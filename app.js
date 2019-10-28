@@ -1091,7 +1091,7 @@ function countingValleys(n, str) {
             down = down + 1
             altitude = altitude - 1
         }
-        if(str[i] === "U") {
+        else if(str[i] === "U") {
             up = up + 1
             altitude = altitude + 1
             if(altitude === 0 ) {
@@ -1102,9 +1102,329 @@ function countingValleys(n, str) {
     return valleyCount
 }
 
-console.log("vallyCount:", countingValleys(8, 'UDDDUDUU') )
+// console.log("vallyCount:", countingValleys(8, 'UDDDUDUU') )
+
+
+
+/*
+You just bought a delicious, yet odorless, cheese for your pet mice. Unfortunately some of them are blind, so they start walking away from this otherwise-irresistible treat!  Write a function blindMice() that will find out how many of your mice are blind. This function should accept a single argument, a string representing the mice and the cheese, and returns the number of mice that are blind. We can assume that all mice walking away from the cheese are blind, while those walking towards it are not.   Cheese: 'C'  Mice walking right: '~M'  Mice walking left: 'M~'  (The '~' is the tail)  Example inputs and correct return values:  "M~~M ~MM~C~MM~M~" à return the number 3 "~M~M~MC M~~M" à return the number 1 "~M CM~~M~M" à return the number 2
+
+**/
+
+
+// Parsing string into tokens
+// State machine
+function countBlindMice(strM) {
+    let hasSeenC = false
+    let blind = 0
+    for(let i=0; i<strM.length; i++) {
+        const char = strM[i]
+        switch(char) {
+            case "M":
+                if(strM[i+1] === "~") {
+                    if(hasSeenC === false) {
+                        blind = blind+1
+                    }
+                    
+                    i = i+1
+                }
+                else {
+                    throw new Error('invalid input')
+                }
+            break;
+            case "~":
+                if(strM[i+1] === "M") {
+                    if(hasSeenC) {
+                        blind = blind+1
+                    }
+                    i = i+1
+                }
+                else {
+                    throw new Error('invalid input')
+                }
+            break;
+            case "C":
+                hasSeenC = true
+        }
+    }
+    return blind
+}
+
+console.log("blind:", countBlindMice("M~~M ~MM~C~MM~M~")) //3
+console.log(countBlindMice("~M~M~MC M~~M")) //1
+console.log(countBlindMice("~M CM~~M~M")) //2
 
 
 
 
 
+
+
+
+/*
+Given a  2D Array, :
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+We define an hourglass in  to be a subset of values with indices falling in this pattern in 's graphical representation:
+a b c
+  d
+e f g
+There are  hourglasses in , and an hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for every hourglass in , then print the maximum hourglass sum.
+For example, given the 2D array:
+-9 -9 -9  1 1 1 
+ 0 -9  0  4 3 2
+-9 -9 -9  1 2 3
+ 0  0  8  6 6 0
+ 0  0  0 -2 0 0
+ 0  0  1  2 4 0
+We calculate the following  hourglass values:
+-63, -34, -9, 12, 
+-10, 0, 28, 23, 
+-27, -11, -2, 10, 
+9, 17, 25, 18
+Our highest hourglass value is  from the hourglass:
+0 4 3
+  1
+8 6 6
+Note: If you have already solved the Java domain's Java 2D Array challenge, you may wish to skip this challenge.
+Function Description
+Complete the function hourglassSum in the editor below. It should return an integer, the maximum hourglass sum in the array.
+hourglassSum has the following parameter(s):
+arr: an array of integers
+Input Format
+Each of the  lines of inputs  contains  space-separated integers .
+Constraints
+
+
+Output Format
+Print the largest (maximum) hourglass sum found in .
+Sample Input
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 2 4 4 0
+0 0 0 2 0 0
+0 0 1 2 4 0
+Sample Output
+19
+Explanation
+ contains the following hourglasses:
+image
+The hourglass with the maximum sum () is:
+2 4 4
+  2
+1 2 4
+**/
+
+
+
+
+
+
+
+const sample = [
+    [1,1,1,0,0,0],
+    [0,1,0,0,0,0],
+    [1,1,1,0,0,0],
+    [0,0,2,4,4,0],
+    [0,0,0,2,0,0],
+    [0,0,1,2,4,0],
+]
+// const array = [
+//     1, 1, 1, 0, 0, 0,
+// 0, 1, 0, 0, 0, 0,
+// 1, 1, 1, 0, 0, 0,
+// 0, 0, 2, 4, 4, 0,
+// 0, 0, 0, 2, 0, 0,
+// 0, 0, 1, 2, 4, 0
+// ]
+function hourglass (arr) {
+    let value = 0;
+    let hourglasses = []
+    // let value = arr[0][0] + arr[0][1] + arr[0][2] + 
+    //                         arr[1][1] + 
+    //             arr[2][0] + arr[2][1] + arr[2][2];
+    for (i = 0; i < arr.length-2; i++) {
+        for (j = 0; j < arr.length-2; j++) {
+            value = arr[i][j] + arr[i][j+1] + arr[i][j+2] + 
+                                arr[i+1][j+1] + 
+                    arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2];
+            hourglasses.push(value);
+        }
+    }
+    console.log(value);
+    console.log(hourglasses);
+    console.log(Math.max.apply(Math, hourglasses));
+    return Math.max.apply(Math, hourglasses)
+    // return value
+}
+hourglass(sample)
+// hourglass(array)
+
+
+
+
+
+
+/*
+Mix Potions  Write a function mixPotions that accepts one argument, an array of potion objects, and returns the potion that is produced when they are mixed. A potion is represented in the following format:  { volume: x, ingredients: { ingredient1: a, ingredient2: b, ingredientA: c } } Where x is a positive number representing the volume of the potion and a, b, and c are positive numbers representing the concentrations of the corresponding ingredients in the potion.  In the above example, the potion has three different ingredients, but a potion can have any number of different ingredients. The function should accept any positive number of potions. Each potion can have any non-negative number of different ingredients.  After mixing, the resulting potion should have a volume equal to the sum of the volumes of the input potions. Also, the resulting potion should have volume-weighted concentrations of each ingredient in the input potions.  Example: mixPotions([ {volume: 100, ingredients: { ingredient1: 50, ingredient2: 20, ingredientA: 500 }}, {volume: 300, ingredients: { ingredient1: 150, ingredientA: 300, ingredientB: 950 }}, ])  The above should return: { volume: 400, ingredients: { ingredient1: 125, ingredient2: 5, ingredientA: 350, ingredientB: 712.5 } }  The result's volume is 400 because 100 + 300 = 400. The result's concentration of ingredient1 is 125. We can determine this because first potion has 50 units of concentration in 100 units of volume and the second potion has 125 units of concentration in 300 units of volume, and (50*100 + 150*300)/(100 + 300) = 125.  Only one of the potions has any of ingredient2, Using the same math, but with 0 for the concentration of ingredient2 in the second potion, we get (20*100 + 0*300)/(100 + 300) = 5.
+**/
+
+
+
+/*
+The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+
+Given two integers x and y, calculate the Hamming distance.
+
+Note:
+0 ≤ x, y < 231.
+
+Example:
+
+Input: x = 1, y = 4
+
+Output: 2
+
+Explanation:
+1   (0 0 0 1)
+4   (0 1 0 0)
+       ↑   ↑
+
+The above arrows point to positions where the corresponding bits are different.
+**/
+
+
+
+
+
+var hammingDistance = function(x, y) {
+
+    console.log('hi')
+
+    const xBiteArray = printBites(x)
+    const yBiteArray = printBites(y)
+
+    console.log({xBiteArray})
+    console.log({yBiteArray})
+    
+    diffCount = 0
+    
+    for(let i=0; i<xBiteArray.length; i++) {
+        if(xBiteArray[i] !== yBiteArray[i]) {
+            diffCount ++
+        }
+    }
+ 
+    return diffCount
+};
+
+
+// console.log(hammingDistance(1, 5))
+
+
+
+function printBites(octet) {
+    let bitesArray = []
+    let count = Math.pow(2, 31);
+    while (Number.isInteger(count) && count > 0) {
+        console.log("count 1:", count)
+        console.log("octet 1:", octet)
+
+        if (octet < count )
+            {
+                count = count / 2;
+                bitesArray.push(0)
+            }
+        else if (octet >= count)
+            {
+                octet = octet - count;
+                count = count / 2;
+                bitesArray.push(1)
+            }
+
+    }
+    return bitesArray
+} 
+
+// console.log('bitesArray:', printBites(511))
+
+
+
+
+
+
+
+/*
+You are choreographing a circus show with various animals. For one act, you are given two kangaroos on a number line ready to jump in the positive direction (i.e, toward positive infinity).
+The first kangaroo starts at location  and moves at a rate of  meters per jump.
+The second kangaroo starts at location  and moves at a rate of  meters per jump.
+You have to figure out a way to get both kangaroos at the same location at the same time as part of the show. If it is possible, return YES, otherwise return NO.
+For example, kangaroo  starts at  with a jump distance  and kangaroo  starts at  with a jump distance of . After one jump, they are both at , (, ), so our answer is YES.
+
+Function Description
+Complete the function kangaroo in the editor below. It should return YES if they reach the same position at the same time, or NO if they don't.
+
+kangaroo has the following parameter(s):
+x1, v1: integers, starting position and jump distance for kangaroo 1
+x2, v2: integers, starting position and jump distance for kangaroo 2
+
+Input Format
+A single line of four space-separated integers denoting the respective values of , , , and .
+
+Constraints
+
+Output Format
+Print YES if they can land on the same location at the same time; otherwise, print NO.
+Note: The two kangaroos must land at the same location after making the same number of jumps.
+*/
+
+
+
+function landingLocation(x1, v1, x2, v2) {
+
+    const yes = "YES"
+    const no = "NO"
+
+    // let landingLocation1 = x1
+    // let landingLocation2 = x2
+
+    // for(let i=0; i<10000; i++) {
+    //     landingLocation1 = landingLocation1 + v1
+    //     landingLocation2 = landingLocation2 + v2
+    //     if(landingLocation1 === landingLocation2) {
+    //         return yes
+    //     }
+    // }
+    // return no
+
+
+    for(let i=0; i<10000; i++) {
+        x1 = x1+ v1
+        x2 = x2+ v2
+
+        if(x1===x2) {
+            return yes
+        }
+    }
+    return no
+
+}
+
+
+// console.log(landingLocation(2081, 8403, 9107, 8400))
+
+
+
+
+
+
+
+
+// function climbingLeaderboard() {
+
+// }
