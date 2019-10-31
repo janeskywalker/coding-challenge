@@ -48,7 +48,7 @@ console.log(isParenthesesMatch("()()(())(()())"))
 // console.assert(isParenthesesMatch("I dont need (parentheses) (at all") === false, '6')
 
 
-console.log(isParenthesesMatch("I dont need (parentheses) at) all"))
+// console.log(isParenthesesMatch("I dont need (parentheses) at) all"))
 
 
 
@@ -102,7 +102,7 @@ function isCommonItem(arr1, arr2) {
   return false
 }
 
-console.log(isCommonItem(arr1, arr2))
+// console.log(isCommonItem(arr1, arr2))
 
 
 
@@ -215,10 +215,10 @@ function calculate(str) {
     return numArr[0]
 }
 
-console.log('one: ', calculate("(3 + 5)"));
-console.log('two: ', calculate("(3 + 5) + 8"));
-console.log('three: ', calculate("(2 * 3) + (5 - 2)"))
-console.log('four: ', calculate("((3 + 4) * 3) + 70"))
+// console.log('one: ', calculate("(3 + 5)"));
+// console.log('two: ', calculate("(3 + 5) + 8"));
+// console.log('three: ', calculate("(2 * 3) + (5 - 2)"))
+// console.log('four: ', calculate("((3 + 4) * 3) + 70"))
 
 
 
@@ -561,7 +561,7 @@ function reverse(str) {
 }
     
     
-console.log(reverse("I am Jane Hot"))
+// console.log(reverse("I am Jane Hot"))
 
 
 
@@ -660,7 +660,7 @@ const birthdayCakeCandles = (arr) => {
     let max = Math.max(...arr);
     return arr.filter(item => item === max).length
 }
-console.log(birthdayCakeCandles(candles));
+// console.log(birthdayCakeCandles(candles));
 
 
 
@@ -741,7 +741,7 @@ function findLargest(str) {
 
 }
 
-console.log(findLargest("00809040021389"))
+// console.log(findLargest("00809040021389"))
 
 
 
@@ -878,7 +878,7 @@ function orderFlights(flightArr) {
 const flights = [ [ 'SFO', 'JFK' ], [ 'LAX', 'SFO' ], [ 'ATL', 'PHX' ], [ 'LAS', 'ATL' ], [ 'PHX', 'LAX' ] ]
 
 
-console.log(orderFlights(flights))
+// console.log(orderFlights(flights))
 
 
 
@@ -998,7 +998,7 @@ function autoComplete(str) {
     // return wordsForObj(str, wordObj['a']['p'])
 }
 
-console.log(autoComplete('ap')) // ['app', 'apple', 'apricot']
+// console.log(autoComplete('ap')) // ['app', 'apple', 'apricot']
 
 
 
@@ -1035,8 +1035,8 @@ function power2(a, b) {
 
 
 
-console.log(power2(2,0))
-console.log(power2(2,3))
+// console.log(power2(2,0))
+// console.log(power2(2,3))
 
 
 
@@ -1150,9 +1150,9 @@ function countBlindMice(strM) {
     return blind
 }
 
-console.log("blind:", countBlindMice("M~~M ~MM~C~MM~M~")) //3
-console.log(countBlindMice("~M~M~MC M~~M")) //1
-console.log(countBlindMice("~M CM~~M~M")) //2
+// console.log("blind:", countBlindMice("M~~M ~MM~C~MM~M~")) //3
+// console.log(countBlindMice("~M~M~MC M~~M")) //1
+// console.log(countBlindMice("~M CM~~M~M")) //2
 
 
 
@@ -1262,7 +1262,7 @@ function hourglass (arr) {
     return Math.max.apply(Math, hourglasses)
     // return value
 }
-hourglass(sample)
+// hourglass(sample)
 // hourglass(array)
 
 
@@ -1425,6 +1425,209 @@ function landingLocation(x1, v1, x2, v2) {
 
 
 
-// function climbingLeaderboard() {
+function climbingLeaderboard(score, alice) {
+    let ranking = []
+    for(let i=0; i<alice.length; i++) {
+        console.log({score})
+        let newScore = score
+        newScore.push(alice[i])
+        newScore.sort((a,b)=>b-a)
+        const rank = newScore.indexOf(alice[i])
+        console.log({rank})
+    }
+}
 
-// }
+
+
+// console.log(climbingLeaderboard([100, 100, 50, 40, 40, 20, 10], [5, 25, 50, 120])) // [6, 4, 2, 1]
+// console.log(climbingLeaderboard([], [])) // [6, 5, 4, 2, 1]
+
+
+
+
+
+function scoreboard(scores, alice) {
+    let m = alice.length
+    let results = []
+    console.log(scores);
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < scores.length; j++) {
+            console.log(`scores`, scores[j])
+            console.log(`alice`, alice[i])
+            if (alice[i] >= scores[j]) {
+                console.log(`scoresinside`, scores[j])
+                console.log(`aliceinsde`, alice[i])
+                results.push(j+1)
+                console.log({results})
+                break
+            }
+            else if(alice[i] < scores[scores.length-1]){
+                results.push(scores.length + 1)
+                console.log({results})
+                break
+            }
+        }
+    }
+    // console.log({results})
+    return results
+}
+let scores = [100, 90, 90, 80, 75, 60]
+let alice = [77, 50] // 4, 6
+// let alice = [50,65,77,90,102]
+// scoreboard(scores, alice);
+
+// console.log(scoreboard([100, 100, 50, 40, 40, 20, 10], [5, 25, 50, 120]))
+
+
+
+
+
+
+
+
+/*
+Watson likes to challenge Sherlock's math ability. He will provide a starting and ending value describing a range of integers. Sherlock must determine the number of square integers within that range, inclusive of the endpoints.
+
+Note: A square integer is an integer which is the square of an integer, e.g 1, 4, 9, 16, 25
+For example, the range is  and , inclusive. There are three square integers in the range:  and .
+Function Description
+Complete the squares function in the editor below. It should return an integer representing the number of square integers in the inclusive range from  to .
+squares has the following parameter(s):
+a: an integer, the lower range boundary
+b: an integer, the uppere range boundary
+Input Format
+The first line contains , the number of test cases. 
+Each of the next  lines contains two space-separated integers denoting  and , the starting and ending integers in the ranges.
+Constraints
+ 
+
+Output Format
+For each test case, print the number of square integers in the range on a new line.
+Sample Input
+2
+3 9
+17 24
+Sample Output
+2
+0
+Explanation
+Test Case #00: In range ,  and  are the two square integers. 
+Test Case #01: In range , there are no square integers.
+**/
+
+
+function countSquareInteger(a, b) {
+    let count = 0
+    for(let i=a; i<=b; i++) {
+        let squareRoot = Math.sqrt(i)
+        if(i>1 && Number.isInteger(squareRoot)){
+            count = count+1
+        }
+    }
+    return count
+}
+
+// console.log(countSquareInteger(2793360, 318714114))
+
+
+
+
+/**
+ * Find the number of ways that a given integer, , can be expressed as the sum of the  powers of unique, natural numbers.
+For example, if  and , we have to find all combinations of unique squares adding up to . The only solution is  .
+Function Description
+Complete the powerSum function in the editor below. It should return an integer that represents the number of possible combinations.
+powerSum has the following parameter(s):
+X: the integer to sum to
+N: the integer power to raise numbers to
+ */
+
+
+
+
+/*
+
+You wish to buy video games from the famous online video game store Mist.
+Usually, all games are sold at the same price,  dollars. However, they are planning to have the seasonal Halloween Sale next month in which you can buy games at a cheaper price. Specifically, the first game you buy during the sale will be sold at  dollars, but every subsequent game you buy will be sold at exactly  dollars less than the cost of the previous one you bought. This will continue until the cost becomes less than or equal to  dollars, after which every game you buy will cost  dollars each.
+For example, if ,  and , then the following are the costs of the first  games you buy, in order:
+
+You have  dollars in your Mist wallet. How many games can you buy during the Halloween Sale?
+
+
+
+Sample Input 0
+20 3 6 80
+Sample Output 0
+6
+Explanation 0
+We have ,  and , the same as in the problem statement. We also have  dollars. We can buy  games since they cost  dollars. However, we cannot buy a th game. Thus, the answer is .
+
+
+
+Sample Input 1
+20 3 6 85
+Sample Output 1
+7
+Explanation 1
+This is the same as the previous case, except this time we have  dollars. This time, we can buy  games since they cost  dollars. However, we cannot buy an th game. Thus, the answer is .
+
+
+*/
+
+
+function gameCount(p, d, m, s) {
+    // let cost = p
+    // let count = 0
+    // while(p>m && p-d>m) {
+    //     cost = cost+p
+    //     p = p-d
+    //     count = count+1
+    //     console.log({p, cost, count})
+    // }
+    // let balance = s - cost
+    // console.log('balance1:', balance)
+    // if(balance<m){
+    //     return count
+    // } else {
+    //     while(balance>m) {
+    //         console.log('balance2:', balance)
+    //         balance = balance - m
+    //         count = count+1
+    //     }
+    //     return count
+    // } 
+
+    let totalExpense = p
+    let count = 1
+
+    if(s-p<0) {
+        return 0
+    }
+
+    while( s-totalExpense>=m) {
+        if(totalExpense+p<=s) {
+            if(p-d>=m) {
+                p = p-d
+            }
+            else {
+                p = m
+            }
+            totalExpense = totalExpense + p
+            count++
+        }
+        else{
+            return count
+        }
+
+    }
+    return count
+}
+
+
+console.log("gameCount",gameCount(20, 3, 6, 85)) //7
+console.log("gameCount",gameCount(20, 3, 6, 80)) //6
+console.log("gameCount",gameCount(16, 2, 1, 9981)) // 9917
+console.log("gameCount",gameCount(100, 1, 1, 99)) // 0
+console.log("gameCount",gameCount(100, 19, 1, 180)) // 0
+
+
