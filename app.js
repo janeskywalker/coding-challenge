@@ -1576,26 +1576,6 @@ This is the same as the previous case, except this time we have  dollars. This t
 
 
 function gameCount(p, d, m, s) {
-    // let cost = p
-    // let count = 0
-    // while(p>m && p-d>m) {
-    //     cost = cost+p
-    //     p = p-d
-    //     count = count+1
-    //     console.log({p, cost, count})
-    // }
-    // let balance = s - cost
-    // console.log('balance1:', balance)
-    // if(balance<m){
-    //     return count
-    // } else {
-    //     while(balance>m) {
-    //         console.log('balance2:', balance)
-    //         balance = balance - m
-    //         count = count+1
-    //     }
-    //     return count
-    // } 
 
     let totalExpense = p
     let count = 1
@@ -1631,3 +1611,60 @@ console.log("gameCount",gameCount(100, 1, 1, 99)) // 0
 console.log("gameCount",gameCount(100, 19, 1, 180)) // 0
 
 
+
+
+/**
+ * Given the meal price (base cost of a meal), tip percent (the percentage of the meal price being added as tip), and tax percent (the percentage of the meal price being added as tax) for a meal, find and print the meal's total cost.
+ * 
+Note: Be sure to use precise values for your calculations, or you may end up with an incorrectly rounded result!
+
+Input Format
+There are  lines of numeric input: 
+The first line has a double,  (the cost of the meal before tax and tip). 
+The second line has an integer,  (the percentage of  being added as tip). 
+The third line has an integer,  (the percentage of  being added as tax).
+
+
+Sample Input
+12.00
+20
+8
+Sample Output
+15
+ */
+
+ function totalMealCost(meal, tip, tax) {
+    const totalMealCost = Math.round(meal + meal*tip/100 + meal*tax/100)
+    return totalMealCost
+ }
+
+ console.log(totalMealCost(15.50, 15, 10))
+
+
+
+ /**
+  * Given an integer, , perform the following conditional actions:
+If  is odd, print Weird
+If  is even and in the inclusive range of 2-5, print Not Weird
+If  is even and in the inclusive range of 6-20, print Weird
+If  is even and greater than 20, print Not Weird
+Complete the stub code provided in your editor to print whether or not  is weird.
+  */
+
+
+  function printWeird(integer) {
+    if(integer % 2 === 1 ) {
+        console.log('Werid')
+    }
+    if(integer %2 === 0 && 2<= integer && integer <= 5) {
+        console.log('Not Werid')
+    }
+    if(integer %2 === 0 && 6<= integer && integer <= 20) {
+        console.log('Werid')
+    }
+    if(integer %2 === 0 && 20<integer) {
+        console.log('Not Werid')
+    }
+  }
+
+  printWeird(24)
