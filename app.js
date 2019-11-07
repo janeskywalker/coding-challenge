@@ -1235,7 +1235,7 @@ const sample = [
     [0,0,1,2,4,0],
 ]
 // const array = [
-//     1, 1, 1, 0, 0, 0,
+// 1, 1, 1, 0, 0, 0,
 // 0, 1, 0, 0, 0, 0,
 // 1, 1, 1, 0, 0, 0,
 // 0, 0, 2, 4, 4, 0,
@@ -1271,8 +1271,26 @@ function hourglass (arr) {
 
 
 /*
-Mix Potions  Write a function mixPotions that accepts one argument, an array of potion objects, and returns the potion that is produced when they are mixed. A potion is represented in the following format:  { volume: x, ingredients: { ingredient1: a, ingredient2: b, ingredientA: c } } Where x is a positive number representing the volume of the potion and a, b, and c are positive numbers representing the concentrations of the corresponding ingredients in the potion.  In the above example, the potion has three different ingredients, but a potion can have any number of different ingredients. The function should accept any positive number of potions. Each potion can have any non-negative number of different ingredients.  After mixing, the resulting potion should have a volume equal to the sum of the volumes of the input potions. Also, the resulting potion should have volume-weighted concentrations of each ingredient in the input potions.  Example: mixPotions([ {volume: 100, ingredients: { ingredient1: 50, ingredient2: 20, ingredientA: 500 }}, {volume: 300, ingredients: { ingredient1: 150, ingredientA: 300, ingredientB: 950 }}, ])  The above should return: { volume: 400, ingredients: { ingredient1: 125, ingredient2: 5, ingredientA: 350, ingredientB: 712.5 } }  The result's volume is 400 because 100 + 300 = 400. The result's concentration of ingredient1 is 125. We can determine this because first potion has 50 units of concentration in 100 units of volume and the second potion has 125 units of concentration in 300 units of volume, and (50*100 + 150*300)/(100 + 300) = 125.  Only one of the potions has any of ingredient2, Using the same math, but with 0 for the concentration of ingredient2 in the second potion, we get (20*100 + 0*300)/(100 + 300) = 5.
+Mix Potions  
+
+Write a function mixPotions that accepts one argument, an array of potion objects, and returns the potion that is produced when they are mixed. 
+
+A potion is represented in the following format:  { volume: x, ingredients: { ingredient1: a, ingredient2: b, ingredientA: c } }
+
+Where x is a positive number representing the volume of the potion and a, b, and c are positive numbers representing the concentrations of the corresponding ingredients in the potion.  In the above example, the potion has three different ingredients, but a potion can have any number of different ingredients. The function should accept any positive number of potions. Each potion can have any non-negative number of different ingredients.  After mixing, the resulting potion should have a volume equal to the sum of the volumes of the input potions. Also, the resulting potion should have volume-weighted concentrations of each ingredient in the input potions.  
+
+Example: mixPotions([ {volume: 100, ingredients: { ingredient1: 50, ingredient2: 20, ingredientA: 500 }}, {volume: 300, ingredients: { ingredient1: 150, ingredientA: 300, ingredientB: 950 }}, ])  
+
+The above should return: { volume: 400, ingredients: { ingredient1: 125, ingredient2: 5, ingredientA: 350, ingredientB: 712.5 } }  
+
+The result's volume is 400 because 100 + 300 = 400. 
+
+The result's concentration of ingredient1 is 125. We can determine this because first potion has 50 units of concentration in 100 units of volume and the second potion has 125 units of concentration in 300 units of volume, and (50*100 + 150*300)/(100 + 300) = 125.  
+
+Only one of the potions has any of ingredient2, Using the same math, but with 0 for the concentration of ingredient2 in the second potion, we get (20*100 + 0*300)/(100 + 300) = 5.
 **/
+
+
 
 
 
@@ -1668,3 +1686,38 @@ Complete the stub code provided in your editor to print whether or not  is weird
   }
 
   printWeird(24)
+
+
+
+
+
+
+  /**
+   * Connect to comics API , render it on home page and search page. In home page you only show one comics. In search page creat search bar and filter all the data based on numbers only upon click button
+ 
+and className he gave me classNames to name them and asked me follow it carefully
+   */
+
+
+
+
+
+
+   function deletion (str) {
+    //    let char = ""
+    let count = 0
+    for(let i=0; i<str.length; i++) {
+        if(str[i] === str[i+1]) {
+            count++
+        }
+    }
+    return count
+   }
+
+
+
+   console.log(deletion('AAAA'))
+   console.log(deletion('BBBBB'))
+   console.log(deletion('ABABABAB'))
+   console.log(deletion('BABABABA'))
+   console.log(deletion('AAABBB'))
