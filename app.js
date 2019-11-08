@@ -1703,8 +1703,17 @@ and className he gave me classNames to name them and asked me follow it carefull
 
 
 
-   function deletion (str) {
-    //    let char = ""
+
+
+
+   /**
+    * 
+    * u are given a string containing characters  and  only. Your task is to change it into a string such that there are no matching adjacent characters. To do this, you are allowed to delete zero or more characters in the string.
+Your task is to find the minimum number of required deletions.
+For example, given the string , remove an  at positions and  to make  in  deletions.
+    */
+
+   function minimalDeletion (str) {
     let count = 0
     for(let i=0; i<str.length; i++) {
         if(str[i] === str[i+1]) {
@@ -1716,8 +1725,117 @@ and className he gave me classNames to name them and asked me follow it carefull
 
 
 
-   console.log(deletion('AAAA'))
-   console.log(deletion('BBBBB'))
-   console.log(deletion('ABABABAB'))
-   console.log(deletion('BABABABA'))
-   console.log(deletion('AAABBB'))
+   console.log(minimalDeletion('AAAA'))
+   console.log(minimalDeletion('BBBBB'))
+   console.log(minimalDeletion('ABABABAB'))
+   console.log(minimalDeletion('BABABABA'))
+   console.log(minimalDeletion('AAABBB'))
+
+
+
+
+
+
+
+
+
+
+/**
+ * 
+A left rotation operation on an array shifts each of the array's elements unit to the left. For example, if  left rotations are performed on array , then the array would become .
+Given an array  of  integers and a number, , perform  left rotations on the array. Return the updated array to be printed as a single line of space-separated integers.
+ */
+
+   function leftRotation(arr, d){
+    const newArray = arr.slice(0, d)
+    const oldArray = arr.slice(d)
+    console.log(newArray, oldArray)
+    const result = oldArray.concat(newArray)
+    console.log(result )
+    return result
+
+   }
+
+   console.log(leftRotation([1, 2, 3, 4, 5, 6], 3))
+
+
+
+
+
+   /**
+    * Function Description
+Complete the repeatedString function in the editor below. It should return an integer representing the number of occurrences of a in the prefix of length  in the infinitely repeating string.
+repeatedString has the following parameter(s):
+s: a string to repeat
+n: the number of characters to consider
+Input Format
+The first line contains a single string, . 
+The second line contains an integer, .
+
+Sample Input 0
+aba
+10
+Sample Output 0
+7
+Explanation 0 
+The first  letters of the infinite string are abaabaabaa. Because there are  a's, we print  on a new line.
+Sample Input 1
+a
+1000000000000
+Sample Output 1
+1000000000000
+Explanation 1 
+Because all of the first  letters of the infinite string are a, we print  on a new line.
+    */
+
+
+
+    function countA(str, n) {
+        let count = 0
+
+        if(n <= str.length) {
+            for(let i=0; i<n; i++) {
+                if(str[i] === "a") {
+                    count ++
+                }
+            }
+            return count
+        } else {
+            let numInOneBlock = 0 
+            for(let i=0; i<str.length; i++) {
+                if(str[i] === "a") {
+                    numInOneBlock ++
+                }
+            }
+            console.log({numInOneBlock})
+
+            const numOfBlocks = Math.floor(n/str.length)
+            console.log(numOfBlocks)
+
+            const remainder = n % str.length
+            console.log({remainder})
+
+            let count = 0 
+
+            for(let i=0; i<remainder; i++) {
+                if(str[i] === "a") {
+                    count ++
+                }
+            }
+
+            console.log(count)
+
+            let result
+            result = numOfBlocks * numInOneBlock + count
+
+            return result
+
+        }
+    }
+
+    console.log(countA('abcdfaaf', 3))
+
+
+
+
+
