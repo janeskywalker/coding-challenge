@@ -1234,14 +1234,29 @@ const sample = [
     [0,0,0,2,0,0],
     [0,0,1,2,4,0],
 ]
-// const array = [
-// 1, 1, 1, 0, 0, 0,
-// 0, 1, 0, 0, 0, 0,
-// 1, 1, 1, 0, 0, 0,
-// 0, 0, 2, 4, 4, 0,
-// 0, 0, 0, 2, 0, 0,
-// 0, 0, 1, 2, 4, 0
-// ]
+
+// jane
+function hourglass2(twoDArray) {
+    const sumArray = []
+    for(let i=0; i<twoDArray.length - 2; i++) {
+        for(let j=0; j<twoDArray.length - 2; j++) {
+            const sum = twoDArray[i][j] + twoDArray[i][j+1] + twoDArray[i][j+2] 
+                                        + twoDArray[i+1][j+1]
+                        +twoDArray[i+2][j] + twoDArray[i+2][j+1] + twoDArray[i+2][j+2]
+            sumArray.push(sum)
+        }
+    }
+    const maxSum = Math.max(...sumArray)
+    return maxSum
+}
+
+console.log('maxSum:', hourglass2(sample))
+
+
+
+
+
+// james
 function hourglass (arr) {
     let value = 0;
     let hourglasses = []
@@ -1262,8 +1277,8 @@ function hourglass (arr) {
     return Math.max.apply(Math, hourglasses)
     // return value
 }
-// hourglass(sample)
-// hourglass(array)
+hourglass(sample)
+
 
 
 
@@ -1656,7 +1671,7 @@ Sample Output
     return totalMealCost
  }
 
- console.log(totalMealCost(15.50, 15, 10))
+//  console.log(totalMealCost(15.50, 15, 10))
 
 
 
@@ -1685,7 +1700,7 @@ Complete the stub code provided in your editor to print whether or not  is weird
     }
   }
 
-  printWeird(24)
+//   printWeird(24)
 
 
 
@@ -1725,11 +1740,11 @@ For example, given the string , remove an  at positions and  to make  in  deleti
 
 
 
-   console.log(minimalDeletion('AAAA'))
-   console.log(minimalDeletion('BBBBB'))
-   console.log(minimalDeletion('ABABABAB'))
-   console.log(minimalDeletion('BABABABA'))
-   console.log(minimalDeletion('AAABBB'))
+//    console.log(minimalDeletion('AAAA'))
+//    console.log(minimalDeletion('BBBBB'))
+//    console.log(minimalDeletion('ABABABAB'))
+//    console.log(minimalDeletion('BABABABA'))
+//    console.log(minimalDeletion('AAABBB'))
 
 
 
@@ -1756,7 +1771,7 @@ Given an array  of  integers and a number, , perform  left rotations on the arra
 
    }
 
-   console.log(leftRotation([1, 2, 3, 4, 5, 6], 3))
+//    console.log(leftRotation([1, 2, 3, 4, 5, 6], 3))
 
 
 
@@ -1833,7 +1848,7 @@ Because all of the first  letters of the infinite string are a, we print  on a n
         }
     }
 
-    console.log(countA('abcdfaaf', 3))
+    // console.log(countA('abcdfaaf', 3))
 
 
 
