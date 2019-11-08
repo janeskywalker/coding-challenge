@@ -1815,6 +1815,7 @@ Because all of the first  letters of the infinite string are a, we print  on a n
                 }
             }
             return count
+
         } else {
             let numInOneBlock = 0 
             for(let i=0; i<str.length; i++) {
@@ -1822,13 +1823,10 @@ Because all of the first  letters of the infinite string are a, we print  on a n
                     numInOneBlock ++
                 }
             }
-            console.log({numInOneBlock})
 
             const numOfBlocks = Math.floor(n/str.length)
-            console.log(numOfBlocks)
 
             const remainder = n % str.length
-            console.log({remainder})
 
             let count = 0 
 
@@ -1837,8 +1835,6 @@ Because all of the first  letters of the infinite string are a, we print  on a n
                     count ++
                 }
             }
-
-            console.log(count)
 
             let result
             result = numOfBlocks * numInOneBlock + count
@@ -1872,3 +1868,39 @@ console.log("result:", recursiveFactorial(11))
 
 
 
+
+
+
+
+
+
+
+function recursiveDecrement(num) {
+    if(num>0){
+        console.log(num)
+        return recursiveDecrement(num-1)
+    }
+    return num
+}
+
+// console.log('recursiveDecrement', recursiveDecrement(4))
+
+
+
+
+
+
+
+// Sum range recursion 
+// Prompt
+// Input = 5
+// Output = 15
+
+function recursiveSum(num) {
+    if(num===1) {
+        return 1
+    }
+    return num + recursiveSum(num-1)
+}
+
+console.log(recursiveSum(5))
