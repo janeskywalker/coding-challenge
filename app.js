@@ -1854,3 +1854,21 @@ Because all of the first  letters of the infinite string are a, we print  on a n
 
 
 
+/**
+ * Write a factorial function that takes a positive integer, N as a parameter and prints the result of N! ( factorial).
+ * 
+ */
+
+ function recursiveFactorial(n) {
+     if(n===1) {
+        return 1
+     }
+     while(n>=2) {
+        return n*recursiveFactorial(n-1)
+     }
+ }
+
+console.log("result:", recursiveFactorial(11))
+
+
+
