@@ -1903,4 +1903,192 @@ function recursiveSum(num) {
     return num + recursiveSum(num-1)
 }
 
-console.log(recursiveSum(5))
+// console.log(recursiveSum(5))
+
+
+
+
+
+
+
+
+
+/**
+ * shortest substring that has all charactors
+ */
+
+
+// loop through all char to see if the string includes all of them 
+function hasAllChar(str, charArr) {
+    if(str.length < charArr.length) {
+        return false
+    } 
+    for(let i=0; i<charArr.length; i++) {
+            if(!str.includes(charArr[i])) {
+                return false
+            }
+    }
+    return true
+}
+
+
+function shortestSubStr(s) {
+
+    // find out all charactors
+    let charArr = []
+    for(let i=0; i<s.length; i++) {
+        if(!charArr.includes(s[i])) {
+            charArr.push(s[i])
+        }
+    }
+    console.log(charArr)
+
+    let nextAnswer = ''
+    let startingIndex = 0
+    const potentialAnswerArray = [] 
+
+    // run the loop from first char b
+    function runLoop () {
+        for(let i = startingIndex; i< s.length; i++) {
+            nextAnswer = nextAnswer+s[i]
+            console.log(nextAnswer)
+            if(hasAllChar(nextAnswer, charArr)) {
+                potentialAnswerArray.push(nextAnswer)
+                nextAnswer = ''
+                // exit for loop
+                break;
+            }
+        }
+        if(startingIndex<s.length){
+            startingIndex = startingIndex + 1
+            // run the loop from next char d
+            runLoop()
+        }
+    }
+
+    runLoop()
+
+    potentialAnswerArray.sort((a, b)=>{
+        if(a.length<b.length) {
+            return -1
+        } else {
+            return 1
+        }
+    })
+    console.log(potentialAnswerArray)
+    return potentialAnswerArray[0].length
+}
+
+// console.log(shortestSubStr('bab'))
+// console.log(shortestSubStr('bdbbcabcd'))
+
+
+
+
+
+
+/**
+ * longest vowel subsequence
+ */
+
+ 
+function areVowelsInOrder(s) {
+    let hasA = false
+    let hasE = false
+    let hasI = false
+    let hasO = false
+    let hasU = false
+    let count = 0
+    for(let i=0; i<s.length; i++) {
+        console.log(i)
+        if(s[i] === 'a' && hasE === false) {
+            hasA = true
+            count++
+        } else if(s[i] === 'e' && hasI === false) {
+            hasE = true
+            count++
+        }else if(s[i] === 'i' && hasO === false) {
+            hasI = true
+            count++
+        }else if(s[i] === 'o' && hasU === false) {
+            hasO = true
+            count++
+        } else if(s[i] === 'u') {
+            count++
+        }
+    }
+    return count
+}
+
+
+// console.log('numOfVowels:', areVowelsInOrder("aeaeieiou"))
+
+
+
+
+ function longestVowelSubsequence(s) {
+
+    const charArr = ["a", 'e', 'i', 'o', 'u']
+
+    let nextAnswer = ''
+    let startingIndex = 0
+
+    function runloop() {
+
+        for(let i = startingIndex; i<s.length; i++) {
+            nextAnswer = nextAnswer + s[i]
+            console.log(nextAnswer)
+            if(nextAnswer.length>=5 && hasAllChar(nextAnswer, charArr)){
+                console.log('ok')
+                break;
+            }
+        }
+
+        if(startingIndex<=s.length-6) {
+            nextAnswer = ''
+            startingIndex = startingIndex+1
+            runloop()
+        }
+    }
+
+    runloop()
+
+ }
+
+
+
+
+const VOWELS = ['a', 'e', 'i', 'o', 'u']
+
+function longestVowel(str) {
+    // 1. Find first a
+    // 2. Find next a or e (loop)
+    let count = 1
+    let cursor = 0 // Where we are in VOWLES
+    let index = str.indexOf('a') // Where we are in str
+    let currentVowel = 'a'
+    
+    console.log(index)
+
+    for(let i=index + 1; i<str.length; i++) {
+        const nextChar = str[i]
+        if(nextChar === VOWELS[cursor]) {
+            count++
+        }else if(nextChar ===VOWELS[cursor + 1]) {
+            currentVowel = nextChar
+            count++
+            cursor++
+        }
+    }
+    if(currentVowel === 'u') {
+        return count
+    } else {
+        return 0
+    }
+    
+}
+
+//  console.log(longestVowelSubsequence("aeiaaioooaauuaeiu")) // 10
+//  console.log(longestVowelSubsequence("aeiou")) // 5
+ console.log('numOfVowels:', longestVowel("eaoeioiua")) // 5
+ console.log('numOfVowels:', longestVowel("eaoeioia")) // 5
