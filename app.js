@@ -2081,3 +2081,28 @@ function longestVowel(str) {
 //  console.log(longestVowelSubsequence("aeiou")) // 5
 //  console.log('numOfVowels:', longestVowel("eaoeioiua")) // 5
 //  console.log('numOfVowels:', longestVowel("eaoeioia")) // 5
+
+
+
+
+
+function longestVowel2(s) {
+
+    let cursor = 0
+    let count = 0
+
+    for(let i = 0; i<s.length; i++) {
+        if(s[i] === VOWELS[cursor]) {
+            count++
+        } else if(s[i] === VOWELS[cursor+1]){
+            count++
+            cursor++
+        }
+    }
+    return count
+}
+
+
+
+ console.log('numOfVowels:', longestVowel2("aoeiooiu")) // 6
+  console.log(longestVowel2("aeiaaioooaauuaeiu")) // 10
