@@ -2022,7 +2022,7 @@ function shortestSubStr2(s) {
 }
 
 // console.log(shortestSubStr2('babb'))
-console.log(shortestSubStr2('bdbbcabcd'))
+// console.log(shortestSubStr2('bdbbcabcd'))
 
 
 
@@ -2090,8 +2090,11 @@ function longestVowel2(s) {
 
     let cursor = 0
     let count = 0
+    let currentVowel = ''
 
     for(let i = 0; i<s.length; i++) {
+        currentVowel = s[i]
+        console.log({currentVowel})
         if(s[i] === VOWELS[cursor]) {
             count++
         } else if(s[i] === VOWELS[cursor+1]){
@@ -2099,10 +2102,53 @@ function longestVowel2(s) {
             cursor++
         }
     }
-    return count
+
+    if(currentVowel === "u") {
+        return count
+    } else {
+        return 0
+    }   
 }
 
+//  console.log('numOfVowels:', longestVowel2("aoeiooi")) // 6
+//   console.log(longestVowel2("aeiaaioooaauuaeiu")) // 10
 
 
- console.log('numOfVowels:', longestVowel2("aoeiooiu")) // 6
-  console.log(longestVowel2("aeiaaioooaauuaeiu")) // 10
+
+
+
+// all incoming dates will be valid dates, but only those in one of the following formates: YYYY/MM/DD, DD/MM/YYYY and MM-DD-YYYY should be included in the return list
+
+function changeDateFormat(dateArr) {
+
+    const changedArr = []
+
+    function changeFormat(date) {
+        if(date.indexOf('/') === 4) {
+            const newDate = date.replace("/", "").replace("/", "")
+            changedArr.push(newDate)
+        }
+
+        else if(date.indexOf('/') === 2) {
+            const removedSlashDate = date.replace("/", "").replace("/", "")
+            let newDate = ''
+            newDate = newDate + removedSlashDate.substring(4) + removedSlashDate.substring(2, 4) + removedSlashDate.substring(0, 2)
+            changedArr.push(newDate)
+        }
+        
+        else if(date.indexOf('-') === 2) {
+            const removedDashDate = date.replace(/-/gi, "")
+            let newDate = ''
+            newDate = newDate + removedDashDate.substring(4) + removedDashDate.substring(0, 4)
+            changedArr.push(newDate)
+        }
+    }
+
+    for(date of dateArr) {
+        changeFormat(date)
+    }
+
+    return changedArr
+}
+
+console.log(changeDateFormat(['2010/03/30', '15/12/2016', '11-15-2012', '20130721'])) 
