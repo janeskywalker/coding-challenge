@@ -1914,7 +1914,9 @@ function recursiveSum(num) {
 
 
 /**
- * shortest substring that has all charactors
+ * shortest substring
+ * 
+ * Given a string comprised of lower case letters in the range a-z, determine the length of the shorsest substring that contains all the letters present in the string. 
  */
 
 
@@ -1951,7 +1953,7 @@ function shortestSubStr(s) {
     function runLoop () {
         for(let i = startingIndex; i< s.length; i++) {
             nextAnswer = nextAnswer+s[i]
-            console.log(nextAnswer)
+            console.log({nextAnswer})
             if(hasAllChar(nextAnswer, charArr)) {
                 potentialAnswerArray.push(nextAnswer)
                 nextAnswer = ''
@@ -1979,8 +1981,53 @@ function shortestSubStr(s) {
     return potentialAnswerArray[0].length
 }
 
-// console.log(shortestSubStr('bab'))
+// console.log(shortestSubStr('babb'))
 // console.log(shortestSubStr('bdbbcabcd'))
+
+function shortestSubStr2(s) {
+    const charArr = []
+    for(let char of s) {
+        // console.log(char)
+        if(!charArr.includes(char)) {
+            charArr.push(char)
+        }
+    }
+    // console.log(charArr)
+
+    const possibleSubstring = []
+    let currentStr = ""
+    let index = 0
+
+    function runLoop() {
+        for(let i = index; i<s.length; i++) {
+            // console.log(s[i])
+            // console.log(i)
+            currentStr = currentStr + s[i]
+            console.log({currentStr})
+            if(hasAllChar(currentStr, charArr)) {
+                possibleSubstring.push(currentStr)
+                currentStr = ""
+                break;
+            } 
+        }
+
+        if(index < s.length - charArr.length){
+            index ++
+            runLoop()
+        }
+        console.log(possibleSubstring)
+    }
+
+    runLoop()
+}
+
+// console.log(shortestSubStr2('babb'))
+console.log(shortestSubStr2('bdbbcabcd'))
+
+
+
+
+
 
 
 
@@ -1988,72 +2035,14 @@ function shortestSubStr(s) {
 
 
 /**
- * longest vowel subsequence
+ * longest subsequence
+ * Given a string, determine the length of the longest subsequence that containes all the vowels in order, and no vowels out of order 
  */
 
  
-function areVowelsInOrder(s) {
-    let hasA = false
-    let hasE = false
-    let hasI = false
-    let hasO = false
-    let hasU = false
-    let count = 0
-    for(let i=0; i<s.length; i++) {
-        console.log(i)
-        if(s[i] === 'a' && hasE === false) {
-            hasA = true
-            count++
-        } else if(s[i] === 'e' && hasI === false) {
-            hasE = true
-            count++
-        }else if(s[i] === 'i' && hasO === false) {
-            hasI = true
-            count++
-        }else if(s[i] === 'o' && hasU === false) {
-            hasO = true
-            count++
-        } else if(s[i] === 'u') {
-            count++
-        }
-    }
-    return count
-}
-
-
-// console.log('numOfVowels:', areVowelsInOrder("aeaeieiou"))
 
 
 
-
- function longestVowelSubsequence(s) {
-
-    const charArr = ["a", 'e', 'i', 'o', 'u']
-
-    let nextAnswer = ''
-    let startingIndex = 0
-
-    function runloop() {
-
-        for(let i = startingIndex; i<s.length; i++) {
-            nextAnswer = nextAnswer + s[i]
-            console.log(nextAnswer)
-            if(nextAnswer.length>=5 && hasAllChar(nextAnswer, charArr)){
-                console.log('ok')
-                break;
-            }
-        }
-
-        if(startingIndex<=s.length-6) {
-            nextAnswer = ''
-            startingIndex = startingIndex+1
-            runloop()
-        }
-    }
-
-    runloop()
-
- }
 
 
 
@@ -2090,5 +2079,5 @@ function longestVowel(str) {
 
 //  console.log(longestVowelSubsequence("aeiaaioooaauuaeiu")) // 10
 //  console.log(longestVowelSubsequence("aeiou")) // 5
- console.log('numOfVowels:', longestVowel("eaoeioiua")) // 5
- console.log('numOfVowels:', longestVowel("eaoeioia")) // 5
+//  console.log('numOfVowels:', longestVowel("eaoeioiua")) // 5
+//  console.log('numOfVowels:', longestVowel("eaoeioia")) // 5
