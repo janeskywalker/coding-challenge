@@ -2152,3 +2152,85 @@ function changeDateFormat(dateArr) {
 }
 
 console.log(changeDateFormat(['2010/03/30', '15/12/2016', '11-15-2012', '20130721'])) 
+
+
+
+
+
+
+
+
+/**
+ * Sherlock considers a string to be valid if all characters of the string appear the same number of times. It is also valid if he can remove just  character at  index in the string, and the remaining characters will occur the same number of times. Given a string , determine if it is valid. If so, return YES, otherwise return NO.
+
+Function Description
+Complete the isValid function in the editor below. It should return either the string YES or the string NO.
+isValid has the following parameter(s):
+s: a string
+
+
+Sample Input 0
+aabbcd
+Sample Output 0
+NO
+
+
+
+Sample Input 1
+aabbccddeefghi
+Sample Output 1
+NO
+
+
+Sample Input 2
+abcdefghhgfedecba
+Sample Output 2
+YES
+
+ */
+
+
+
+ function SherlockValidString(s) {
+     const Yes='YES'
+     const No='NO'
+    const charHash = {}
+    for(char of s) {
+        if(!charHash.hasOwnProperty(char)){
+            charHash[char] = 1
+        } else{
+            charHash[char] ++
+        }
+    }
+
+    const values = Object.values(charHash)
+    
+    values.sort((a, b)=>a-b)
+    
+    if(values[values.length-1] - values[0]>1) {
+        return No
+    }
+
+    const newValues = values.map(value=>value-values[0])
+
+    let count1 = 0
+    newValues.map((value)=>{
+        if(value>0) {
+            count1++
+        }
+    })
+
+    if(count1 > 1) {
+        return No
+    }
+
+    return Yes 
+    
+
+ }
+
+//  console.log(SherlockValidString('aabbcd'))
+//  console.log(SherlockValidString('aaabbcd'))
+//  console.log(SherlockValidString('abcdefghhgfedecba'))
+//  console.log(SherlockValidString('aabbccddeefghi'))
+//  console.log(SherlockValidString('qcfbdopdgvjanhdhijcgkchzqfbvwlxpncsqthvzefztoebypdgahnzzucutnsiawctplooqtqjkumikspmbelbzpvscncekexbroqjjgvtahemzvybzleaazsepwjbcicuysdiaaddihpjeomebqgcsbghxriccmwahbihcmmmvcxaskgtcmxungdnxnpzancjokssyfgwhewboewsqupgastzgkzixdrnpjgqommxqkagoxzgtootihsqttyqwremdmetaqttatzqsawlqlezuzrqusgrjmfoyjibbbudwttpwramchnzghpazxtikaxklhlmifrebkvxcwlgfbhliwnhwjrglqsxxglhldompjlrhxamahzigpreakmlbekakyiydymsjymrxmfxvfhdwahwktjlaumkswivwvpfvbysperllaqjayhktqwtkkgeiobglrniumakstxftnotnxehncaaoggyxiekbrtvfvfxpeeksuefrkoforhexncwvihybcuhxbgmglzahfhzpwgfnnjmcnlaxsyywuftwmiezhegmnfdjnkycvlfiwffqddmylhwxpcwwgektknfzzfcuqhcoojgrpuracpztrxszbcvnsanrfpmyyqomcxfrrzrvospiphhqlcgdetxmklmkbaydxdwrepmthdbwmkpypvdtqafalrmpukutnrksiznqeqoradppyulovsqikczgmwzcpmwxnjnrbekdhbviwgytypdktdsibumqginvtdouhzzqauyycxrdovpjairbcdrkngfglvcsucjxwjxbgpewmtgobxpfdipqqwxcsbwmdhlcrjdzajymcecgdtlgbbztxwxrzugddrhucmwcvuqxasddlpkosjirhfjibplfiublgznbtgztyexmvjanukhdsqlthzaptcaabqbxwcqwhpicalqwvxznpnjwmjnflqfpijmelecswnxwyptvmujdhubtdobrgiioruufaxxwkwtklofziqcq'))
