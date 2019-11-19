@@ -1,7 +1,7 @@
 console.log('hi')
 
 
-
+// matching parentheses
 function isParenthesesMatch(str) {
     const arr = []
     if(str.startsWith(")") || str.endsWith('(')) {
@@ -30,44 +30,26 @@ function isParenthesesMatch(str) {
     
 }
 
-console.log(isParenthesesMatch("))(("))
-console.log(isParenthesesMatch("(())"))
-console.log(isParenthesesMatch("))"))
-console.log(isParenthesesMatch("((())"))
-console.log(isParenthesesMatch("(()))"))
-console.log(isParenthesesMatch("("))
-console.log(isParenthesesMatch("()()(())(()())"))
-
-// console.assert(isParenthesesMatch("I dont need (parentheses) at all(") === false, "1")
-// console.assert(isParenthesesMatch(")I dont need (parentheses) at all") === false, '2')
-
-// console.assert(isParenthesesMatch("I dont need (parentheses) at ( all") === false, '3')
-// console.assert(isParenthesesMatch("I dont need (parentheses) at) all") === false, '4')
-// console.assert(isParenthesesMatch("I dont need (parentheses) at all") === true, '5')
-
-// console.assert(isParenthesesMatch("I dont need (parentheses) (at all") === false, '6')
-
-
-// console.log(isParenthesesMatch("I dont need (parentheses) at) all"))
+// console.log(isParenthesesMatch("))(("))
+// console.log(isParenthesesMatch("(())"))
+// console.log(isParenthesesMatch("))"))
+// console.log(isParenthesesMatch("((())"))
+// console.log(isParenthesesMatch("(()))"))
+// console.log(isParenthesesMatch("("))
+// console.log(isParenthesesMatch("()()(())(()())"))
 
 
 
 
 
+
+// Create a function that takes an array of numbers and returns an object that contains the number as a key and the number of occurances as the value
 
 const numArr = [2, 17, 8, 2, 1, 2, 18, 5, 19, 8];
 
 // const strArr = ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
 
-// Create a function that takes an array of numbers and returns an object that contains the number as a key and the number of occurances as the value
-
-
-
 const numArr2 = [2, 17, 8, 2];
-
-// const strArr = ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
-
-// Create a function that takes an array of numbers and returns an object that contains the number as a key and the number of occurances as the value
 
 const obj = {}
 
@@ -112,8 +94,8 @@ function isCommonItem(arr1, arr2) {
 
 /**
 
-Balanced parens
-()()()
+create function calculate
+This challenge is a variation of matching parenthese
 
 calculate("(3 + 4) * 5") returns 35
 calculate("(2 * 3) + (5 - 2)") returns 9
@@ -148,6 +130,7 @@ function add(a, b) {
     return a/b
 }
 
+// conttruct custom data structure - hash map 
 const opMap = {
     "+": add,
     "-": subtract,
@@ -163,6 +146,8 @@ function calculate(str) {
     
     for(let i=0; i<str.length; i++) {
         const char = str[i]
+
+        // save current number to a variable curNum
         // dealing with single digits now, and multi-digits later
         if (isNumeric(char)) {
             if(curNum === null) {
@@ -177,6 +162,7 @@ function calculate(str) {
             curNum = null
         }
         
+        // keep track of parents in an array
         if(char === '(') {
             parenArr.push(char)
         }
@@ -191,6 +177,7 @@ function calculate(str) {
             numArr.push(op(b, a))
         }
         
+        // keep track of operators in an array
         if(isOperator(char)) {
             opArr.push(opMap[char])
         }
@@ -211,7 +198,6 @@ function calculate(str) {
          throw new Error("Invalid input")
     }
     
-    
     return numArr[0]
 }
 
@@ -231,6 +217,7 @@ function calculate(str) {
 
 
 /**
+ * OOP
  * 
  * EventEmitter
  * 
@@ -273,9 +260,7 @@ class EventEmitter {
                 callback(data)
             })
         } 
-    }
-     
-     
+    }    
 }
  
 const ee = new EventEmitter()
@@ -295,7 +280,6 @@ console.assert(ee.eventHandlers['click'].length === 2)
 
 ee.emit('click', 2)
 console.assert(count === 2)
-
 
 remove()
 
@@ -529,10 +513,7 @@ function findCopy(path, copyTree) {
     
     
     
-    
-    
-    
-    
+
     
     
     
@@ -560,8 +541,11 @@ function reverse(str) {
     }
 }
     
-    
-// console.log(reverse("I am Jane Hot"))
+// console.log(reverse("I am Jane"))
+
+
+
+
 
 
 
@@ -703,6 +687,9 @@ var deduped = sandwiches.filter(function (sandwich, index) {
 
 
 
+
+
+
 // given a string a digits, return the largest 3-digit number that can be found as a substring of the given string
 
 // '12345" => 345
@@ -772,7 +759,7 @@ function fibonacciSequence() {
 
 
 
-
+// string parsing
 
 // Write a function insertDash that accepts a number as a parameter and returns a string with a dash inserted between any consecutive odd numbers.
 
@@ -782,7 +769,7 @@ function inserDash(num) {
     for( let i=0; i<str.length; i++) {
         if(str[i] % 2 === 1 && str[i-1] %2 === 1) {
             console.log(str[i])
-            str[i-1] = "-" + str[i]
+            // str[i-1] = "-" + str[i]
             newStr = newStr + "-" + str[i]
         }
 
@@ -791,7 +778,7 @@ function inserDash(num) {
     return newStr
 }
 
-// console.log(inserDash(4335767999))
+console.log(inserDash(4335767999))
 
 
 
@@ -816,6 +803,7 @@ function removeSpace(sentence) {
 }
 console.log(removeSpace("The film   starts       at      midnight. "))
 console.log(removeSpace(" Always look on    the bright   side of  life."))
+
 
 
 
@@ -2234,3 +2222,6 @@ YES
 //  console.log(SherlockValidString('abcdefghhgfedecba'))
 //  console.log(SherlockValidString('aabbccddeefghi'))
 //  console.log(SherlockValidString('qcfbdopdgvjanhdhijcgkchzqfbvwlxpncsqthvzefztoebypdgahnzzucutnsiawctplooqtqjkumikspmbelbzpvscncekexbroqjjgvtahemzvybzleaazsepwjbcicuysdiaaddihpjeomebqgcsbghxriccmwahbihcmmmvcxaskgtcmxungdnxnpzancjokssyfgwhewboewsqupgastzgkzixdrnpjgqommxqkagoxzgtootihsqttyqwremdmetaqttatzqsawlqlezuzrqusgrjmfoyjibbbudwttpwramchnzghpazxtikaxklhlmifrebkvxcwlgfbhliwnhwjrglqsxxglhldompjlrhxamahzigpreakmlbekakyiydymsjymrxmfxvfhdwahwktjlaumkswivwvpfvbysperllaqjayhktqwtkkgeiobglrniumakstxftnotnxehncaaoggyxiekbrtvfvfxpeeksuefrkoforhexncwvihybcuhxbgmglzahfhzpwgfnnjmcnlaxsyywuftwmiezhegmnfdjnkycvlfiwffqddmylhwxpcwwgektknfzzfcuqhcoojgrpuracpztrxszbcvnsanrfpmyyqomcxfrrzrvospiphhqlcgdetxmklmkbaydxdwrepmthdbwmkpypvdtqafalrmpukutnrksiznqeqoradppyulovsqikczgmwzcpmwxnjnrbekdhbviwgytypdktdsibumqginvtdouhzzqauyycxrdovpjairbcdrkngfglvcsucjxwjxbgpewmtgobxpfdipqqwxcsbwmdhlcrjdzajymcecgdtlgbbztxwxrzugddrhucmwcvuqxasddlpkosjirhfjibplfiublgznbtgztyexmvjanukhdsqlthzaptcaabqbxwcqwhpicalqwvxznpnjwmjnflqfpijmelecswnxwyptvmujdhubtdobrgiioruufaxxwkwtklofziqcq'))
+
+
+
