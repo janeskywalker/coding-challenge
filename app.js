@@ -2159,7 +2159,7 @@ function changeDateFormat(dateArr) {
     return changedArr
 }
 
-console.log(changeDateFormat(['2010/03/30', '15/12/2016', '11-15-2012', '20130721'])) 
+// console.log(changeDateFormat(['2010/03/30', '15/12/2016', '11-15-2012', '20130721'])) 
 
 
 
@@ -2284,3 +2284,40 @@ function calculateMaxProfit(arr) {
 
  console.log(calculateMaxProfit([45, 24, 35, 31, 40, 38, 11])) //16
  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
+
+
+
+
+
+
+
+ /**
+  * write a function that takes a string and an array, return true if the string can be built with elements from the array, otherwise return false
+  * 
+  * what about when str=''
+  */
+
+function canBuild(str, arr) {
+    let subStr = ''
+    for(let i=0; i<str.length; i++) {
+        subStr=subStr+str[i]
+        console.log({subStr})
+        if(arr.includes(subStr)){
+            subStr=''
+        } 
+    }
+
+    console.log({subStr})
+    if(subStr==='') {
+        return true
+    } else {
+        false
+    }
+    
+}
+
+  console.assert(canBuild(('abcefg'), ['abc', 'dt', 'efg']) === true)
+ 
+
+
+
