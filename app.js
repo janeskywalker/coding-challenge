@@ -1,4 +1,3 @@
-console.log('hi')
 
 
 // matching parentheses
@@ -54,7 +53,7 @@ const numArr2 = [2, 17, 8, 2];
 const obj = {}
 
 for( element of numArr) {
-  console.log(element)
+//   console.log(element)
   
   if(!obj.hasOwnProperty(element)) {
      obj[element] = 0
@@ -62,7 +61,7 @@ for( element of numArr) {
   obj[element] = obj[element] + 1 
 }
 
-console.log(obj)
+// console.log(obj)
 
 
 
@@ -77,7 +76,7 @@ const arr2 = ['m', 'o', 'x', 'b']
 function isCommonItem(arr1, arr2) {
   for(i of arr1) {
     if(arr2.includes(i)) {
-      console.log(i)
+    //   console.log(i)
       return true
      }
   }
@@ -493,10 +492,10 @@ function findPath(targetNode, tree) {
 
 const targetNode = tree.children[0].children[1]
 
-console.log('targetNode: ', targetNode);
+// console.log('targetNode: ', targetNode);
 
-console.log(findPath(targetNode, tree))
-console.log(findNode(targetNode, tree, copy));
+// console.log(findPath(targetNode, tree))
+// console.log(findNode(targetNode, tree, copy));
     
     
 function findCopy(path, copyTree) {
@@ -619,7 +618,7 @@ const arrSum2 = Array(num2)
 
 const arrSum = [ ...arrSum1, ...arrSum2]
 
-console.log(arrSum.length)
+// console.log(arrSum.length)
 
 
 
@@ -778,7 +777,7 @@ function inserDash(num) {
     return newStr
 }
 
-console.log(inserDash(4335767999))
+// console.log(inserDash(4335767999))
 
 
 
@@ -801,8 +800,8 @@ console.log(inserDash(4335767999))
 function removeSpace(sentence) {
     return sentence = sentence.replace(/\s+/g, " ").trim()
 }
-console.log(removeSpace("The film   starts       at      midnight. "))
-console.log(removeSpace(" Always look on    the bright   side of  life."))
+// console.log(removeSpace("The film   starts       at      midnight. "))
+// console.log(removeSpace(" Always look on    the bright   side of  life."))
 
 
 
@@ -851,9 +850,7 @@ function orderFlights(flightArr) {
     
     sortedArray.push(startingPoint)
     let dest = flightObj[startingPoint]
-    
-     // What about flightObj?
-    
+        
     while (dest !== undefined) {
         console.log({ dest })
         sortedArray.push(dest)
@@ -992,8 +989,13 @@ function autoComplete(str) {
 
 
 
-// iterative 
 
+
+
+
+
+
+// iterative 
 function power(a, b) {
   let result = 1
   for(let i=0; i<b; i++) {
@@ -1016,12 +1018,8 @@ function power2(a, b) {
   return a*power2(a, b-1)
 }
 
-
 // time complexity
 // space complexity
-
-
-
 
 // console.log(power2(2,0))
 // console.log(power2(2,3))
@@ -1094,6 +1092,11 @@ function countingValleys(n, str) {
 
 
 
+
+
+
+
+
 /*
 You just bought a delicious, yet odorless, cheese for your pet mice. Unfortunately some of them are blind, so they start walking away from this otherwise-irresistible treat!  Write a function blindMice() that will find out how many of your mice are blind. This function should accept a single argument, a string representing the mice and the cheese, and returns the number of mice that are blind. We can assume that all mice walking away from the cheese are blind, while those walking towards it are not.   Cheese: 'C'  Mice walking right: '~M'  Mice walking left: 'M~'  (The '~' is the tail)  Example inputs and correct return values:  "M~~M ~MM~C~MM~M~" à return the number 3 "~M~M~MC M~~M" à return the number 1 "~M CM~~M~M" à return the number 2
 
@@ -1149,7 +1152,12 @@ function countBlindMice(strM) {
 
 
 
+
+
 /*
+
+largest hourglass sum 
+
 Given a  2D Array, :
 1 1 1 0 0 0
 0 1 0 0 0 0
@@ -1346,6 +1354,13 @@ var hammingDistance = function(x, y) {
 
 
 // console.log(hammingDistance(1, 5))
+
+
+
+
+
+
+
 
 
 
@@ -1625,11 +1640,11 @@ function gameCount(p, d, m, s) {
 }
 
 
-console.log("gameCount",gameCount(20, 3, 6, 85)) //7
-console.log("gameCount",gameCount(20, 3, 6, 80)) //6
-console.log("gameCount",gameCount(16, 2, 1, 9981)) // 9917
-console.log("gameCount",gameCount(100, 1, 1, 99)) // 0
-console.log("gameCount",gameCount(100, 19, 1, 180)) // 0
+// console.log("gameCount",gameCount(20, 3, 6, 85)) //7
+// console.log("gameCount",gameCount(20, 3, 6, 80)) //6
+// console.log("gameCount",gameCount(16, 2, 1, 9981)) // 9917
+// console.log("gameCount",gameCount(100, 1, 1, 99)) // 0
+// console.log("gameCount",gameCount(100, 19, 1, 180)) // 0
 
 
 
@@ -1660,6 +1675,11 @@ Sample Output
  }
 
 //  console.log(totalMealCost(15.50, 15, 10))
+
+
+
+
+
 
 
 
@@ -2225,3 +2245,42 @@ YES
 
 
 
+/**
+ * stock max profit:
+ * can not buy and sell at the same time
+ */
+
+ // 0(n^2), two passes, nested for loop
+function calculateMaxProfit(arr) {
+    let buyPrice = 0
+    let sellPrice = 0
+    let maxProfit = 0
+    let profit
+    for(let i=0; i<arr.length-1; i++) {
+        for( let j=1; j<arr.length; j++) {
+            buyPrice = arr[i]
+            sellPrice = arr[j]
+            profit = sellPrice-buyPrice
+            if (maxProfit<profit) {
+                maxProfit = profit
+            } 
+        }
+    }
+    return maxProfit
+ }
+
+ // 0(n), one pass, one loop
+ function calculateMaxProfit2(arr) {
+    let buyPrice = 0
+    let sellPrice = 0
+    let maxProfit = 0
+    let profit
+    for(let i=0; i<arr.length-1; i++) {
+
+
+    }
+    return maxProfit
+ }
+
+ console.log(calculateMaxProfit([45, 24, 35, 31, 40, 38, 11])) //16
+ console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
