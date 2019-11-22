@@ -2496,3 +2496,36 @@ var generate = function(numRows) {
 
 console.log(generate(5))
 
+
+
+
+
+
+/**
+ * reverse words in a string
+ */
+
+ function reverseWords(s) {
+    let temp = ""
+    let reversed = ""
+    for(let i=0; i<s.length; i++) {
+        if(s[i]===" ") {
+            reversed = reversed + temp + " "
+            temp = ""
+        } 
+
+        else if(i===s.length-1) {
+            temp = s[i] + temp
+            reversed = reversed + temp
+        } 
+        else {
+            temp = s[i] + temp
+        }
+    }
+    return reversed
+ }
+
+
+//  console.log(reverseWords(["h","e","l","l","o"]))
+ console.log(reverseWords("Let's take LeetCode contest")) // "s'teL ekat edoCteeL tsetnoc"
+ //  console.log(reverseWords("the sky is blue"))
