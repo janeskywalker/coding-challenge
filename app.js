@@ -1992,6 +1992,13 @@ function shortestSubStr(s) {
 // console.log(shortestSubStr('babb'))
 // console.log(shortestSubStr('bdbbcabcd'))
 
+
+
+
+
+
+
+
 function shortestSubStr2(s) {
     const charArr = []
     for(let char of s) {
@@ -2029,8 +2036,68 @@ function shortestSubStr2(s) {
     runLoop()
 }
 
-// console.log(shortestSubStr2('babb'))
-// console.log(shortestSubStr2('bdbbcabcd'))
+
+
+
+
+
+
+
+
+
+function hasAllChar2(subStr, allChar) {
+    for(char of allChar) {
+        if(!subStr.includes(char)) {
+            return false
+        }
+    }
+    return true
+}
+
+function shortestSubStr3(str){
+
+    const allChar=[...new Set(str)]
+    console.log({allChar})
+
+    let possibleSubStrings=[]
+    let subStr=''
+
+    const allCharLen=allChar.length
+
+    let startingIndex=0
+
+    function runLoop() {
+        for(let i=startingIndex; i<str.length; i++) {
+            subStr=subStr+str[i]
+            console.log('one: ', {subStr})
+            if(subStr.length>=allCharLen) {
+                if(hasAllChar2(subStr, allChar)){
+                    // if(subStr.length===allCharLen) {
+                    //     return subStr
+                    // } else {
+                        possibleSubStrings.push(subStr)
+                    // }
+                }
+            }
+        }
+
+        if(startingIndex<str.length-allCharLen) {
+            startingIndex++
+            subStr=''
+            return runLoop()
+        } else {
+            // sort and return
+        }
+    }
+
+    return runLoop()
+
+    console.log(possibleSubStrings)
+}
+
+
+console.log('answer: ', shortestSubStr3('bacca'))
+// console.log(shortestSubStr3('abcdbabbbcd'))
 
 
 
@@ -2283,6 +2350,7 @@ YES
 /**
  * stock max profit:
  * can not buy and sell at the same time
+ * if no profit, return -1
  */
 
  // 0(n^2), two passes, nested for loop
@@ -2306,19 +2374,35 @@ function calculateMaxProfit(arr) {
 
  // 0(n), one pass, one loop
  function calculateMaxProfit2(arr) {
-    let buyPrice = 0
-    let sellPrice = 0
-    let maxProfit = 0
-    let profit
-    for(let i=0; i<arr.length-1; i++) {
+    // let buyPrice = null
+    // let sellPrice = null
+    // let maxProfit = 0
+    // let profit
+    // for(let i=0; i<arr.length-1; i++) {
+    //     if (buyPrice === null) {
+    //         buyPrice = arr[i]
+    //     }
 
+    //     if(sellPrice && arr[i] > sellPrice) {
+    //         sellPrice = arr[i]
+    //     }
 
-    }
-    return maxProfit
+    //     if(arr[i] < arr[i+1]) {
+    //         buyPrice = arr[i]
+    //         sellPrice = arr[i+1]
+    //     }
+
+    //     maxProfit = sellPrice - buyPrice
+
+        // arr[i] < buyPrice
+        // arr[i] > sellPrice
+    // }
+
+    // return maxProfit
  }
 
- console.log(calculateMaxProfit([45, 24, 35, 31, 40, 38, 11])) //16
  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
+//  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
 
 
 
@@ -2358,421 +2442,57 @@ function canBuild(str, arr) {
 
 
 
-  const data = [
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-05-31 20:05:06",
-        "internal_id": 341,
-        "ad_name": "7854 2nd Rd",
-        "bathrooms": 3,
-        "bedrooms": 4,
-        "city": "Atlanta",
-        "country": "France",
-        "latitude": 37.68316696886722,
-        "longitude": -122.52220006837292,
-        "base_rate": 204.39,
-        "description": "Bright apartment in a spectacular area",
-        "laundry_onsite": false,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": true,
-        "paid_parking": false,
-        "fitness_equipment": true,
-        "extra_beds": true,
-        "fees": 14,
-        "base_nightly_price": 192.13,
-        "cleaning_fee": 20.16,
-        "sleeps": 7,
-        "in_person_checkin": true,
-        "wifi_network_name": "Sonder Guest",
-        "wifi_network_password": "Fake"
-    },
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-06-03 19:07:10",
-        "internal_id": 4041,
-        "ad_name": "266 South Gulf Rd",
-        "bathrooms": 2,
-        "bedrooms": 3,
-        "city": "New York City",
-        "country": "Italy",
-        "latitude": 37.74993569440665,
-        "longitude": -122.52158351438194,
-        "base_rate": 497.19,
-        "description": "Spacious unit for a peaceful getaway",
-        "laundry_onsite": false,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": false,
-        "paid_parking": false,
-        "fitness_equipment": false,
-        "extra_beds": true,
-        "fees": 21,
-        "base_nightly_price": 467.36,
-        "cleaning_fee": 6.23,
-        "sleeps": 3,
-        "in_person_checkin": true,
-        "wifi_network_name": "Sonder",
-        "wifi_network_password": "Not real"
-    },
-    {
-        "partner": "Booking.com",
-        "last_updated": "2018-06-02 19:35:41",
-        "internal_id": 341,
-        "ad_name": "152 Marvon Ln",
-        "bathrooms": 1,
-        "bedrooms": 2,
-        "city": "Whistler",
-        "country": "Canada",
-        "latitude": 37.742192541787155,
-        "longitude": -122.53053206432163,
-        "base_rate": 244.83,
-        "description": "Comfortable, stylish apartment",
-        "laundry_onsite": true,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": false,
-        "paid_parking": false,
-        "fitness_equipment": true,
-        "extra_beds": true,
-        "fees": 10,
-        "sleeps": 9,
-        "fitness_room_onsite": false,
-        "room_service": true
-    },
-    {
-        "partner": "Booking.com",
-        "last_updated": "2018-04-14 19:31:20",
-        "internal_id": 2761,
-        "ad_name": "9612 Annadale Ln",
-        "bathrooms": 1,
-        "bedrooms": 2,
-        "city": "London",
-        "country": "Italy",
-        "latitude": 37.69763454255414,
-        "longitude": -122.53110999186555,
-        "base_rate": 365.43,
-        "description": "You'll never want to stay in another hotel",
-        "laundry_onsite": false,
-        "pool": true,
-        "outdoor_grill": false,
-        "free_parking": false,
-        "paid_parking": true,
-        "fitness_equipment": true,
-        "extra_beds": false,
-        "fees": 18,
-        "sleeps": 7,
-        "fitness_room_onsite": true,
-        "room_service": false
-    },
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-04-05 19:35:33",
-        "internal_id": 6602,
-        "ad_name": "33 Schoolhouse St",
-        "bathrooms": 1,
-        "bedrooms": 2,
-        "city": "Atlanta",
-        "country": "Italy",
-        "latitude": 37.793678435552096,
-        "longitude": -122.51963967686089,
-        "base_rate": 180.93,
-        "description": "Unique, delightful space ready for travelers",
-        "laundry_onsite": true,
-        "pool": false,
-        "outdoor_grill": true,
-        "free_parking": true,
-        "paid_parking": false,
-        "fitness_equipment": true,
-        "extra_beds": true,
-        "fees": 21,
-        "base_nightly_price": 195.4,
-        "cleaning_fee": 30.46,
-        "sleeps": 10,
-        "in_person_checkin": true,
-        "wifi_network_name": "Secure Wifi",
-        "wifi_network_password": "secure_password"
-    },
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-06-01 12:01:32",
-        "internal_id": 8614,
-        "ad_name": "9215 Durham St",
-        "bathrooms": 1,
-        "bedrooms": 3,
-        "city": "Paris",
-        "country": "Canada",
-        "latitude": 37.73141013187593,
-        "longitude": -122.52593981606427,
-        "base_rate": 283.29,
-        "description": "Spectacular view of the area",
-        "laundry_onsite": true,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": true,
-        "paid_parking": true,
-        "fitness_equipment": false,
-        "extra_beds": true,
-        "fees": 6,
-        "base_nightly_price": 283.29,
-        "cleaning_fee": 13.04,
-        "sleeps": 12,
-        "in_person_checkin": false,
-        "wifi_network_name": "Sonder",
-        "wifi_network_password": "Not real"
-    },
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-05-31 20:05:06",
-        "internal_id": 8864,
-        "ad_name": "382 San Juan Dr",
-        "bathrooms": 2,
-        "bedrooms": 3,
-        "city": "Dallas",
-        "country": "Italy",
-        "latitude": 37.694344843977085,
-        "longitude": -122.52938356604386,
-        "base_rate": 196.45,
-        "description": "Spectacular view of the area",
-        "laundry_onsite": false,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": false,
-        "paid_parking": true,
-        "fitness_equipment": true,
-        "extra_beds": true,
-        "fees": 12,
-        "base_nightly_price": 192.52,
-        "cleaning_fee": 10.98,
-        "sleeps": 10,
-        "in_person_checkin": true,
-        "wifi_network_name": "NSA Surveillance Van",
-        "wifi_network_password": "nobody will connect"
-    },
-    {
-        "partner": "Booking.com",
-        "last_updated": "2018-06-02 19:35:41",
-        "internal_id": 4575,
-        "ad_name": "43 W Gainsway Ct",
-        "bathrooms": 1,
-        "bedrooms": 3,
-        "city": "Vancouver",
-        "country": "United States",
-        "latitude": 37.615275983795065,
-        "longitude": -122.52291322676678,
-        "base_rate": 250.19,
-        "description": "Beautiful scenic view",
-        "laundry_onsite": true,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": true,
-        "paid_parking": true,
-        "fitness_equipment": false,
-        "extra_beds": true,
-        "fees": 21,
-        "sleeps": 8,
-        "fitness_room_onsite": false,
-        "room_service": false
-    },
-    {
-        "partner": "Expedia",
-        "last_updated": "2018-06-03 19:07:51",
-        "internal_id": 9255,
-        "ad_name": "203 Bowman Ln",
-        "bathrooms": 3,
-        "bedrooms": 1,
-        "city": "San Diego",
-        "country": "United States",
-        "latitude": 37.71458910694875,
-        "longitude": -122.52878675201475,
-        "base_rate": 505.96,
-        "description": "Live like a local in this stylish apartment",
-        "laundry_onsite": false,
-        "pool": true,
-        "outdoor_grill": false,
-        "free_parking": true,
-        "paid_parking": true,
-        "fitness_equipment": false,
-        "extra_beds": false,
-        "fees": 19,
-        "guests": 11,
-        "breakfast_available": true,
-        "fitness_room_onsite": false,
-        "nightly_price": 495.84,
-        "weekly_price": 471.05
-    },
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-04-23 19:31:49",
-        "internal_id": 8303,
-        "ad_name": "804 W Devonshire St",
-        "bathrooms": 2,
-        "bedrooms": 2,
-        "city": "San Francisco",
-        "country": "United States",
-        "latitude": 37.64309245871732,
-        "longitude": -122.5235299222908,
-        "base_rate": 230.52,
-        "description": "Travel like royalty in this luxury space",
-        "laundry_onsite": true,
-        "pool": false,
-        "outdoor_grill": true,
-        "free_parking": true,
-        "paid_parking": true,
-        "fitness_equipment": false,
-        "extra_beds": true,
-        "fees": 21,
-        "base_nightly_price": 230.52,
-        "cleaning_fee": 7.91,
-        "sleeps": 10,
-        "in_person_checkin": true,
-        "wifi_network_name": "Sonder Guest",
-        "wifi_network_password": "Fake"
-    },
-    {
-        "partner": "Expedia",
-        "last_updated": "2018-05-25 19:27:37",
-        "internal_id": 7173,
-        "ad_name": "230 Tallwood St",
-        "bathrooms": 2,
-        "bedrooms": 1,
-        "city": "New Orleans",
-        "country": "Canada",
-        "latitude": 37.628364212790366,
-        "longitude": -122.53201492094469,
-        "base_rate": 154.9,
-        "description": "Travel like royalty in this luxury space",
-        "laundry_onsite": false,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": false,
-        "paid_parking": false,
-        "fitness_equipment": false,
-        "extra_beds": true,
-        "fees": 13,
-        "guests": 8,
-        "breakfast_available": true,
-        "fitness_room_onsite": false,
-        "nightly_price": 154.9,
-        "weekly_price": 147.16
-    },
-    {
-        "partner": "Airbnb",
-        "last_updated": "2018-04-23 19:31:49",
-        "internal_id": 1242,
-        "ad_name": "426 N Saxon Dr",
-        "bathrooms": 2,
-        "bedrooms": 1,
-        "city": "Boston",
-        "country": "United States",
-        "latitude": 37.616175160694766,
-        "longitude": -122.52353740832139,
-        "base_rate": 555.15,
-        "description": "Live like a local in this stylish apartment",
-        "laundry_onsite": true,
-        "pool": false,
-        "outdoor_grill": false,
-        "free_parking": true,
-        "paid_parking": true,
-        "fitness_equipment": false,
-        "extra_beds": true,
-        "fees": 8,
-        "base_nightly_price": 555.15,
-        "cleaning_fee": 14.47,
-        "sleeps": 9,
-        "in_person_checkin": true,
-        "wifi_network_name": "NSA Surveillance Van",
-        "wifi_network_password": "nobody will connect"
-    },
-    {
-        "partner": "Expedia",
-        "last_updated": "2018-05-28 19:07:57",
-        "internal_id": 1596,
-        "ad_name": "149 Leeton Ridge St",
-        "bathrooms": 3,
-        "bedrooms": 5,
-        "city": "Austin",
-        "country": "United Kingdom",
-        "latitude": 37.71361749004941,
-        "longitude": -122.52106692219373,
-        "base_rate": 189.26,
-        "description": "Live like a local in this stylish apartment",
-        "laundry_onsite": true,
-        "pool": true,
-        "outdoor_grill": false,
-        "free_parking": false,
-        "paid_parking": false,
-        "fitness_equipment": true,
-        "extra_beds": true,
-        "fees": 11,
-        "guests": 4,
-        "breakfast_available": false,
-        "fitness_room_onsite": true,
-        "nightly_price": 189.26,
-        "weekly_price": 179.8
-    },
-    {
-        "partner": "Expedia",
-        "last_updated": "2018-05-22 19:28:24",
-        "internal_id": 1242,
-        "ad_name": "957 St Margarets Ave",
-        "bathrooms": 2,
-        "bedrooms": 5,
-        "city": "Whistler",
-        "country": "Canada",
-        "latitude": 37.654547274135844,
-        "longitude": -122.52143416371892,
-        "base_rate": 398.07,
-        "description": "Apartment clickbait",
-        "laundry_onsite": true,
-        "pool": true,
-        "outdoor_grill": true,
-        "free_parking": true,
-        "paid_parking": false,
-        "fitness_equipment": true,
-        "extra_beds": true,
-        "fees": 17,
-        "guests": 5,
-        "breakfast_available": false,
-        "fitness_room_onsite": true,
-        "nightly_price": 517.49,
-        "weekly_price": 491.62
-    }]
 
 
 
-function findSounderUnit(data) {
-    const map= [
-        {
-            "internal_id":1, 
-            "partner": []
-        },
-        {
-            "internal_id":2, 
-            "partner": []
-        },
-        {
-            "internal_id":3, 
-            "partner": []
+/**
+ * pascal's triangle
+ */
+
+
+ function generateArray(num, previousArr) {
+    array=[]
+    for(let i=0; i<=num; i++) {
+        // console.log(i)
+        if(i===0 || i===num) {
+            array.push(1)
         }
+        else {
+            array.push(previousArr[i-1]+previousArr[i])
+        }
+    }
+    return array
+ }
 
-    ]
+
+//  console.log(generateArray(5, [ 1, 4, 6, 4, 1 ]))
+
+var generate = function(numRows) {
+
+    let triangle=[]
+
+    for(let i=0; i<numRows; i++) {
+        if(i===0) {
+           triangle.push([1])
+        }
         
-    
-    for(unit of data) {
-        if(unit.internal_id===1) {
-            map[0].partner.push(unit.partner)
+        else if(i===1) {
+            triangle.push([1,1])
         }
-        if(unit.internal_id===2) {
-            map[1].partner.push(unit.partner)
+        
+        else if(i===2) {
+            array=[1,triangle[i-1][0] + triangle[i-1][1] ,1]
+            triangle.push(array)
         }
-        if(unit.internal_id===3) {
-            map[2].partner.push(unit.partner)
+
+        else{
+            array = generateArray(i, triangle[i-1])
+            triangle.push(array)
         }
     }
 
-    return map
-}
+    return triangle
+};
 
-findSounderUnit(data)
+console.log(generate(5))
 
