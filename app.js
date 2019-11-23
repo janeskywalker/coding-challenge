@@ -2611,16 +2611,47 @@ root.addNode(2)
 root.addNode(2)
 root.addNode(2)
 root.addNode(2)
-// root.addNode(2)
-// root.addNode(2)
-console.log(root)
+
+// console.log(root)
 
 
-// const isUnivalTree = function(root) {
-//     console.log(root.value)
-// }
 
 
-// console.log(isUnivalTree([2,2,2])) // true 
+
+
+function isLeftSame(node, nodeValue) {
+    if(node.left === null || node.left.val=== nodeValue) {
+        return true
+    }
+    return false
+}
+
+function isRightSame(node, nodeValue) {
+    if(node.right === null || node.right.val === nodeValue) {
+        return true
+    }
+    return false
+}
+
+const isUnivalTree = function(node, nodeVal) {
+
+    if(node===null) {
+        return true
+    }
+
+    console.log(node)
+    nodeVal = nodeVal || node.val
+    console.log(nodeVal)
+
+    if ( isLeftSame(node, nodeVal) && isRightSame(node, nodeVal)){
+        return isUnivalTree(node.left, nodeVal) && isUnivalTree(node.right, nodeVal)
+    }
+    return false
+
+}
+
+console.log(isUnivalTree(root)) // true 
 //    console.log(isUnivalTree([1,1,1,1,1,null,1])) // true 
 //    console.log(isUnivalTree([2,2,2,5,2])) // false 
+
+
