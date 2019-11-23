@@ -2494,7 +2494,7 @@ var generate = function(numRows) {
     return triangle
 };
 
-console.log(generate(5))
+// console.log(generate(5))
 
 
 
@@ -2527,7 +2527,7 @@ console.log(generate(5))
 
 
 //  console.log(reverseWords(["h","e","l","l","o"]))
- console.log(reverseWords("Let's take LeetCode contest")) // "s'teL ekat edoCteeL tsetnoc"
+//  console.log(reverseWords("Let's take LeetCode contest")) // "s'teL ekat edoCteeL tsetnoc"
  
  
 
@@ -2535,16 +2535,36 @@ console.log(generate(5))
 
 
 
- function reverseWords2(s) {
-    let reversed
-    reversed = s.trim().replace( /\s\s+/g, ' ' ).split(' ').reverse().join(' ')
-    console.log(reversed)
- }
+//  function reverseWords2(s) {
+//     let reversed
+//     reversed = s.trim().replace( /\s\s+/g, ' ' ).split(' ').reverse().join(' ')
+//     return reversed
+//  }
  
  
- 
- 
- 
+function reverseWords2(s) {
+    let trimed = s.trim().replace(/\s\s+/g, ' ')
+    let temp = ""
+    let reversed = ""
+
+    for(let i=0; i<trimed.length; i++) {
+
+        if(trimed[i] === " ") {
+            reversed = " " + temp + reversed
+            temp = ""
+        } else if(i===trimed.length-1) {
+            temp = temp + trimed[i]
+            reversed = temp + reversed
+        } else {
+            temp = temp + trimed[i]
+        }
+    }
+
+    console.log({reversed})
+}
+
+
+
   console.log(reverseWords2("the sky is blue"))
   console.log(reverseWords2("  hello world!  ")) //"world! hello"
   console.log(reverseWords2("a good   example")) // "example good a"
