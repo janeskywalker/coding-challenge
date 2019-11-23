@@ -2564,8 +2564,63 @@ function reverseWords2(s) {
 }
 
 
+//   console.log(reverseWords2("the sky is blue"))
+//   console.log(reverseWords2("  hello world!  ")) //"world! hello"
+//   console.log(reverseWords2("a good   example")) // "example good a"
 
-  console.log(reverseWords2("the sky is blue"))
-  console.log(reverseWords2("  hello world!  ")) //"world! hello"
-  console.log(reverseWords2("a good   example")) // "example good a"
+
+
   
+
+
+
+
+
+
+/**
+ * univalued binary tree
+ * a binary tree is univalued is every node in the tree has the same value
+ */
+
+
+class Tree {
+    constructor(val) {
+        this.val = val
+        this.size = 0
+        this.left = null
+        this.right = null
+    }
+
+    addNode(val){
+        this.size += 1;
+        if(this.left === null) {
+            this.left = new Tree(val)
+        } else if(this.right === null) {
+            this.right = new Tree(val)
+        } else if (this.left.size <= this.right.size) {
+            this.left.addNode(val)
+        } else {
+            this.right.addNode(val)
+        }
+    }
+}
+
+const root = new Tree(2)
+
+root.addNode(2)
+root.addNode(2)
+root.addNode(2)
+root.addNode(2)
+// root.addNode(2)
+// root.addNode(2)
+console.log(root)
+
+
+// const isUnivalTree = function(root) {
+//     console.log(root.value)
+// }
+
+
+// console.log(isUnivalTree([2,2,2])) // true 
+//    console.log(isUnivalTree([1,1,1,1,1,null,1])) // true 
+//    console.log(isUnivalTree([2,2,2,5,2])) // false 
