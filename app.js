@@ -2528,4 +2528,24 @@ console.log(generate(5))
 
 //  console.log(reverseWords(["h","e","l","l","o"]))
  console.log(reverseWords("Let's take LeetCode contest")) // "s'teL ekat edoCteeL tsetnoc"
- //  console.log(reverseWords("the sky is blue"))
+ 
+ 
+
+
+
+
+
+ function reverseWords2(s) {
+    let reversed
+    reversed = s.trim().replace( /\s\s+/g, ' ' ).split(' ').reverse().join(' ')
+    console.log(reversed)
+ }
+ 
+ 
+ 
+ 
+ 
+  console.log(reverseWords2("the sky is blue"))
+  console.log(reverseWords2("  hello world!  ")) //"world! hello"
+  console.log(reverseWords2("a good   example")) // "example good a"
+  
