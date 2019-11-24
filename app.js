@@ -2648,7 +2648,7 @@ const isUnivalTree = function(node, nodeVal) {
 
 }
 
-console.log(isUnivalTree(root)) // true 
+// console.log(isUnivalTree(root)) // true 
 //    console.log(isUnivalTree([1,1,1,1,1,null,1])) // true 
 //    console.log(isUnivalTree([2,2,2,5,2])) // false 
 
@@ -2659,25 +2659,39 @@ console.log(isUnivalTree(root)) // true
 class Tree2 {
     constructor(val) {
         this.val = val
+        this.childSize = 0
         this.left = null
         this.right = null
-        this.childSize = 0
     }
 
     addNode(val){
+        // add to the left child
         if( this.left === null ) {
             this.left = new Tree2(val)
             this.childSize++
+        // add to the right child
         } else if( this.right === null){
             this.right = new Tree2(val)
             this.childSize++
-        } else if(this.left.childSize <= this.right.childSize) {
+        } 
+        // add to the left child's child
+        else if(this.left.childSize <= this.right.childSize) {
             this.left.addNode(val)
+        //  // add to the right child's child
         } else if(this.left.childSize > this.right.childSize) {
             this.right.addNode(val)
         }
     }
 }
+
+
+const root2 = new Tree2(2)
+root2.addNode(2)
+root2.addNode(2)
+root2.addNode(5)
+root2.addNode(2)
+
+console.log(root2)
 
 
 
