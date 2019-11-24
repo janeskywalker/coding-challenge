@@ -2583,6 +2583,9 @@ function reverseWords2(s) {
  */
 
 
+
+
+ // answer 1: recursive soluction 
 class Tree {
     constructor(val) {
         this.val = val
@@ -2611,11 +2614,6 @@ root.addNode(2)
 root.addNode(2)
 root.addNode(2)
 root.addNode(2)
-
-// console.log(root)
-
-
-
 
 
 
@@ -2653,5 +2651,33 @@ const isUnivalTree = function(node, nodeVal) {
 console.log(isUnivalTree(root)) // true 
 //    console.log(isUnivalTree([1,1,1,1,1,null,1])) // true 
 //    console.log(isUnivalTree([2,2,2,5,2])) // false 
+
+
+
+// anwser 2: recursive review
+
+class Tree2 {
+    constructor(val) {
+        this.val = val
+        this.left = null
+        this.right = null
+        this.childSize = 0
+    }
+
+    addNode(val){
+        if( this.left === null ) {
+            this.left = new Tree2(val)
+            this.childSize++
+        } else if( this.right === null){
+            this.right = new Tree2(val)
+            this.childSize++
+        } else if(this.left.childSize <= this.right.childSize) {
+            this.left.addNode(val)
+        } else if(this.left.childSize > this.right.childSize) {
+            this.right.addNode(val)
+        }
+    }
+}
+
 
 
