@@ -2645,7 +2645,6 @@ const isUnivalTree = function(node, nodeVal) {
         return isUnivalTree(node.left, nodeVal) && isUnivalTree(node.right, nodeVal)
     }
     return false
-
 }
 
 // console.log(isUnivalTree(root)) // true 
@@ -2688,19 +2687,24 @@ const root2 = new Tree2(2)
 root2.addNode(2)
 root2.addNode(2)
 root2.addNode(5)
-root2.addNode(2)
+root2.addNode(5)
 
 console.log(root2)
 
 function isLeftSame2(node, nodeVal) {
-    if(node === null || node.left.val === nodeVal) {
-        return true
-    }
-    return false
+    
+        if(node.left === null || node.left.val === nodeVal) {
+            console.log('checking left child')
+            return true
+        }
+        return false
+
 }
 
 function isRightSame2(node, nodeVal) {
-    if(node === null || node.right.val === nodeVal) {
+    
+    if(node.right === null || node.right.val === nodeVal) {
+        console.log('checking right child')
         return true
     }
     return false
@@ -2708,17 +2712,24 @@ function isRightSame2(node, nodeVal) {
 
 
 function isUnivalTree2(node) {
+    console.log('checking tree', node)
     // the first time nodeVal is null
 
     // is left child same
     // is right child same
     // recursive call 
-    if(isLeftSame2(node, node.val) && isRightSame2(node, node.val)) {
-        console.log('child same')
-        return true
-    } else {
-        return false
-    }
+
+        if(node === null) {
+            return true 
+        }
+
+        if( isLeftSame2(node, node.val) && isRightSame2(node, node.val)) {
+            console.log('child same')
+            return isUnivalTree2(node.left, node.val) && isUnivalTree2(node.right, node.val)
+        } else {
+            return false
+        }
+
 }
 
 console.log(isUnivalTree2(root2))
