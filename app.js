@@ -2655,7 +2655,6 @@ const isUnivalTree = function(node, nodeVal) {
 
 
 // anwser 2: recursive review
-
 class Tree2 {
     constructor(val) {
         this.val = val
@@ -2677,7 +2676,7 @@ class Tree2 {
         // add to the left child's child
         else if(this.left.childSize <= this.right.childSize) {
             this.left.addNode(val)
-        //  // add to the right child's child
+        // add to the right child's child
         } else if(this.left.childSize > this.right.childSize) {
             this.right.addNode(val)
         }
@@ -2692,6 +2691,37 @@ root2.addNode(5)
 root2.addNode(2)
 
 console.log(root2)
+
+function isLeftSame2(node, nodeVal) {
+    if(node === null || node.left.val === nodeVal) {
+        return true
+    }
+    return false
+}
+
+function isRightSame2(node, nodeVal) {
+    if(node === null || node.right.val === nodeVal) {
+        return true
+    }
+    return false
+}
+
+
+function isUnivalTree2(node) {
+    // the first time nodeVal is null
+
+    // is left child same
+    // is right child same
+    // recursive call 
+    if(isLeftSame2(node, node.val) && isRightSame2(node, node.val)) {
+        console.log('child same')
+        return true
+    } else {
+        return false
+    }
+}
+
+console.log(isUnivalTree2(root2))
 
 
 
