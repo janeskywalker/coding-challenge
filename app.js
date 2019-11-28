@@ -2835,7 +2835,6 @@ function mergeTrees(t1, t2) {
     // console.log('result:', t1)
     return t1
 }
-
 // console.log('result: ', mergeTrees(t1, t2))
 
 
@@ -2876,21 +2875,101 @@ const t3 = {
 
 
 
+// failed try "top-down"
+
+// function maxDepth(root) {
+
+//     function countDepth(root, count) {
+//         console.log({root, count})
+
+//         if(root.size === 0) {
+//             return count
+//         }
+
+//         if(root.left !== null && root.right === null) {
+//             console.log('going left')
+//             count ++
+//             return countDepth(root.left, count)
+//         }
+
+//         if(root.right !== null) {
+//             console.log('going right')
+//             count ++
+//             console.log({count})
+//             return countDepth(root.right, count)
+//         }
+
+//     }
+
+//     return countDepth(root, 1)
+
+// }
+// console.log("result:", maxDepth(t3))
 
 
 
 
-function maxDepth(root) {
 
+
+// "top-down solution"
+let answer = 0
+function maxDepth(root, depth) {
+
+    // root is null
     if(root === null) {
-        return 1 
+        return answer
     }
 
-    let leftDepth = maxDepth(root.left)
-    let rightDepth = maxDepth(root.right)
+    // root has no child
+    if(root.left === null && root.right === null) {
+        // compare answer and depth
+        answer = Math.max(answer, depth)
+    }
 
-    let depth = Math.max(leftDepth, rightDepth) + 1
-    return depth
+    // root has child 
+    maxDepth(root.left, depth+1) 
+
+    maxDepth(root.right, depth+1)
+
+    return answer
 
 }
-console.log("result:", maxDepth(t3))
+
+
+// console.log("result:", maxDepth(t3, 1))
+
+
+
+
+// top-down solution:
+var maxDepth = function(root) {    
+    let maxNodes = (node, sum) => {
+        if (node === null) {
+            return sum;
+        }
+        
+        return Math.max(maxNodes(node.left, sum + 1), maxNodes(node.right, sum + 1));
+    }
+    
+    return maxNodes(root, 0);
+};
+
+
+
+
+// "bottom-up" solution 
+// function maxDepth(root) {
+//     if(root === null) {
+//         return 0
+//     }
+//     else {
+//         let leftDepth = maxDepth(root.left)
+//         let rightDepth = maxDepth(root.right)
+//         let biggerDepth = Math.max(leftDepth, rightDepth)
+//         return biggerDepth + 1
+//     }
+// }
+// console.log("result:", maxDepth(t3))
+
+
+
