@@ -2420,7 +2420,7 @@ function canBuild(str, arr) {
     let subStr = ''
     for(let i=0; i<str.length; i++) {
         subStr=subStr+str[i]
-        console.log({subStr})
+        // console.log({subStr})
         if(arr.includes(subStr)){
             subStr=''
         } 
@@ -2560,7 +2560,7 @@ function reverseWords2(s) {
         }
     }
 
-    console.log({reversed})
+    // console.log({reversed})
 }
 
 
@@ -2637,9 +2637,7 @@ const isUnivalTree = function(node, nodeVal) {
         return true
     }
 
-    console.log(node)
     nodeVal = nodeVal || node.val
-    console.log(nodeVal)
 
     if ( isLeftSame(node, nodeVal) && isRightSame(node, nodeVal)){
         return isUnivalTree(node.left, nodeVal) && isUnivalTree(node.right, nodeVal)
@@ -2689,7 +2687,7 @@ root2.addNode(2)
 root2.addNode(5)
 root2.addNode(5)
 
-console.log(root2)
+// console.log(root2)
 
 function isLeftSame2(node, nodeVal) {
     
@@ -2712,8 +2710,6 @@ function isRightSame2(node, nodeVal) {
 
 
 function isUnivalTree2(node) {
-    console.log('checking tree', node)
-    // the first time nodeVal is null
 
     // is left child same
     // is right child same
@@ -2732,7 +2728,169 @@ function isUnivalTree2(node) {
 
 }
 
-console.log(isUnivalTree2(root2))
+// console.log(isUnivalTree2(root2))
 
 
 
+
+// iterative solution -- while loop
+
+function isUnivalTree3(node) {
+
+}
+
+// console.log(isUnivalTree3(root2))
+
+
+
+
+
+
+/**
+ * merge two binary trees
+ */
+
+
+
+ const t1 = {
+     value: 1,
+     size: 2,
+     left: {
+         value: 3,
+         size: 1, 
+         left: {
+             value: 5,
+             size: 0,
+             left: null,
+             right: null
+         },
+         right: null
+     },
+     right: {
+         value: 2,
+         size: 0,
+         left: null,
+         right: null
+     }
+ }
+
+ const t2 = {
+    value: 2,
+    size: 2,
+    left: {
+        value: 1,
+        size: 1, 
+        left: null,
+        right: {
+            value: 4,
+            size: 0,
+            left: null,
+            right: null
+        }
+    },
+    right: {
+        value: 3,
+        size: 1,
+        left: null,
+        right: {
+            value: 7,
+            size: 0,
+            left: null,
+            right: null
+        }
+    }
+}
+
+
+function mergeTrees(t1, t2) {
+    // root
+    // console.log('root:')
+    // console.log(t1, t2)
+
+    if (t1 === null) {
+        return t2
+    }
+
+    if (t2 === null) {
+        return t1
+    }
+
+    // root sum
+    // console.log('root sum:')
+    t1.value = t1.value + t2.value
+    // console.log(t1.value)
+
+    // Going down tree
+
+    // left
+    t1.left = mergeTrees(t1.left, t2.left)
+    // console.log("root.left", t1.left)
+
+    // right
+    t1.right = mergeTrees(t1.right, t2.right)
+    // console.log("root.right", t1.right)
+
+    // Going back up tree
+
+    // console.log('result:', t1)
+    return t1
+}
+
+// console.log('result: ', mergeTrees(t1, t2))
+
+
+
+
+/**
+ * max depth of a tree
+ */
+
+const t3 = {
+    val: 3,
+    size: 2,
+    left: {
+        val: 9,
+        size: 0, 
+        left: null,
+        right: null
+    },
+    // left: null,
+    right: {
+        val: 20,
+        size: 0,
+        left: {
+            val: 15,
+            size: 0, 
+            left: null,
+            right: null
+        },
+        right: {
+            val: 7,
+            size: 0,
+            left: null,
+            right: null
+        }
+        // right: null
+    }
+}
+
+
+
+
+
+
+
+function maxDepth(root) {
+
+    if(root === null) {
+        return 1 
+    }
+
+    let leftDepth = maxDepth(root.left)
+    let rightDepth = maxDepth(root.right)
+
+    let depth = Math.max(leftDepth, rightDepth) + 1
+    return depth
+
+}
+console.log("result:", maxDepth(t3))
