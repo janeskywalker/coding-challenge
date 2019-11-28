@@ -452,6 +452,36 @@ const copy = {
     ]
 };
     
+
+function findPath2(targetNode, tree) {
+    function path(targetNode, tree, pathIndexArray) {
+        console.log({tree, pathIndexArray})
+        if(tree === targetNode) {
+            return pathIndexArray
+        }
+
+        else if(tree.children.length === 0) {
+            return null
+        }
+
+        else{
+            for(let i=0; i<tree.children.length; i++) {
+                let pathIndexArrayCopy = [...pathIndexArray, i]
+                if (path(targetNode, tree.children[i], pathIndexArrayCopy) ){
+                    return path(targetNode, tree.children[i], pathIndexArrayCopy)
+                }
+            }
+        }
+
+    }
+    return path(targetNode, tree, [])
+}
+const targetNode = tree.children[0].children[1]
+console.log(findPath2(targetNode, tree))
+
+
+
+
     
 
 function findNode(targetNode, tree, copyTree) {
@@ -490,10 +520,7 @@ function findPath(targetNode, tree) {
 }
 
 
-const targetNode = tree.children[0].children[1]
-
-// console.log('targetNode: ', targetNode);
-
+// const targetNode = tree.children[0].children[1]
 // console.log(findPath(targetNode, tree))
 // console.log(findNode(targetNode, tree, copy));
     
@@ -703,7 +730,7 @@ var deduped = sandwiches.filter(function (sandwich, index) {
 
 
 function findLargest(str) {
-    console.log(sortedArr = str.split('').map(char=>parseInt(char)).sort())
+    // console.log(sortedArr = str.split('').map(char=>parseInt(char)).sort())
 
     const length = str.length // 5
 
@@ -767,7 +794,7 @@ function inserDash(num) {
     newStr = ""
     for( let i=0; i<str.length; i++) {
         if(str[i] % 2 === 1 && str[i-1] %2 === 1) {
-            console.log(str[i])
+            // console.log(str[i])
             // str[i-1] = "-" + str[i]
             newStr = newStr + "-" + str[i]
         }
@@ -826,13 +853,13 @@ function orderFlights(flightArr) {
         flightObj[flightArr[i][0]]=flightArr[i][1]
     }
 
-    console.log({flightObj})
+    // console.log({flightObj})
 
     const destinations = Object.values(flightObj)
-    console.log({destinations})
+    // console.log({destinations})
     
     const departures = Object.keys(flightObj)
-    console.log({departures})
+    // console.log({departures})
     
     let startingPoint = null
     
@@ -846,7 +873,7 @@ function orderFlights(flightArr) {
         }
     }
     
-    console.log({startingPoint})
+    // console.log({startingPoint})
     
     sortedArray.push(startingPoint)
     let dest = flightObj[startingPoint]
@@ -999,9 +1026,9 @@ function autoComplete(str) {
 function power(a, b) {
   let result = 1
   for(let i=0; i<b; i++) {
-    console.log({i})
+    // console.log({i})
     result = result * a
-    console.log({result})
+    // console.log({result})
   }
   return result
 }
@@ -1246,7 +1273,7 @@ function hourglass2(twoDArray) {
     return maxSum
 }
 
-console.log('maxSum:', hourglass2(sample))
+// console.log('maxSum:', hourglass2(sample))
 
 
 
@@ -1273,7 +1300,7 @@ function hourglass (arr) {
     return Math.max.apply(Math, hourglasses)
     // return value
 }
-hourglass(sample)
+// hourglass(sample)
 
 
 
@@ -2132,7 +2159,7 @@ function longestVowel(str) {
     let index = str.indexOf('a') // Where we are in str
     let currentVowel = 'a'
     
-    console.log(index)
+    // console.log(index)
 
     for(let i=index + 1; i<str.length; i++) {
         const nextChar = str[i]
@@ -2169,7 +2196,7 @@ function longestVowel2(s) {
 
     for(let i = 0; i<s.length; i++) {
         currentVowel = s[i]
-        console.log({currentVowel})
+        // console.log({currentVowel})
         if(s[i] === VOWELS[cursor]) {
             count++
         } else if(s[i] === VOWELS[cursor+1]){
@@ -2401,7 +2428,7 @@ function calculateMaxProfit(arr) {
     // return maxProfit
  }
 
- console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
+//  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
 //  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
 
 
@@ -2950,7 +2977,6 @@ var maxDepth = function(root) {
         
         return Math.max(maxNodes(node.left, sum + 1), maxNodes(node.right, sum + 1));
     }
-    
     return maxNodes(root, 0);
 };
 
