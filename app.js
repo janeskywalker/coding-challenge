@@ -452,7 +452,7 @@ const copy = {
     ]
 };
     
-
+// review
 function findPath2(targetNode, tree) {
     function path(targetNode, tree, pathIndexArray) {
         console.log({tree, pathIndexArray})
@@ -484,6 +484,8 @@ console.log(findPath2(targetNode, tree))
 
     
 
+
+// solution:
 function findNode(targetNode, tree, copyTree) {
     const path = findPath(targetNode, tree);
     const copyNode = findCopy(path, copyTree);
@@ -2843,9 +2845,7 @@ function mergeTrees(t1, t2) {
     }
 
     // root sum
-    // console.log('root sum:')
     t1.value = t1.value + t2.value
-    // console.log(t1.value)
 
     // Going down tree
 
@@ -2855,7 +2855,6 @@ function mergeTrees(t1, t2) {
 
     // right
     t1.right = mergeTrees(t1.right, t2.right)
-    // console.log("root.right", t1.right)
 
     // Going back up tree
 
@@ -2999,3 +2998,26 @@ var maxDepth = function(root) {
 
 
 
+
+
+/**
+ * longest palindrome
+ */
+
+function longestPalindrome(s) {
+    let map = {}
+    let pairs = 0
+
+    for(char of s) {
+        if(!map.hasOwnProperty(char)) {
+            map[char] = 1
+        } else {
+            delete map[char]
+            pairs++
+        }
+    }
+    let single = Object.keys(map).length >= 1 ? 1 : 0
+    const answer = pairs * 2 + single
+    return answer
+}
+console.log(longestPalindrome("abccccdd"))
