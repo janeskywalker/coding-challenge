@@ -3020,4 +3020,33 @@ function longestPalindrome(s) {
     const answer = pairs * 2 + single
     return answer
 }
-console.log(longestPalindrome("abccccdd"))
+// console.log(longestPalindrome("abccccdd"))
+
+
+/**
+ * longest word in dictionary
+ */
+
+
+ function longestWord(words) {
+    words.sort()
+    let set = new Set()
+    let ans = ""
+
+    for(word of words) {
+        if (word.length === 1 || set.has(word.slice(0, -1))) {
+            set.add(word);
+            if (word.length > ans.length) {
+              ans = word;
+            }
+        console.log(ans)
+        }
+    }
+    return ans
+ }
+
+
+
+//  console.log(longestWord(["w","wo","wor","worl", "world"])) // world
+//  console.log(longestWord(["a", "banana", "app", "appl", "ap", "apply", "apple"])) // apple
+ console.log(longestWord(["b","br","bre","brea","break","breakf","breakfa","breakfas","breakfast","l","lu","lun","lunc","lunch","d","di","din","dinn","dinne","dinner"])) // apple
