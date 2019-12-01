@@ -3085,6 +3085,26 @@ function longestPalindrome(s) {
 // }
 
 
+// refactor brute force solution
+
+
+function subarraySum(nums, k) {
+    let startingIndice = 0 
+    let countEqualsK = 0
+    
+    while(startingIndice < nums.length) {
+        let sum = 0
+        for(let i = startingIndice; i<nums.length; i++) {
+            sum = sum + nums[i]
+            if(sum === k) {
+                countEqualsK++
+            }
+        }
+        startingIndice++
+    }
+    return countEqualsK
+}
+
   // brute force solution, for loop inside of a for loop (java)
   /**
    * 
@@ -3105,9 +3125,9 @@ function longestPalindrome(s) {
 }
    */
 
-
+// hashmap solution failed
 // function subarraySum(nums, k) {
-//     let map = new Map
+//     let map = {}
 //     let sum = 0
 //     let count = 0;
 
@@ -3138,34 +3158,40 @@ function longestPalindrome(s) {
 //     return count
 // }
 
+// successful hashmap solution
+// function subarraySum(nums, k){
+//     // key = sum, value = number of occurances
+//     let map = new Map
+//     let sum = 0
+//     let count = 0
+//     map.set(0, 1)
 
-function subarraySum(nums, k){
+//     for(let i = 0; i < nums.length; i++) {
+//         sum += nums[i]
+//         console.log('sum: ', sum)
+//         // when sum === k, count++ because {0:1}
+//         if(map.has(sum-k)) {
+//             count = count + map.get(sum-k)
+//             console.log('count: ', count);
+//         }
+//         if(map.has(sum)) {
+//             map.set(sum, map.get(sum) + 1)
 
-    let map = new Map
-    let sum = 0
-    let count = 0
+//         } else {
+//             map.set(sum, 1)
+//         }
+//     }
 
-    map.set(0, 1)
-
-    for(let i = 0; i < nums.length; i++) {
-        sum += nums[i]
-        if(map.has(sum-k)) {
-            count = count + map.get(sum-k)
-        } if(map.has(sum)) {
-            map.set(sum, map.get(sum) + 1)
-        } else(
-            map.set(sum, 1)
-        )
-    }
-    return count 
-}
+//     console.log('map: ', map.entries());
+//     return count 
+// }
 
 
 // console.log(subarraySum([1, 2, 3, 1, -1], 3)) //
-// console.log(subarraySum([3, 4, 7, 2, -3, 1, 4, 2], 7)) //2
-// console.log(subarraySum([1], 0)) //
-// console.log(subarraySum([1, 1, 1], 2)) //
-// console.log(subarraySum([-1, -1, 1], 0)) //
-console.log(subarraySum([1, 2, 3], 3)) //
+console.log(subarraySum([3, 4, 7, 2, -3, 1, 4, 2], 7)) //4
+console.log(subarraySum([1], 0)) // 0
+console.log(subarraySum([1, 1, 1], 2)) // 2
+console.log(subarraySum([-1, -1, 1], 0)) // 1
+console.log(subarraySum([1, 2, 3], 3)) // 2
 
 
