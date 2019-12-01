@@ -3062,25 +3062,53 @@ function longestPalindrome(s) {
   * subarray sum equals k
   */
 
-const sum = (arr) => {
-    const sum = arr.reduce((cur, acc)=> cur + acc)
-    return sum
-}
+  // brute force solution, for loop inside of a  while loop
+// const sum = (arr) => {
+//     const sum = arr.reduce((cur, acc)=> cur + acc)
+//     return sum
+// }
 
-function subarraySum(nums, k) {
-    let startingIndice = 0 
-    let countEqualsK = 0
+// function subarraySum(nums, k) {
+//     let startingIndice = 0 
+//     let countEqualsK = 0
     
-    while(startingIndice < nums.length) {
-        for(let i = startingIndice; i<nums.length; i++) {
-            let subArray = nums.slice(startingIndice, i + 1)
-            if(sum(subArray) === k) {
-                countEqualsK++
+//     while(startingIndice < nums.length) {
+//         for(let i = startingIndice; i<nums.length; i++) {
+//             let subArray = nums.slice(startingIndice, i + 1)
+//             if(sum(subArray) === k) {
+//                 countEqualsK++
+//             }
+//         }
+//         startingIndice++
+//     }
+//     return countEqualsK
+// }
+
+
+  // brute force solution, for loop inside of a for loop (java)
+  /**
+   * 
+   * public class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int count = 0;
+        for (int start = 0; start < nums.length; start++) {
+            for (int end = start + 1; end <= nums.length; end++) {
+                int sum = 0;
+                for (int i = start; i < end; i++)
+                    sum += nums[i];
+                if (sum == k)
+                    count++;
             }
         }
-        startingIndice++
+        return count;
     }
-    return countEqualsK
 }
+   */
 
+
+function subarraySum(nums, k) {
+
+}
 console.log(subarraySum([1, 2, 3], 3)) //2
+
+
