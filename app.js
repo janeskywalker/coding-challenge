@@ -3062,12 +3062,25 @@ function longestPalindrome(s) {
   * subarray sum equals k
   */
 
-  const sum = (arr) => {
+const sum = (arr) => {
     const sum = arr.reduce((cur, acc)=> cur + acc)
     return sum
-  }
+}
 
-  function subarrayEqualsK(arr) {
-      
-  }
-  console.log(subarrayEqualsK([1,1,1], 2)) //2
+function subarraySum(nums, k) {
+    let startingIndice = 0 
+    let countEqualsK = 0
+    
+    while(startingIndice < nums.length) {
+        for(let i = startingIndice; i<nums.length; i++) {
+            let subArray = nums.slice(startingIndice, i + 1)
+            if(sum(subArray) === k) {
+                countEqualsK++
+            }
+        }
+        startingIndice++
+    }
+    return countEqualsK
+}
+
+console.log(subarraySum([1, 2, 3], 3)) //2
