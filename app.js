@@ -3023,11 +3023,13 @@ function longestPalindrome(s) {
 // console.log(longestPalindrome("abccccdd"))
 
 
+
+
+
+
 /**
  * longest word in dictionary
  */
-
-
  function longestWord(words) {
     words.sort()
     let set = new Set()
@@ -3039,7 +3041,7 @@ function longestPalindrome(s) {
             if (word.length > ans.length) {
               ans = word;
             }
-        console.log(ans)
+        // console.log(ans)
         }
     }
     return ans
@@ -3049,4 +3051,23 @@ function longestPalindrome(s) {
 
 //  console.log(longestWord(["w","wo","wor","worl", "world"])) // world
 //  console.log(longestWord(["a", "banana", "app", "appl", "ap", "apply", "apple"])) // apple
- console.log(longestWord(["b","br","bre","brea","break","breakf","breakfa","breakfas","breakfast","l","lu","lun","lunc","lunch","d","di","din","dinn","dinne","dinner"])) // apple
+//  console.log(longestWord(["b","br","bre","brea","break","breakf","breakfa","breakfas","breakfast","l","lu","lun","lunc","lunch","d","di","din","dinn","dinne","dinner"])) // apple
+
+
+
+
+
+
+ /**
+  * subarray sum equals k
+  */
+
+  const sum = (arr) => {
+    const sum = arr.reduce((cur, acc)=> cur + acc)
+    return sum
+  }
+
+  function subarrayEqualsK(arr) {
+      
+  }
+  console.log(subarrayEqualsK([1,1,1], 2)) //2
