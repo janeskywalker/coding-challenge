@@ -3106,9 +3106,66 @@ function longestPalindrome(s) {
    */
 
 
-function subarraySum(nums, k) {
+// function subarraySum(nums, k) {
+//     let map = new Map
+//     let sum = 0
+//     let count = 0;
 
+//     for(let i = 0; i < nums.length; i++) {
+//         // calculate sum
+//         sum += nums[i]
+//         // enter new sum to map
+//         if(!map.hasOwnProperty(sum)) {
+//             map[sum] = 1
+//         } else {
+//             map[sum]++
+//         }
+
+//         // if sum  === k, increment count 
+//         if(sum === k) {
+//             count++
+//         }
+
+//         // if sum - k === any previously stored sum, increase count 
+//         if(map.hasOwnProperty(sum-k)) {
+//             count++
+//         }
+
+//         console.log(count)
+        
+//     }
+//     console.log(map)
+//     return count
+// }
+
+
+function subarraySum(nums, k){
+
+    let map = new Map
+    let sum = 0
+    let count = 0
+
+    map.set(0, 1)
+
+    for(let i = 0; i < nums.length; i++) {
+        sum += nums[i]
+        if(map.has(sum-k)) {
+            count = count + map.get(sum-k)
+        } if(map.has(sum)) {
+            map.set(sum, map.get(sum) + 1)
+        } else(
+            map.set(sum, 1)
+        )
+    }
+    return count 
 }
-console.log(subarraySum([1, 2, 3], 3)) //2
+
+
+// console.log(subarraySum([1, 2, 3, 1, -1], 3)) //
+// console.log(subarraySum([3, 4, 7, 2, -3, 1, 4, 2], 7)) //2
+// console.log(subarraySum([1], 0)) //
+// console.log(subarraySum([1, 1, 1], 2)) //
+// console.log(subarraySum([-1, -1, 1], 0)) //
+console.log(subarraySum([1, 2, 3], 3)) //
 
 
