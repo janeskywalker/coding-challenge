@@ -3062,7 +3062,8 @@ function longestPalindrome(s) {
   * subarray sum equals k
   */
 
-  // brute force solution, for loop inside of a  while loop
+  // brute force solution, for loop inside of a  while loop (leetcode not accepted)
+
 // const sum = (arr) => {
 //     const sum = arr.reduce((cur, acc)=> cur + acc)
 //     return sum
@@ -3085,9 +3086,7 @@ function longestPalindrome(s) {
 // }
 
 
-// refactor brute force solution
-
-
+// refactor brute force solution (leetcode accepted)
 function subarraySum(nums, k) {
     let startingIndice = 0 
     let countEqualsK = 0
@@ -3105,25 +3104,7 @@ function subarraySum(nums, k) {
     return countEqualsK
 }
 
-  // brute force solution, for loop inside of a for loop (java)
-  /**
-   * 
-   * public class Solution {
-    public int subarraySum(int[] nums, int k) {
-        int count = 0;
-        for (int start = 0; start < nums.length; start++) {
-            for (int end = start + 1; end <= nums.length; end++) {
-                int sum = 0;
-                for (int i = start; i < end; i++)
-                    sum += nums[i];
-                if (sum == k)
-                    count++;
-            }
-        }
-        return count;
-    }
-}
-   */
+
 
 // hashmap solution failed
 // function subarraySum(nums, k) {
@@ -3195,3 +3176,24 @@ console.log(subarraySum([-1, -1, 1], 0)) // 1
 console.log(subarraySum([1, 2, 3], 3)) // 2
 
 
+
+/**
+ * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+ */
+
+
+var twoSum = function(nums, target) {
+    let ans = []
+    for(let i = 0; i<nums.length; i++) {
+        for(let j = i; j<nums.length; j++) {
+            if(nums[i] + nums[j] === target && i!==j) {
+                ans.push(i, j)
+            }
+        }
+    }
+    return ans
+};
+
+console.log(twoSum([1, 2, 7, 11, 15], 3))
+console.log(twoSum([3, 2, 3], 6))
