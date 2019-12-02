@@ -3209,3 +3209,100 @@ var twoSum = function(nums, target) {
 
 console.log(twoSum([1, 2, 7, 11, 15], 3))
 console.log(twoSum([3, 2, 3], 6))
+
+/**
+ * 
+ * Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+ * 
+ * Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+
+I can be placed before V (5) and X (10) to make 4 and 9. 
+X can be placed before L (50) and C (100) to make 40 and 90. 
+C can be placed before D (500) and M (1000) to make 400 and 900.
+
+ * 
+  */
+
+ //solution: 
+ var romanToInt = function(s) {
+    s.split('')
+    let result = 0;
+    
+    for(let i=0;i<s.length;i++){
+        switch(s[i]){
+            case 'I':
+                if(s[i+1] === 'V' || s[i+1]==='X'){
+                    result --;
+                }else{
+                    result ++;
+                }
+                break;
+            case 'V':
+                result += 5;
+                break;
+            case 'X':
+                if(s[i+1] === 'L' || s[i+1]==='C'){
+                    result -= 10;
+                }else{
+                    result += 10;
+                }
+                break;
+            case 'L':
+                result += 50;
+                break;
+            case 'C':
+                if(s[i+1] === 'D' || s[i+1]==='M'){
+                    result -= 100;
+                }else{
+                    result += 100;
+                }
+                break;
+            case 'D':
+                result += 500;
+                break;
+            case 'M':
+                result += 1000;
+                break;
+            default:
+                console.log("something wrong")
+                break;
+        }
+    }
+    
+    return result;
+};
+
+var romanToInt = function(s) {
+    const roman = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    }
+    
+    let sum = 0;
+    
+    for (let i = 0; i < s.length; i++) {
+        const currVal = roman[s[i]]
+        const nextVal = roman[s[i+1]]
+        
+        if (currVal < nextVal) {
+            sum += nextVal - currVal
+            i++
+        } else {
+            sum += currVal
+        }
+    }
+    
+    return sum
+};
