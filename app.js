@@ -3182,18 +3182,30 @@ console.log(subarraySum([1, 2, 3], 3)) // 2
 
  */
 
+// nested for loop, log n square
+// var twoSum = function(nums, target) {
+//     let ans = []
+//     for(let i = 0; i<nums.length; i++) {
+//         for(let j = i; j<nums.length; j++) {
+//             if(nums[i] + nums[j] === target && i!==j) {
+//                 ans.push(i, j)
+//             }
+//         }
+//     }
+//     return ans
+// };
 
+// one pass, o(n)
 var twoSum = function(nums, target) {
-    let ans = []
-    for(let i = 0; i<nums.length; i++) {
-        for(let j = i; j<nums.length; j++) {
-            if(nums[i] + nums[j] === target && i!==j) {
-                ans.push(i, j)
-            }
+    let map = new Map 
+    for(let i = 0; i < nums.length; i++) {
+        let complement = target - nums[i]
+        if(map.has(complement)) {
+            return ans = [map.get(complement), i]
         }
+        map.set(nums[i], i)
     }
-    return ans
-};
+}
 
 console.log(twoSum([1, 2, 7, 11, 15], 3))
 console.log(twoSum([3, 2, 3], 6))
