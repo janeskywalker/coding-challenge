@@ -3348,3 +3348,38 @@ var isValid = function(s) {
 // console.log(isValid("()[]{}"))
 // console.log(isValid("([)]"))
 // console.log(isValid("("))
+
+
+/**
+ * 
+ *Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+ */
+
+var longestCommonPrefix = function(strs) {
+    let res = ""
+    if(strs.length === 0) {
+        return res
+    }
+    let str1 = strs[0]
+    for(i=0; i<str1.length; i++) {
+        for(j=1; j<strs.length; j++){
+            if(strs[j][i] !== str1[i]) {
+                return res
+            }
+        }
+        res = res+str1[i]
+    }
+    return res
+};
+
+
+console.log(longestCommonPrefix(["flower","flow","flight"])) // "fl"
+console.log(longestCommonPrefix(["dog","racecar","car"])) // ""
+console.log(longestCommonPrefix(["a"])) // "a"
+console.log(longestCommonPrefix(["", ""])) // ""
+console.log(longestCommonPrefix(["c", "c"])) // "c"
+console.log(longestCommonPrefix(["aa", "aa"])) // "aa"
+console.log(longestCommonPrefix(["caa","","a","acb"])) // ""
+console.log(longestCommonPrefix([])) // ""
