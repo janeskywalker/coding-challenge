@@ -3169,11 +3169,11 @@ function subarraySum(nums, k) {
 
 
 // console.log(subarraySum([1, 2, 3, 1, -1], 3)) //
-console.log(subarraySum([3, 4, 7, 2, -3, 1, 4, 2], 7)) //4
-console.log(subarraySum([1], 0)) // 0
-console.log(subarraySum([1, 1, 1], 2)) // 2
-console.log(subarraySum([-1, -1, 1], 0)) // 1
-console.log(subarraySum([1, 2, 3], 3)) // 2
+// console.log(subarraySum([3, 4, 7, 2, -3, 1, 4, 2], 7)) //4
+// console.log(subarraySum([1], 0)) // 0
+// console.log(subarraySum([1, 1, 1], 2)) // 2
+// console.log(subarraySum([-1, -1, 1], 0)) // 1
+// console.log(subarraySum([1, 2, 3], 3)) // 2
 
 
 
@@ -3207,8 +3207,8 @@ var twoSum = function(nums, target) {
     }
 }
 
-console.log(twoSum([1, 2, 7, 11, 15], 3))
-console.log(twoSum([3, 2, 3], 6))
+// console.log(twoSum([1, 2, 7, 11, 15], 3))
+// console.log(twoSum([3, 2, 3], 6))
 
 /**
  * 
@@ -3306,3 +3306,45 @@ var romanToInt = function(s) {
     
     return sum
 };
+
+
+/**
+ * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Note that an empty string is also considered valid.
+ */
+
+var isValid = function(s) {
+    let map = new Map
+    map.set('[', ']')
+    map.set('{', '}')
+    map.set('(', ')')
+
+    const openParents = []
+
+    for(parent of s) {
+        console.log({parent})
+        if(map.has(parent)) {
+            openParents.push(parent)
+            console.log({openParents})
+        } else {
+            lastParent = openParents.pop()
+            console.log({lastParent})
+            if(parent !== map.get(lastParent)) {
+                return false
+            }
+        }
+    }
+    
+    if(openParents.length > 0) {
+        return false
+    }
+    return true
+}
+// console.log(isValid("()[]{}"))
+// console.log(isValid("([)]"))
+// console.log(isValid("("))
