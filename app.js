@@ -477,7 +477,7 @@ function findPath2(targetNode, tree) {
     return path(targetNode, tree, [])
 }
 const targetNode = tree.children[0].children[1]
-console.log(findPath2(targetNode, tree))
+// console.log(findPath2(targetNode, tree))
 
 
 
@@ -3375,11 +3375,47 @@ var longestCommonPrefix = function(strs) {
 };
 
 
-console.log(longestCommonPrefix(["flower","flow","flight"])) // "fl"
-console.log(longestCommonPrefix(["dog","racecar","car"])) // ""
-console.log(longestCommonPrefix(["a"])) // "a"
-console.log(longestCommonPrefix(["", ""])) // ""
-console.log(longestCommonPrefix(["c", "c"])) // "c"
-console.log(longestCommonPrefix(["aa", "aa"])) // "aa"
-console.log(longestCommonPrefix(["caa","","a","acb"])) // ""
-console.log(longestCommonPrefix([])) // ""
+// console.log(longestCommonPrefix(["flower","flow","flight"])) // "fl"
+// console.log(longestCommonPrefix(["dog","racecar","car"])) // ""
+// console.log(longestCommonPrefix(["a"])) // "a"
+// console.log(longestCommonPrefix(["", ""])) // ""
+// console.log(longestCommonPrefix(["c", "c"])) // "c"
+// console.log(longestCommonPrefix(["aa", "aa"])) // "aa"
+// console.log(longestCommonPrefix(["caa","","a","acb"])) // ""
+// console.log(longestCommonPrefix([])) // ""
+
+
+
+/**
+ * Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words.  It is guaranteed there is at least one word that isn't banned, and that the answer is unique.
+
+Words in the list of banned words are given in lowercase, and free of punctuation.  Words in the paragraph are not case sensitive.  The answer is in lowercase.
+ */
+
+var mostCommonWord = function(paragraph, banned) {
+    let map = new Map
+    paragraph = paragraph.toLowerCase().split(/\W+/)
+    // paragraph = paragraph.replace(/[!?',;.]/g, "").toLowerCase().split(" ");
+
+    for(word of paragraph) {
+        if(!map.has(word)) {
+            map.set(word, 0)
+        }
+        map.set(word, map.get(word) + 1)
+    }
+
+    const temps = map.keys()
+
+    max = ''
+    count = 0
+
+    for(temp of temps) {
+        if(banned.indexOf(temp) === -1 && map.get(temp) > count) {
+            max = temp
+            count = map.get(temp)
+        }
+    }
+    return max    
+};
+// console.log(mostCommonWord("Bob hit a ball, hit BALL it was hit.", ["hit"])) // "ball"
+// console.log(mostCommonWord("Bob!", [])) // "bob"
