@@ -3231,19 +3231,25 @@ You may assume that each input would have exactly one solution and you may not u
 
  */
 
-const twoSum2 = (nums, target) => {
-    let map = new Map
-
-    for(let i=0; i<nums.length; i++) {
-        if(map.has(target - nums[i])) {
-            return res = [map.get(target - nums[i]), i]
-        }
-        if(!map.has(nums[i])) {
-            map.set(nums[i], i)
-        }
+ // two pointers, one pass
+const twoSum2 = (numbers, target) => {
+    let start = 0;
+    let end = numbers.length - 1;
+    while (start < end) {
+      const sum = numbers[start] + numbers[end];
+      if (sum === target) {
+        return [start + 1, end + 1];
+      }
+      else if (sum < target) {
+        start++
+      }
+      else {
+        end--
+      }
     }
 }
-console.log(twoSum2([1, 2, 7, 11, 15], 3))
+console.log(twoSum2([1, 2, 7, 11, 15], 26))
+console.log(twoSum2([2, 7, 11, 15], 9))
 
 
 
