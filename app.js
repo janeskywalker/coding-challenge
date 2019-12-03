@@ -3419,3 +3419,25 @@ var mostCommonWord = function(paragraph, banned) {
 };
 // console.log(mostCommonWord("Bob hit a ball, hit BALL it was hit.", ["hit"])) // "ball"
 // console.log(mostCommonWord("Bob!", [])) // "bob"
+
+
+
+
+/**
+ * Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+ */
+
+ // one-pass, O(N)
+function maxSubArray(nums) {
+    let sum = nums[0]
+    let max = nums[0]
+    for(let i=0; i <nums.length; i++) {
+        sum = Math.max( sum + nums[i], nums[i])
+        max = Math.max( sum, max)
+        console.log({sum, max})
+    }
+}
+
+// console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])) //6
+// console.log(maxSubArray([-1, 2, 3, -2, -1])) //5
+
