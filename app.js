@@ -3691,6 +3691,46 @@ var firstUniqChar = function(s) {
     }
     return -1
 }
-console.log(firstUniqChar("leetcode")) // 0
-console.log(firstUniqChar("loveleetcode")) // 2
-console.log(firstUniqChar("")) // -1
+// console.log(firstUniqChar("leetcode")) // 0
+// console.log(firstUniqChar("loveleetcode")) // 2
+// console.log(firstUniqChar("")) // -1
+
+
+
+
+
+
+/**
+ * Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.
+
+Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.
+ */
+
+var findShortestSubArray = function(nums) {
+    const map = new Map
+    let degree = 0
+    
+    for(let i =0; i<nums.length; i++) {
+        const n = nums[i]
+        if(!map.has(n)) {
+            map.set(n, [])
+        } 
+        map.get(n).push(i)
+        degree = Math.max(map.get(n).length, degree)
+
+    }
+
+    let shortest = nums.length
+    for(let i=0; i<nums.length; i++) {
+        const n = nums[i]
+        if(map.get(n).length === degree) {
+            const left = map.get(n)[0]
+            const right = map.get(n)[degree-1]
+            const length = right - left 
+            shortest = Math.min(shortest, length+1)
+        }
+    }
+    return shortest
+}
+// console.log(findShortestSubArray([1, 2, 2, 3, 1])) //2
+console.log(findShortestSubArray([1,2,2,3,1,4,2])) //6
