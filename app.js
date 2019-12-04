@@ -3706,31 +3706,69 @@ var firstUniqChar = function(s) {
 Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.
  */
 
-var findShortestSubArray = function(nums) {
-    const map = new Map
-    let degree = 0
+ // one hashmap, two passes
+// var findShortestSubArray = function(nums) {
+//     const map = new Map
+//     let degree = 0
     
-    for(let i =0; i<nums.length; i++) {
-        const n = nums[i]
-        if(!map.has(n)) {
-            map.set(n, [])
-        } 
-        map.get(n).push(i)
-        degree = Math.max(map.get(n).length, degree)
+//     for(let i =0; i<nums.length; i++) {
+//         const n = nums[i]
+//         if(!map.has(n)) {
+//             map.set(n, [])
+//         } 
+//         map.get(n).push(i)
+//         degree = Math.max(map.get(n).length, degree)
 
-    }
+//     }
 
-    let shortest = nums.length
-    for(let i=0; i<nums.length; i++) {
-        const n = nums[i]
-        if(map.get(n).length === degree) {
-            const left = map.get(n)[0]
-            const right = map.get(n)[degree-1]
-            const length = right - left 
-            shortest = Math.min(shortest, length+1)
-        }
-    }
-    return shortest
-}
+//     let shortest = nums.length
+//     for(let i=0; i<nums.length; i++) {
+//         const n = nums[i]
+//         if(map.get(n).length === degree) {
+//             const left = map.get(n)[0]
+//             const right = map.get(n)[degree-1]
+//             const length = right - left 
+//             shortest = Math.min(shortest, length+1)
+//         }
+//     }
+//     return shortest
+// }
 // console.log(findShortestSubArray([1, 2, 2, 3, 1])) //2
-console.log(findShortestSubArray([1,2,2,3,1,4,2])) //6
+// console.log(findShortestSubArray([1,2,2,3,1,4,2])) //6
+
+
+
+// three hashmaps, one pass solution: working in progress
+var findShortestSubArray = function(nums) {
+    const firstIndex = {}
+    const lastIndex = {}
+    const numCount = {}
+    let max = 0
+    let maxNum = 0
+
+    for(let i=0; i<nums.length; i++) {
+        let n = nums[i]
+        if(!firstIndex.hasOwnProperty(n)) {
+        firstIndex[n] = i
+        }
+
+        lastIndex[n] = i
+
+        if(!numCount[n]) {
+            numCount[n] = 0
+        }
+        numCount[n]++
+
+        if(max < numCount[n]) {
+            max = numCount[n]
+            maxNum = numCount[n]
+        }        
+    }
+
+    console.log({firstIndex})
+    console.log({lastIndex})
+    console.log({numCount})
+    console.log(max)
+    console.log(maxNum)
+};
+// console.log(findShortestSubArray([1, 2, 2, 3, 1])) //2
