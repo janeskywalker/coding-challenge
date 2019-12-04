@@ -3649,6 +3649,48 @@ After you are done modifying the input array in-place, return the new length of 
     return chars.splice(chars.indexOf("end") + 1)
   }
 
-  console.log(compress(["a","a","b","b","c","c","c"])) // 6, ["a","2","b","2","c","3"]
+//   console.log(compress(["a","a","b","b","c","c","c"])) // 6, ["a","2","b","2","c","3"]
 //   console.log(compress(["a"])) // 1, ["a"]
 //   console.log(compress(["a","b","b","b","b","b","b","b","b","b","b","b","b"])) // 4, ["a","b","1","2"].
+
+
+// another solution using shift 
+var compress = function(chars) {
+    var cache = chars.shift(), count = 1;
+    chars.push("End");
+    for (let i = 0, len = chars.length; i < len; i++) {
+        var tmp = chars.shift();
+        if (cache == tmp) {
+            count++;
+        } else {
+            chars.push(cache);
+            if (count > 1) {
+                Array.prototype.push.apply(chars, String(count).split(""));
+            }
+            cache = tmp;
+            count = 1;
+        }
+    }
+    return chars.length;
+};
+
+
+
+/**
+ * first unique char of a string
+ */
+
+var firstUniqChar = function(s) {
+    if(s.length === 0) {
+        return -1
+    }
+    for(char of s) {
+        if(s.indexOf(char) === s.lastIndexOf(char)) {
+            return s.indexOf(char)
+        }
+    }
+    return -1
+}
+console.log(firstUniqChar("leetcode")) // 0
+console.log(firstUniqChar("loveleetcode")) // 2
+console.log(firstUniqChar("")) // -1
