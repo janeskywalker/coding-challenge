@@ -3243,13 +3243,14 @@ const twoSum2 = (numbers, target) => {
       else if (sum < target) {
         start++
       }
-      else {
+      else if (sum > target){
         end--
       }
     }
+    return [-1, -1]
 }
-console.log(twoSum2([1, 2, 7, 11, 15], 26))
-console.log(twoSum2([2, 7, 11, 15], 9))
+// console.log(twoSum2([1, 2, 7, 11, 15], 26))
+// console.log(twoSum2([2, 7, 11, 15], 9))
 
 
 
@@ -3548,3 +3549,66 @@ var maxProfit = function(prices) {
 
 // console.log(maxProfit([7,1,5,3,6,4])) //5
 // console.log(maxProfit([7,6,4,3,1])) //0
+
+
+
+
+
+/**
+ * add strings
+ * 
+ * Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+ * 
+
+    The length of both num1 and num2 is < 5100.
+    Both num1 and num2 contains only digits 0-9.
+    Both num1 and num2 does not contain any leading zero.
+    You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+ */
+
+ const addStr = (num1, num2) => {
+    let sum = ""
+    let carryOver = 0
+    let i = num1.length - 1
+    let j = num2.length - 1
+
+    while( i >= 0 || j>=0) {
+
+        let n1 = Number(num1[i])
+        let n2 = Number(num2[j])
+        
+        if (i < 0) {
+            n1 = 0;
+        }
+        if (j < 0) {
+            n2 = 0;
+        }
+
+        currentSum = n1 + n2 + carryOver
+        carryOver = 0 
+
+        if(currentSum > 9) {
+            carryOver = 1 
+            currentSum = currentSum % 10 
+            sum = currentSum.toString() + sum 
+            
+        } else {
+            sum = currentSum.toString() + sum
+        }
+
+        i--
+        j-- 
+    }
+    if(carryOver === 1) {
+        sum = "1" + sum
+    }
+    return sum
+ }
+ console.log(addStr("123", "45")) // 168
+ console.log(addStr("10", "45")) // 55
+ console.log(addStr("5", "47")) // 52
+ console.log(addStr("55", "45")) // 100
+ console.log(addStr("1000", "4")) // 1004
+ console.log(addStr("1000", "90")) // 1090
+ console.log(addStr("0", "0")) // 0
