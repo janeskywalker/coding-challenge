@@ -3600,15 +3600,55 @@ var maxProfit = function(prices) {
         i--
         j-- 
     }
+
     if(carryOver === 1) {
         sum = "1" + sum
     }
+
     return sum
  }
- console.log(addStr("123", "45")) // 168
- console.log(addStr("10", "45")) // 55
- console.log(addStr("5", "47")) // 52
- console.log(addStr("55", "45")) // 100
- console.log(addStr("1000", "4")) // 1004
- console.log(addStr("1000", "90")) // 1090
- console.log(addStr("0", "0")) // 0
+//  console.log(addStr("123", "45")) // 168
+//  console.log(addStr("10", "45")) // 55
+//  console.log(addStr("5", "47")) // 52
+//  console.log(addStr("55", "45")) // 100
+//  console.log(addStr("1000", "4")) // 1004
+//  console.log(addStr("1000", "90")) // 1090
+//  console.log(addStr("0", "0")) // 0
+
+
+
+
+ /**
+  * 
+  Given an array of characters, compress it in-place.
+
+The length after compression must always be smaller than or equal to the original array.
+
+Every element of the array should be a character (not int) of length 1.
+
+After you are done modifying the input array in-place, return the new length of the array.
+  */
+
+  var compress = function(chars) {
+    let count = 1
+    chars.push('end')
+
+    for(i=0; i<chars.indexOf("end"); i++) {
+        if(chars[i] === chars[i + 1] ) {
+            count ++
+        }
+        else {
+            chars.push(chars[i])
+            if(count > 1) {
+                chars.push(...count.toString().split(''))
+            }
+            console.log(chars)
+            count = 1
+        }
+    }
+    return chars.splice(chars.indexOf("end") + 1)
+  }
+
+  console.log(compress(["a","a","b","b","c","c","c"])) // 6, ["a","2","b","2","c","3"]
+//   console.log(compress(["a"])) // 1, ["a"]
+//   console.log(compress(["a","b","b","b","b","b","b","b","b","b","b","b","b"])) // 4, ["a","b","1","2"].
