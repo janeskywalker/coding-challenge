@@ -3907,7 +3907,45 @@ var validPalindrome = function(s) {
 // }
 
 
-console.log(validPalindrome('aba')) // true
-console.log(validPalindrome('abca')) // true
-console.log(validPalindrome('cbatac')) // true
-console.log(validPalindrome('cbddab')) // true
+// console.log(validPalindrome('aba')) // true
+// console.log(validPalindrome('abca')) // true
+// console.log(validPalindrome('cbatac')) // true
+// console.log(validPalindrome('cbddab')) // true
+
+
+
+
+
+
+
+/**
+ * Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+You must do this in-place without making a copy of the array.
+Minimize the total number of operations.
+ */
+
+var moveZeroes = function(nums) {
+    let zeroCount = 0
+    let j = 1
+    let len = nums.length
+
+    for(let i=0; i<len ; i++) {
+        let shift = nums.shift()
+        console.log({shift})
+        if(shift === 0) {
+            zeroCount++
+        } else {
+            nums.push(shift)
+        }
+        console.log({nums, zeroCount})
+    }
+    while(j<=zeroCount) {
+        nums.push(0)
+        j++
+    }
+   
+    return nums
+};
+console.log(moveZeroes([0,1,0,3,12])) //[1,3,12,0,0]
+// console.log(moveZeroes([0,0,1])) //[1,3,12,0,0]
