@@ -3772,3 +3772,118 @@ var findShortestSubArray = function(nums) {
     console.log(maxNum)
 };
 // console.log(findShortestSubArray([1, 2, 2, 3, 1])) //2
+
+
+// leetcode solution:
+// var findShortestSubArray = function(nums) {
+//     var firstIndex = Object.create(null);
+//     var lastIndex = Object.create(null);
+//     var numCount = Object.create(null);
+//     var max = 0;
+//     var maxNum;
+//     for (var i = 0; i < nums.length; i++) {
+//         if (firstIndex[nums[i]] === undefined) {
+//             firstIndex[nums[i]] = i;
+//             numCount[nums[i]] = 1;
+//         } else {
+//             numCount[nums[i]]++;
+//         }
+        
+//         lastIndex[nums[i]] = i;
+//         if (max < numCount[nums[i]]) {
+//             max = numCount[nums[i]];
+//             maxNum = nums[i];
+//         } else if (max === numCount[nums[i]] && (lastIndex[nums[i]] - firstIndex[nums[i]]) < (lastIndex[maxNum] - firstIndex[maxNum])) {
+//             maxNum = nums[i];
+//         }
+//     }
+    
+//     return 1 + lastIndex[maxNum] - firstIndex[maxNum];
+// };
+
+
+
+
+
+
+/**
+ * Valid palindrome
+ * 
+ * Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+ */
+
+
+
+var isPalindrome = function(s) {
+    // remove all non-alphanumeric charactors and spaces
+    s = s.replace(/[^a-zA-Z0-9+]/g, "").replace(/\s/g, "").toLowerCase()
+
+    if(s.length === 0 || s.length === 1) {
+        return true
+    }
+
+    const midIndex = s.length % 2 === 0 ? s.length : s.length -1
+    const lastIndex = midIndex/2 -1
+
+    for(let i=0; i<= lastIndex; i++) {
+        if(s[i] !== s[s.length - 1 - i]) {
+            return false
+        }
+    } return true
+
+};
+
+
+// var isPalindrome = function(s) {
+//     s = s.replace(/[^a-zA-Z0-9+]/g, "").replace(/\s/g, "").toLowerCase()
+
+//     let reversed = ""
+//     for(let i=0; i<s.length; i++) {
+//         reversed = s[i] + reversed
+//     } 
+//     return reversed === s
+// };
+
+// console.log(isPalindrome("A man, a plan, a canal: Panama")) // true
+// console.log(isPalindrome("race a car")) // false
+// console.log(isPalindrome("")) // true
+// console.log(isPalindrome("c#dc")) // true
+
+
+// Valid Palidrome II
+
+var isPalindrom = function(s) {
+    let reversed = ""
+    for(let i=0; i<s.length; i++) {
+        reversed = s[i] + reversed
+    } 
+    return reversed === s
+};
+
+
+var validPalindrome = function(s) {
+    let l = 0
+    let r = s.length -1
+
+    // this keep looping
+    while(l<r) {
+        if(s[l] === s[r]) {
+            l++
+            r--
+        } else {
+            // this is to delete one char: 
+            return isPalindrom(s.substring(l, r)) || isPalindrom(s.substring(l+1, r+1))
+        }
+    }
+    return true
+
+};
+
+
+
+console.log(validPalindrome('aba')) // true
+console.log(validPalindrome('abca')) // true
+console.log(validPalindrome('cbatac')) // true
+console.log(validPalindrome('cbddab')) // true
