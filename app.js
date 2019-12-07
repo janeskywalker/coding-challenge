@@ -3882,6 +3882,30 @@ var validPalindrome = function(s) {
 };
 
 
+// alternative solution:
+// var validPalindrome = function(s) {
+//     var l = 0;
+//     var r = s.length - 1;
+    
+//     while (l <= r) {
+//         if (s[l] === s[r]) {
+//             l ++;
+//             r --;
+//         } else return isPalindrome(s, l+1, r) || isPalindrome(s, l, r-1);
+//     }
+//     return true;
+// };
+
+// var isPalindrome = function(str, l, r) {
+//     while (l <= r) {
+//         if (str[l] === str[r]) {
+//             l ++;
+//             r --;
+//         } else return false;
+//     }
+//     return true;
+// }
+
 
 console.log(validPalindrome('aba')) // true
 console.log(validPalindrome('abca')) // true
