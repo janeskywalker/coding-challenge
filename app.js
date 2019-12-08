@@ -3971,7 +3971,7 @@ house3: r, g, b
 
 var minCost = function(costs) {
     if (!costs.length) return 0;
-    
+
     var n = costs.length -1
     for(let i=1; i<costs.length; i++) {
         costs[i][0] += Math.min(costs[i-1][1], costs[i-1][2])
@@ -3983,4 +3983,26 @@ var minCost = function(costs) {
     }
     return Math.min(costs[n][0], costs[n][1], costs[n][2])
 }
-console.log(minCost([[17,2,17],[16,16,5],[14,3,19]])) // 10 (2+5+3)
+// console.log(minCost([[17,2,17],[16,16,5],[14,3,19]])) // 10 (2+5+3)
+
+
+
+/**
+ * Given two arrays, write a function to compute their intersection.
+ */
+
+
+var intersection = function(nums1, nums2) {
+    const set1 = new Set(nums1)
+    const set2 = new Set(nums2)
+    const intersection = []
+
+    for(char of set1) {
+        if(set2.has(char)) {
+            intersection.push(char)
+        }
+    }
+    return intersection
+};
+console.log(intersection([1,2,2,1], [2,2])) // [2]
+console.log(intersection([4,9,5], [9,4,9,8,4])) // [4, 9]
