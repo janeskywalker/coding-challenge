@@ -4004,5 +4004,82 @@ var intersection = function(nums1, nums2) {
     }
     return intersection
 };
-console.log(intersection([1,2,2,1], [2,2])) // [2]
-console.log(intersection([4,9,5], [9,4,9,8,4])) // [4, 9]
+// console.log(intersection([1,2,2,1], [2,2])) // [2]
+// console.log(intersection([4,9,5], [9,4,9,8,4])) // [4, 9]
+
+
+
+
+
+
+
+
+
+/**
+ * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+ */
+
+
+var rob = function(nums) {
+    if(nums.length === 0) {
+        return 0
+    }
+    if(nums.length === 1) {
+        return nums[0]
+    }
+
+    let runningTotal = []
+    runningTotal[0] = nums[0]
+    runningTotal[1] = Math.max(nums[0], nums[1])
+    for(let i=2; i<nums.length; i++) {
+        runningTotal[i] = Math.max( runningTotal[i-2] + nums[i], runningTotal[i-1])
+    }
+    return runningTotal[nums.length -1]
+};
+// console.log(rob([1,2,3,1])) //4
+// console.log(rob([2,7,9,3,1])) //12
+// console.log(rob([2,1,1,2])) //12
+
+
+
+
+
+
+
+/**
+ * In an alien language, surprisingly they also use english lowercase letters, but possibly in a different order. The order of the alphabet is some permutation of lowercase letters.
+
+Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only if the given words are sorted lexicographicaly in this alien language.
+ */
+
+
+var isAlienSorted = function(words, order) {
+    for(let i=0; i<words.length -1; i++) {
+        let currentWord = words[i]
+        let nextWord = words[i+1]
+        console.log(currentWord, nextWord)
+        for(let j=0; j<currentWord.length; j++) {
+            let charA = currentWord.charAt(j)
+            let charB = nextWord.charAt(j)
+
+            console.log(charA, charB)
+            console.log(order.indexOf(charA))
+            console.log(order.indexOf(charB))
+
+            if(order.indexOf(charA)<order.indexOf(charB)) {
+                break
+            } else {
+                if(order.indexOf(charA)>order.indexOf(charB)){
+                    return false
+                }
+
+            }
+        }
+    }
+    return true
+}
+// console.log(isAlienSorted(["hello","leetcode"], "hlabcdefgijkmnopqrstuvwxyz")) // true
+// console.log(isAlienSorted(["word","world","row"], "worldabcefghijkmnpqstuvxyz")) // false
+// console.log(isAlienSorted(["apple","app"], "abcdefghijklmnopqrstuvwxyz")) // false
