@@ -4455,6 +4455,7 @@ var floodFill = function(image, sr, sc, newColor) {
     // a helper function to be called recursivelly
     // fill itself and 4 directions
     const floodFillHelper = (image, sr, sc, newColor, startingColor) => {
+        // instead of writing a condition of execution, writing the opposite, if the conditions satisfy, exit and dont do anything
         if(sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || image[sr][sc] !== startingColor ) {
             return 
         }
@@ -4467,6 +4468,8 @@ var floodFill = function(image, sr, sc, newColor) {
     }
 
     floodFillHelper(image, sr, sc, newColor, startingColor)
+
+    // return image here
     return image
 }
 console.log(floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)) // [[2,2,2],[2,2,0],[2,0,1]]
