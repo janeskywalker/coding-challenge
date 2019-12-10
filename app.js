@@ -2606,6 +2606,7 @@ function reverseWords2(s) {
 
 
 
+
 /**
  * univalued binary tree
  * a binary tree is univalued is every node in the tree has the same value
@@ -2775,6 +2776,15 @@ function isUnivalTree3(node) {
 
 
 
+
+
+
+
+
+
+
+
+
 /**
  * merge two binary trees
  */
@@ -2862,6 +2872,10 @@ function mergeTrees(t1, t2) {
     return t1
 }
 // console.log('result: ', mergeTrees(t1, t2))
+
+
+
+
 
 
 
@@ -3000,6 +3014,11 @@ var maxDepth = function(root) {
 
 
 
+
+
+
+
+
 /**
  * longest palindrome
  */
@@ -3021,6 +3040,11 @@ function longestPalindrome(s) {
     return answer
 }
 // console.log(longestPalindrome("abccccdd"))
+
+
+
+
+
 
 
 
@@ -3174,6 +3198,13 @@ function subarraySum(nums, k) {
 // console.log(subarraySum([1, 1, 1], 2)) // 2
 // console.log(subarraySum([-1, -1, 1], 0)) // 1
 // console.log(subarraySum([1, 2, 3], 3)) // 2
+
+
+
+
+
+
+
 
 
 
@@ -3554,6 +3585,11 @@ var maxProfit = function(prices) {
 
 
 
+
+
+
+
+
 /**
  * add strings
  * 
@@ -3618,6 +3654,11 @@ var maxProfit = function(prices) {
 
 
 
+
+
+
+
+
  /**
   * 
   Given an array of characters, compress it in-place.
@@ -3676,6 +3717,12 @@ var compress = function(chars) {
 
 
 
+
+
+
+
+
+
 /**
  * first unique char of a string
  */
@@ -3694,6 +3741,8 @@ var firstUniqChar = function(s) {
 // console.log(firstUniqChar("leetcode")) // 0
 // console.log(firstUniqChar("loveleetcode")) // 2
 // console.log(firstUniqChar("")) // -1
+
+
 
 
 
@@ -3800,6 +3849,9 @@ var findShortestSubArray = function(nums) {
     
 //     return 1 + lastIndex[maxNum] - firstIndex[maxNum];
 // };
+
+
+
 
 
 
@@ -3987,6 +4039,12 @@ var minCost = function(costs) {
 
 
 
+
+
+
+
+
+
 /**
  * Given two arrays, write a function to compute their intersection.
  */
@@ -4091,6 +4149,7 @@ var isAlienSorted = function(words, order) {
 
 
 /**
+ * DFS
  * In a given grid, each cell can have one of three values:
 
 the value 0 representing an empty cell;
@@ -4150,4 +4209,91 @@ var orangesRotting = function(grid) {
 }
 // console.log(orangesRotting([[2,1,1],[1,1,0],[0,1,1]])) //4
 // console.log(orangesRotting([[2,1,1],[0,1,1],[1,0,1]])) //-1
-console.log(orangesRotting([[0,2]])) //0
+// console.log(orangesRotting([[0,2]])) //0
+
+
+
+
+
+
+/**
+ * will revisit this one
+ * 
+ * DFS
+ * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+ */
+
+
+var isSymmetric = function(root) {
+    
+}
+// console.log(isSymmetric([1,2,2,3,4,4,3])) // true
+// console.log(isSymmetric([1,2,2,null,3,null,3])) // false
+
+
+
+
+
+
+
+
+
+/**
+ * Given a 32-bit signed integer, reverse digits of an integer.
+ */
+
+var reverse = function(x) {
+
+    const max = Math.pow(2, 31)
+    let str = x.toString()
+    // alternative: let str = x.toString().split("").reverse().join("")
+
+    let reversed = ''
+    for(let char of str) {
+        reversed = char+reversed
+    }
+
+    if(reversed[reversed.length -1] === '-' ) {
+        reversed = "-" + reversed.substring(0, reversed.length - 1)
+    }
+
+    const result = Number(reversed)
+    return result < -max || result > max ? 0 : result
+}
+// console.log(reverse(123)) //321
+// console.log(reverse(-123)) //-321
+// console.log(reverse(1200)) //21
+// console.log(reverse(1534236469)) //21
+
+
+
+
+
+
+
+
+/**
+ * Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+ */
+
+var isPalindromeNum = function(x) {
+    if( x < 0 ) {
+        return false
+    }
+
+    let str = x.toString().split('').reverse().join('')
+    let reversed = Number(str)
+    
+    return reversed === x
+}
+// console.log(isPalindromeNum(121)) // true
+// console.log(isPalindromeNum(-121)) // false
+// console.log(isPalindromeNum(10)) // false
+
+
+
+
+
+
+
+
