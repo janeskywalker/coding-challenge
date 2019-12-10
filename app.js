@@ -2125,7 +2125,7 @@ function shortestSubStr3(str){
 }
 
 
-console.log('answer: ', shortestSubStr3('bacca'))
+// console.log('answer: ', shortestSubStr3('bacca'))
 // console.log(shortestSubStr3('abcdbabbbcd'))
 
 
@@ -4220,6 +4220,9 @@ var orangesRotting = function(grid) {
 
 
 
+
+
+
 /**
  * will revisit this one
  * 
@@ -4347,6 +4350,7 @@ var isHappy2 = function(n) {
 
 
 
+
 // iterative 
 // var isHappy = function(n) {
 //     const set = new Set
@@ -4369,6 +4373,7 @@ var isHappy2 = function(n) {
 
 //         return true
 // };
+
 
 
 
@@ -4401,7 +4406,67 @@ var isHappy = function(n) {
 
 
 
-console.log(isHappy(19)) //true
-console.log(isHappy(116)) //false
-console.log(isHappy(7)) //true
+// console.log(isHappy(19)) //true
+// console.log(isHappy(116)) //false
+// console.log(isHappy(7)) //true
 
+
+
+
+
+
+
+/**
+ * magic squares in grid -- skipped
+ */
+
+
+
+
+
+
+
+
+
+
+ /**
+  * DFS
+  * 
+  * same solution with: 200, 547, 695
+  * 
+  * An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
+
+Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, and a pixel value newColor, "flood fill" the image.
+
+To perform a "flood fill", consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color as the starting pixel), and so on. Replace the color of all of the aforementioned pixels with the newColor.
+
+At the end, return the modified image.
+  */
+
+
+
+var floodFill = function(image, sr, sc, newColor) {
+    // check if anywork to do
+    const startingColor = image[sr][sc]
+    if(startingColor === newColor) {
+        return image
+    }
+
+    // a helper function to be called recursivelly
+    // fill itself and 4 directions
+    const floodFillHelper = (image, sr, sc, newColor, startingColor) => {
+        if(sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || image[sr][sc] !== startingColor ) {
+            return 
+        }
+
+            image[sr][sc] = newColor
+            floodFillHelper(image, sr-1, sc, newColor, startingColor)
+            floodFillHelper(image, sr+1, sc, newColor, startingColor)
+            floodFillHelper(image, sr, sc+1, newColor, startingColor)
+            floodFillHelper(image, sr, sc-1, newColor, startingColor)
+    }
+
+    floodFillHelper(image, sr, sc, newColor, startingColor)
+    return image
+}
+console.log(floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)) // [[2,2,2],[2,2,0],[2,0,1]]
