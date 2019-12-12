@@ -876,7 +876,7 @@ var isSameTree = function(p, q) {
 
 
 var isSubtree = function(s, t) {
-    console.log({s, t})
+    // console.log({s, t})
     // no need to check t - null is always a subtree of another tree
     if(s === null) {
         return false
@@ -890,4 +890,93 @@ var isSubtree = function(s, t) {
     // it is ok if there is false because this is or ||
     return isSubtree(s.left, t) || isSubtree(s.right, t)
 };
-console.log(isSubtree(tree4, tree5))
+// console.log(isSubtree(tree4, tree5))
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * 
+ * DFS
+ * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+ * 
+ *        1
+ *      /   \
+       2     2
+      / \   / \
+ *   3  4   4  3 
+
+
+ */
+
+t5 = {
+    val: 1,
+    left: {
+        val: 2,
+        left: {
+            val: 3,
+            left: null,
+            right: null
+        },
+        right: {
+            val: 4,
+            left: null,
+            right: null
+        }
+    },
+    right: {
+        val: 2,
+        left: {
+            val: 4,
+            left: null,
+            right: null
+        },
+        right: {
+            val: 3,
+            left: null,
+            right: null
+        }
+    }
+}
+
+// recursive solution
+var isMirror = (t1, t2) => {
+    // it can be both null
+    if( t1 === null && t2 === null ) {
+        return true
+    }
+
+    // if only one is null the other one is not, false
+    if( t1 === null || t2 === null ) {
+        return false
+    }
+
+    // when two trees are mirrored, two roots has same val
+    if(t1.val !== t2.val) {
+        return false
+    }
+
+    // left child is missor to the other tree's right child, 
+    return isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
+}
+
+var isSymmetric = function(root) {
+    // if root is null, it is symmetric
+    if(!root) {
+        return true
+    }
+
+    // check if left child is mirror of right child
+    return isMirror(root.left, root.right)
+}
+console.log(isSymmetric(t5)) // true
+// console.log(isSymmetric([1,2,2,null,3,null,3])) // false

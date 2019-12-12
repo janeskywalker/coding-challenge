@@ -887,23 +887,6 @@ var isAlienSorted = function(words, order) {
 
 
 
-/**
- * will revisit this one
- * 
- * DFS
- * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
- */
-
-
-var isSymmetric = function(root) {
-    
-}
-// console.log(isSymmetric([1,2,2,3,4,4,3])) // true
-// console.log(isSymmetric([1,2,2,null,3,null,3])) // false
-
-
-
-
 
 
 

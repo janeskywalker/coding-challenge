@@ -1,42 +1,5 @@
 
 
-// matching parentheses
-function isParenthesesMatch(str) {
-    const arr = []
-    if(str.startsWith(")") || str.endsWith('(')) {
-        return false
-    }
-    else {
-
-        for(let i=0; i<str.length; i++) {
-
-            if (str[i] === ')' && arr.length === 0) {
-                return false 
-            } 
-            if (str[i] === '(') {
-                arr.push(str[i])
-            } 
-            if (str[i] === ')') {
-                arr.pop()
-            } 
-        }
-
-        if (arr.length !== 0) {
-            return false
-        }
-        return true
-    }
-    
-}
-
-// console.log(isParenthesesMatch("))(("))
-// console.log(isParenthesesMatch("(())"))
-// console.log(isParenthesesMatch("))"))
-// console.log(isParenthesesMatch("((())"))
-// console.log(isParenthesesMatch("(()))"))
-// console.log(isParenthesesMatch("("))
-// console.log(isParenthesesMatch("()()(())(()())"))
-
 
 
 
@@ -86,294 +49,6 @@ function isCommonItem(arr1, arr2) {
 // console.log(isCommonItem(arr1, arr2))
 
 
-
-
-
-
-
-/**
-
-create function calculate
-This challenge is a variation of matching parenthese
-
-calculate("(3 + 4) * 5") returns 35
-calculate("(2 * 3) + (5 - 2)") returns 9
-calculate("((3 + 4) * 3) + 70") returns 91
-
- */
- 
-function isNumeric(char) {
-    return char >= '0' && char <= '9'
-}
-
-function isOperator(char) {
-    if(char === "+" || char === "-" || char === "*" || char === "/") {
-        return true
-    }
-    return false
-}
-
-function add(a, b) {
-    return a+b
-}
-
- function subtract(a, b) {
-    return a-b
-}
-
- function multiply(a, b) {
-    return a*b
-}
-
- function divide(a, b) {
-    return a/b
-}
-
-// conttruct custom data structure - hash map 
-const opMap = {
-    "+": add,
-    "-": subtract,
-    '*': multiply,
-    '/': divide
-}
-
-function calculate(str) {
-    const numArr = []
-    const opArr = []
-    const parenArr = []
-    let curNum = null
-    
-    for(let i=0; i<str.length; i++) {
-        const char = str[i]
-
-        // save current number to a variable curNum
-        // dealing with single digits now, and multi-digits later
-        if (isNumeric(char)) {
-            if(curNum === null) {
-                curNum = char
-            } else {
-                curNum = curNum + char
-            }
-           //  numArr.push(parseInt(char))
-        } else if (curNum !== null){
-            // char is not numeric it's okay to push
-            numArr.push(parseInt(curNum))
-            curNum = null
-        }
-        
-        // keep track of parents in an array
-        if(char === '(') {
-            parenArr.push(char)
-        }
-        
-        if(char === ')'){
-            // do math
-            // chech paren balance later
-            
-            const op = opArr.pop()
-            const a = numArr.pop()
-            const b = numArr.pop()
-            numArr.push(op(b, a))
-        }
-        
-        // keep track of operators in an array
-        if(isOperator(char)) {
-            opArr.push(opMap[char])
-        }
-    }
-    
-    if (curNum !== null) {
-         numArr.push(parseInt(curNum))
-    }
-    
-    // check if all maths are done 
-    if(numArr.length === 2 && opArr.length === 1) {
-         const op = opArr.pop()
-         const a = numArr.pop()
-         const b = numArr.pop()
-         numArr.push(op(b, a))
-         
-    } else if (numArr.length > 1 || opArr.length > 0) {
-         throw new Error("Invalid input")
-    }
-    
-    return numArr[0]
-}
-
-// console.log('one: ', calculate("(3 + 5)"));
-// console.log('two: ', calculate("(3 + 5) + 8"));
-// console.log('three: ', calculate("(2 * 3) + (5 - 2)"))
-// console.log('four: ', calculate("((3 + 4) * 3) + 70"))
-
-
-
-
-
-
-
-
-
-
-
-/**
- * OOP
- * 
- * EventEmitter
- * 
- * add(name, callback)
- * - returns function to remove event
- * 
- * // trigger, fire
- * emit(name, data)
- * - callback receives data given to emit
- * 
- */
- 
- 
-class EventEmitter {
-    constructor() {
-        this.eventHandlers = {}
-    }
-     
-    add(name, callback) {
-        if(this.eventHandlers.hasOwnProperty(name)) {
-            this.eventHandlers[name].push(callback)
-        } 
-        else {
-            this.eventHandlers[name] = [callback]
-        }
-         
-        console.log(this.eventHandlers[name])
-        
-        return () => {
-            this.eventHandlers[name] = this.eventHandlers[name].filter((next) => {
-                return next !== callback
-            })
-            console.log(this.eventHandlers[name])
-        }
-    }
-    
-    emit(name, data) {
-        if(this.eventHandlers.hasOwnProperty(name)) {
-            this.eventHandlers[name].forEach((callback) => {
-                callback(data)
-            })
-        } 
-    }    
-}
- 
-const ee = new EventEmitter()
-let count = 0
-const remove = ee.add('click', (arg) => {
-    count++
-    console.assert(arg === 2)
-})
-ee.add('click', (arg) => {
-    count++
-    console.assert(arg === 2)
-})
-
-console.assert(ee.eventHandlers['click'].length === 2)
-
-// remove()
-
-ee.emit('click', 2)
-console.assert(count === 2)
-
-remove()
-
-console.assert(ee.eventHandlers['click'].length === 1)
-
-
-
-
-
-
-
-
-
-
-// modified to make event an object instead of array
-
-         /**
- * 
- * EventEmitter
- * 
- * add(name, callback)
- * - returns function to remove event
- * 
- * // trigger, fire
- * emit(name, data)
- * - callback receives data given to emit
- * 
- */
- 
- 
-class EventEmitter2 {
-    constructor() {
-        this.eventHandlers = {}
-        this.currentId = 0
-    }
-     
-    add(name, callback) {
-        
-        const currentId = this.currentId
-        this.currentId ++
-        
-        if(this.eventHandlers.hasOwnProperty(name)) {
-            this.eventHandlers[name][currentId] = callback
-        } 
-        else {
-            this.eventHandlers[name] = {[currentId]:callback}
-        }
-        
-        console.log(this.eventHandlers[name])
-        
-        return () => {
-            delete this.eventHandlers[name][currentId]
-            console.log(this.eventHandlers[name])
-        }
-    }
-    
-    emit(name, data) {
-        if(this.eventHandlers.hasOwnProperty(name)) {
-            // this.eventHandlers[name].forEach((callback) => {
-            //     callback(data)
-            // })
-            
-            const callbackArr = Object.values(this.eventHandlers[name])
-            callbackArr.forEach((callback) => {
-                callback(data)
-            })
-        } 
-        
-        
-    }
-     
-}
- 
-const ee2 = new EventEmitter2()
-let count2 = 0
-const remove2 = ee.add('click', (arg) => {
-    count2++
-    console.assert(arg === 2, 'one')
-})
-ee.add('click', (arg) => {
-    count2++
-    console.assert(arg === 2, 'two')
-})
-
-// console.assert(ee.eventHandlers['click'].length === 2, 'three')
-
-// remove()
-
-ee.emit('click', 2)
-console.assert(count2 === 2, 'four')
-
-
-remove2()
-
-// console.assert(ee.eventHandlers['click'].length === 1, 'five')
 
 
 
@@ -687,61 +362,6 @@ function removeSpace(sentence) {
 
 
 
-/**
- * const flights = [ [ 'SFO', 'JFK' ], [ 'LAX', 'SFO' ], [ 'ATL', 'PHX' ], [ 'LAS', 'ATL' ], [ 'PHX', 'LAX' ] ]
- * 
- * orderFlights(flights)
- * 
- * return [ 'LAS', 'ATL', 'PHX', 'LAX', 'SFO', 'JFK' ]
- * 
- */ 
- 
-function orderFlights(flightArr) {
-    let sortedArray = []
-    const flightObj = {}
-    
-    for(let i=0; i<flightArr.length; i++) {
-        flightObj[flightArr[i][0]]=flightArr[i][1]
-    }
-
-    // console.log({flightObj})
-
-    const destinations = Object.values(flightObj)
-    // console.log({destinations})
-    
-    const departures = Object.keys(flightObj)
-    // console.log({departures})
-    
-    let startingPoint = null
-    
-    for(const i of departures) {
-        if(!destinations.includes(i)) {
-            if(startingPoint !== null) {
-                throw new Error("invalid input - multiple startingPoint");
-            }
-            startingPoint = i
-            break
-        }
-    }
-    
-    // console.log({startingPoint})
-    
-    sortedArray.push(startingPoint)
-    let dest = flightObj[startingPoint]
-        
-    while (dest !== undefined) {
-        console.log({ dest })
-        sortedArray.push(dest)
-        dest = flightObj[dest]
-    }
-    
-    return sortedArray
-}
- 
-const flights = [ [ 'SFO', 'JFK' ], [ 'LAX', 'SFO' ], [ 'ATL', 'PHX' ], [ 'LAS', 'ATL' ], [ 'PHX', 'LAX' ] ]
-
-
-// console.log(orderFlights(flights))
 
 
 
@@ -749,158 +369,6 @@ const flights = [ [ 'SFO', 'JFK' ], [ 'LAX', 'SFO' ], [ 'ATL', 'PHX' ], [ 'LAS',
 
 
 
-
-
-
-
-
-
-
-
-
-/**
- * Auto complete
- */
- 
-const words = [
-    'app',
-    'apple',
-    'apricot',
-    'animal',
-    'baby',
-    'beef',
-    'bear',
-    'bean',
-    'cub',
-    'cup',
-    'clean',
-    'cleaver',
-    'closet',
-    'den',
-    'dinner',
-    'dine',
-    'elephant',
-    'elevator',
-    'meat',
-    'mean',
-    'naked',
-    'near',
-    'far',
-    'zebra',
-    'zoo',
-    'soft',
-    'hard',
-    'soap',
-    'seed',
-    'tree',
-    'trip',
-    'tripe',
-    'train',
-    'odd',
-    'pop',
-    'pencile',
-]
-
-// this is an object with other objects inside of it
-const wordObj = {}
-
-function addWordToObj(word, wordObj) {
-    if(word.length > 0) {
-            
-        // console.log('word: ', word);
-        let char = word[0]
-        if(wordObj[char] === undefined) {
-            wordObj[char] = {
-                words: [],
-            }
-        }
-    
-        const partialWord = word.substring(1)
-        wordObj = wordObj[char]
-    
-        addWordToObj(partialWord, wordObj)
-    }
-}
-
-for(let i=0; i<words.length; i++) {
-    addWordToObj(words[i], wordObj)
-}
-
-// console.log(JSON.stringify(wordObj, null, 2))
-
-// {
-//     p: {
-//       e: {
-//           n: {
-//               c: {
-//                   i: {
-//                       l: {
-//                           e: {}
-//                       }
-//                   }
-//               }
-//           }
-//       },
-//       o: {
-//           p: {}
-//       }
-//     }
-// }
-
-// key 'a' is another object that has key 'p'
-// wordObj['a']['p'] 
-// ['app', 'apple', 'apricot']
-
-// function wordsForObj(prefix, obj) {
-//     console.log('prefix: ', prefix)
-//     console.log('obj: ', obj);
-// }
-
-function autoComplete(str) {
-    const parts = str.split('');
-    // return wordsForObj(str, wordObj['a']['p'])
-}
-
-// console.log(autoComplete('ap')) // ['app', 'apple', 'apricot']
-
-
-
-
-
-
-
-
-
-
-
-// iterative 
-function power(a, b) {
-  let result = 1
-  for(let i=0; i<b; i++) {
-    // console.log({i})
-    result = result * a
-    // console.log({result})
-  }
-  return result
-}
-
-
-
-// recursive
-
-function power2(a, b) {
-  if(b===0) {
-    return 1
-  }
-  
-  return a*power2(a, b-1)
-}
-
-// time complexity
-// space complexity
-
-// console.log(power2(2,0))
-// console.log(power2(2,3))
 
 
 
@@ -971,57 +439,6 @@ function countingValleys(n, str) {
 
 
 
-
-
-
-
-/*
-You just bought a delicious, yet odorless, cheese for your pet mice. Unfortunately some of them are blind, so they start walking away from this otherwise-irresistible treat!  Write a function blindMice() that will find out how many of your mice are blind. This function should accept a single argument, a string representing the mice and the cheese, and returns the number of mice that are blind. We can assume that all mice walking away from the cheese are blind, while those walking towards it are not.   Cheese: 'C'  Mice walking right: '~M'  Mice walking left: 'M~'  (The '~' is the tail)  Example inputs and correct return values:  "M~~M ~MM~C~MM~M~" à return the number 3 "~M~M~MC M~~M" à return the number 1 "~M CM~~M~M" à return the number 2
-
-**/
-
-
-// Parsing string into tokens
-// State machine
-function countBlindMice(strM) {
-    let hasSeenC = false
-    let blind = 0
-    for(let i=0; i<strM.length; i++) {
-        const char = strM[i]
-        switch(char) {
-            case "M":
-                if(strM[i+1] === "~") {
-                    if(hasSeenC === false) {
-                        blind = blind+1
-                    }
-                    
-                    i = i+1
-                }
-                else {
-                    throw new Error('invalid input')
-                }
-            break;
-            case "~":
-                if(strM[i+1] === "M") {
-                    if(hasSeenC) {
-                        blind = blind+1
-                    }
-                    i = i+1
-                }
-                else {
-                    throw new Error('invalid input')
-                }
-            break;
-            case "C":
-                hasSeenC = true
-        }
-    }
-    return blind
-}
-
-// console.log("blind:", countBlindMice("M~~M ~MM~C~MM~M~")) //3
-// console.log(countBlindMice("~M~M~MC M~~M")) //1
-// console.log(countBlindMice("~M CM~~M~M")) //2
 
 
 
@@ -1158,26 +575,57 @@ function hourglass (arr) {
 
 
 
-
 /*
-Mix Potions  
+You just bought a delicious, yet odorless, cheese for your pet mice. Unfortunately some of them are blind, so they start walking away from this otherwise-irresistible treat!  Write a function blindMice() that will find out how many of your mice are blind. This function should accept a single argument, a string representing the mice and the cheese, and returns the number of mice that are blind. We can assume that all mice walking away from the cheese are blind, while those walking towards it are not.   Cheese: 'C'  Mice walking right: '~M'  Mice walking left: 'M~'  (The '~' is the tail)  Example inputs and correct return values:  "M~~M ~MM~C~MM~M~" à return the number 3 "~M~M~MC M~~M" à return the number 1 "~M CM~~M~M" à return the number 2
 
-Write a function mixPotions that accepts one argument, an array of potion objects, and returns the potion that is produced when they are mixed. 
-
-A potion is represented in the following format:  { volume: x, ingredients: { ingredient1: a, ingredient2: b, ingredientA: c } }
-
-Where x is a positive number representing the volume of the potion and a, b, and c are positive numbers representing the concentrations of the corresponding ingredients in the potion.  In the above example, the potion has three different ingredients, but a potion can have any number of different ingredients. The function should accept any positive number of potions. Each potion can have any non-negative number of different ingredients.  After mixing, the resulting potion should have a volume equal to the sum of the volumes of the input potions. Also, the resulting potion should have volume-weighted concentrations of each ingredient in the input potions.  
-
-Example: mixPotions([ {volume: 100, ingredients: { ingredient1: 50, ingredient2: 20, ingredientA: 500 }}, {volume: 300, ingredients: { ingredient1: 150, ingredientA: 300, ingredientB: 950 }}, ])  
-
-The above should return: { volume: 400, ingredients: { ingredient1: 125, ingredient2: 5, ingredientA: 350, ingredientB: 712.5 } }  
-
-The result's volume is 400 because 100 + 300 = 400. 
-
-The result's concentration of ingredient1 is 125. We can determine this because first potion has 50 units of concentration in 100 units of volume and the second potion has 125 units of concentration in 300 units of volume, and (50*100 + 150*300)/(100 + 300) = 125.  
-
-Only one of the potions has any of ingredient2, Using the same math, but with 0 for the concentration of ingredient2 in the second potion, we get (20*100 + 0*300)/(100 + 300) = 5.
 **/
+
+
+// Parsing string into tokens
+// State machine
+function countBlindMice(strM) {
+    let hasSeenC = false
+    let blind = 0
+    for(let i=0; i<strM.length; i++) {
+        const char = strM[i]
+        switch(char) {
+            case "M":
+                if(strM[i+1] === "~") {
+                    if(hasSeenC === false) {
+                        blind = blind+1
+                    }
+                    
+                    i = i+1
+                }
+                else {
+                    throw new Error('invalid input')
+                }
+            break;
+            case "~":
+                if(strM[i+1] === "M") {
+                    if(hasSeenC) {
+                        blind = blind+1
+                    }
+                    i = i+1
+                }
+                else {
+                    throw new Error('invalid input')
+                }
+            break;
+            case "C":
+                hasSeenC = true
+        }
+    }
+    return blind
+}
+
+// console.log("blind:", countBlindMice("M~~M ~MM~C~MM~M~")) //3
+// console.log(countBlindMice("~M~M~MC M~~M")) //1
+// console.log(countBlindMice("~M CM~~M~M")) //2
+
+
+
+
 
 
 
@@ -1463,6 +911,7 @@ N: the integer power to raise numbers to
 
 
 
+
 /*
 
 You wish to buy video games from the famous online video game store Mist.
@@ -1527,6 +976,13 @@ function gameCount(p, d, m, s) {
 // console.log("gameCount",gameCount(16, 2, 1, 9981)) // 9917
 // console.log("gameCount",gameCount(100, 1, 1, 99)) // 0
 // console.log("gameCount",gameCount(100, 19, 1, 180)) // 0
+
+
+
+
+
+
+
 
 
 
@@ -1611,6 +1067,9 @@ and className he gave me classNames to name them and asked me follow it carefull
 
 
 
+
+
+
    /**
     * 
     * u are given a string containing characters  and  only. Your task is to change it into a string such that there are no matching adjacent characters. To do this, you are allowed to delete zero or more characters in the string.
@@ -1662,6 +1121,9 @@ Given an array  of  integers and a number, , perform  left rotations on the arra
    }
 
 //    console.log(leftRotation([1, 2, 3, 4, 5, 6], 3))
+
+
+
 
 
 
@@ -1740,6 +1202,12 @@ Because all of the first  letters of the infinite string are a, we print  on a n
 
 
 
+
+
+
+
+
+
 /**
  * Write a factorial function that takes a positive integer, N as a parameter and prints the result of N! ( factorial).
  * 
@@ -1795,355 +1263,6 @@ function recursiveSum(num) {
 
 // console.log(recursiveSum(5))
 
-
-
-
-
-
-
-
-
-/**
- * shortest substring
- * 
- * Given a string comprised of lower case letters in the range a-z, determine the length of the shorsest substring that contains all the letters present in the string. 
- */
-
-
-// loop through all char to see if the string includes all of them 
-function hasAllChar(str, charArr) {
-    if(str.length < charArr.length) {
-        return false
-    } 
-    for(let i=0; i<charArr.length; i++) {
-            if(!str.includes(charArr[i])) {
-                return false
-            }
-    }
-    return true
-}
-
-
-function shortestSubStr(s) {
-
-    // find out all charactors
-    let charArr = []
-    for(let i=0; i<s.length; i++) {
-        if(!charArr.includes(s[i])) {
-            charArr.push(s[i])
-        }
-    }
-    console.log(charArr)
-
-    let nextAnswer = ''
-    let startingIndex = 0
-    const potentialAnswerArray = [] 
-
-    // run the loop from first char b
-    function runLoop () {
-        for(let i = startingIndex; i< s.length; i++) {
-            nextAnswer = nextAnswer+s[i]
-            console.log({nextAnswer})
-            if(hasAllChar(nextAnswer, charArr)) {
-                potentialAnswerArray.push(nextAnswer)
-                nextAnswer = ''
-                // exit for loop
-                break;
-            }
-        }
-        if(startingIndex<s.length){
-            startingIndex = startingIndex + 1
-            // run the loop from next char d
-            runLoop()
-        }
-    }
-
-    runLoop()
-
-    potentialAnswerArray.sort((a, b)=>{
-        if(a.length<b.length) {
-            return -1
-        } else {
-            return 1
-        }
-    })
-    console.log(potentialAnswerArray)
-    return potentialAnswerArray[0].length
-}
-
-// console.log(shortestSubStr('babb'))
-// console.log(shortestSubStr('bdbbcabcd'))
-
-
-
-
-
-
-
-
-function shortestSubStr2(s) {
-    const charArr = []
-    for(let char of s) {
-        // console.log(char)
-        if(!charArr.includes(char)) {
-            charArr.push(char)
-        }
-    }
-    // console.log(charArr)
-
-    const possibleSubstring = []
-    let currentStr = ""
-    let index = 0
-
-    function runLoop() {
-        for(let i = index; i<s.length; i++) {
-            // console.log(s[i])
-            // console.log(i)
-            currentStr = currentStr + s[i]
-            console.log({currentStr})
-            if(hasAllChar(currentStr, charArr)) {
-                possibleSubstring.push(currentStr)
-                currentStr = ""
-                break;
-            } 
-        }
-
-        if(index < s.length - charArr.length){
-            index ++
-            runLoop()
-        }
-        console.log(possibleSubstring)
-    }
-
-    runLoop()
-}
-
-
-
-
-
-
-
-
-
-
-function hasAllChar2(subStr, allChar) {
-    for(char of allChar) {
-        if(!subStr.includes(char)) {
-            return false
-        }
-    }
-    return true
-}
-
-function shortestSubStr3(str){
-
-    const allChar=[...new Set(str)]
-    console.log({allChar})
-
-    let possibleSubStrings=[]
-    let subStr=''
-
-    const allCharLen=allChar.length
-
-    let startingIndex=0
-
-    function runLoop() {
-        for(let i=startingIndex; i<str.length; i++) {
-            subStr=subStr+str[i]
-            console.log('one: ', {subStr})
-            if(subStr.length>=allCharLen) {
-                if(hasAllChar2(subStr, allChar)){
-                    // if(subStr.length===allCharLen) {
-                    //     return subStr
-                    // } else {
-                        possibleSubStrings.push(subStr)
-                    // }
-                }
-            }
-        }
-
-        if(startingIndex<str.length-allCharLen) {
-            startingIndex++
-            subStr=''
-            return runLoop()
-        } else {
-            // sort and return
-        }
-    }
-
-    return runLoop()
-
-    console.log(possibleSubStrings)
-}
-
-
-// console.log('answer: ', shortestSubStr3('bacca'))
-// console.log(shortestSubStr3('abcdbabbbcd'))
-
-
-
-
-
-
-
-
-
-
-
-/**
- * longest subsequence
- * Given a string, determine the length of the longest subsequence that containes all the vowels in order, and no vowels out of order 
- */
-
- 
-
-
-
-
-
-
-
-const VOWELS = ['a', 'e', 'i', 'o', 'u']
-
-function longestVowel(str) {
-    // 1. Find first a
-    // 2. Find next a or e (loop)
-    let count = 1
-    let cursor = 0 // Where we are in VOWLES
-    let index = str.indexOf('a') // Where we are in str
-    let currentVowel = 'a'
-    
-    // console.log(index)
-
-    for(let i=index + 1; i<str.length; i++) {
-        const nextChar = str[i]
-        if(nextChar === VOWELS[cursor]) {
-            count++
-        }else if(nextChar ===VOWELS[cursor + 1]) {
-            currentVowel = nextChar
-            count++
-            cursor++
-        }
-    }
-    if(currentVowel === 'u') {
-        return count
-    } else {
-        return 0
-    }
-    
-}
-
-//  console.log(longestVowelSubsequence("aeiaaioooaauuaeiu")) // 10
-//  console.log(longestVowelSubsequence("aeiou")) // 5
-//  console.log('numOfVowels:', longestVowel("eaoeioiua")) // 5
-//  console.log('numOfVowels:', longestVowel("eaoeioia")) // 5
-
-
-
-
-
-function longestVowel2(s) {
-
-    let cursor = 0
-    let count = 0
-    let currentVowel = ''
-
-    for(let i = 0; i<s.length; i++) {
-        currentVowel = s[i]
-        // console.log({currentVowel})
-        if(s[i] === VOWELS[cursor]) {
-            count++
-        } else if(s[i] === VOWELS[cursor+1]){
-            count++
-            cursor++
-        }
-    }
-
-    if(currentVowel === "u") {
-        return count
-    } else {
-        return 0
-    }   
-}
-
-
-
-
-
-function longestVowel3(str) {
-    let startingIndex=0
-    let vowelIndex=0
-    let count=0
-    let currentChar
-
-    for(let i=0; i<str.length; i++) {
-        if(str[i] === VOWELS[vowelIndex]) {
-            currentChar=str[i]
-            count++
-        } else if(str[i] === VOWELS[vowelIndex+1]){
-            currentChar=str[i]
-            console.log(str[i])
-            count++
-            vowelIndex++
-        }
-    }
-    if(currentChar==='u') {
-        return count
-    }
-    return 0
-}
-
-
-//  console.log('numOfVowels:', longestVowel3("aoeiooi")) // 0
-//   console.log('numOfVowels3:', longestVowel3("aeiaaioooaauuaeiu")) // 10
-//   console.log('numOfVowels3:', longestVowel3("aaeaioou")) // 7
-
-
-
-
-
-
-
-
-
-
-
-// all incoming dates will be valid dates, but only those in one of the following formates: YYYY/MM/DD, DD/MM/YYYY and MM-DD-YYYY should be included in the return list
-
-function changeDateFormat(dateArr) {
-
-    const changedArr = []
-
-    function changeFormat(date) {
-        if(date.indexOf('/') === 4) {
-            const newDate = date.replace("/", "").replace("/", "")
-            changedArr.push(newDate)
-        }
-
-        else if(date.indexOf('/') === 2) {
-            const removedSlashDate = date.replace("/", "").replace("/", "")
-            let newDate = ''
-            newDate = newDate + removedSlashDate.substring(4) + removedSlashDate.substring(2, 4) + removedSlashDate.substring(0, 2)
-            changedArr.push(newDate)
-        }
-        
-        else if(date.indexOf('-') === 2) {
-            const removedDashDate = date.replace(/-/gi, "")
-            let newDate = ''
-            newDate = newDate + removedDashDate.substring(4) + removedDashDate.substring(0, 4)
-            changedArr.push(newDate)
-        }
-    }
-
-    for(date of dateArr) {
-        changeFormat(date)
-    }
-
-    return changedArr
-}
-
-// console.log(changeDateFormat(['2010/03/30', '15/12/2016', '11-15-2012', '20130721'])) 
 
 
 
@@ -2233,6 +1352,9 @@ YES
 
 
 
+
+
+
 /**
  * stock max profit:
  * can not buy and sell at the same time
@@ -2289,6 +1411,10 @@ function calculateMaxProfit(arr) {
 
 //  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
 //  console.log(calculateMaxProfit2([45, 24, 35, 31, 40, 38, 11])) //16
+
+
+
+
 
 
 
