@@ -1069,3 +1069,252 @@ var isHappy = function(n) {
 
 
 
+
+
+
+
+ /**
+  * You have an array of logs.  Each log is a space delimited string of words.
+
+For each log, the first word in each log is an alphanumeric identifier.  Then, either:
+
+Each word after the identifier will consist only of lowercase letters, or;
+Each word after the identifier will consist only of digits.
+We will call these two varieties of logs letter-logs and digit-logs.  It is guaranteed that each log has at least one word after its identifier.
+
+Reorder the logs so that all of the letter-logs come before any digit-log.  The letter-logs are ordered lexicographically ignoring identifier, with the identifier used in case of ties.  The digit-logs should be put in their original order.
+
+Return the final order of the logs.
+
+  */
+
+var removeId = (log) => {
+    log = log.slice(log.indexOf(' ') + 1)
+    return log
+}
+
+var isNum = (char) => {
+    return /\d/.test(char)
+}
+
+
+ var reorderLogFiles = function(logs) {
+     let digArr = []
+     let letArr = []
+     for(log of logs) {
+        newlog = removeId(log)
+        if(isNum(newlog[0])) {
+            digArr.push(log)
+        } else {
+            letArr.push(log)
+        }
+     }
+
+     console.log(letArr)
+     
+     // comparing function for 2 strings,
+     function compare(a, b) {
+        console.log({a, b})
+        let res = removeId(a).localeCompare(removeId(b))
+        console.log({res})
+
+        // if they're equal then compares identifiers
+        if(res === 0) {
+            return a.slice(0, a.indexOf(" ")).localeCompare(b.sclice(0, b.indexOf(" ")))
+        }
+        return res
+     }
+
+     console.log("before sorting", letArr)
+
+     letArr.sort(compare)
+
+     return [...letArr, ...digArr]
+     
+    
+}
+// console.log(reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"])) //["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"]
+
+
+
+
+
+
+
+/**
+ * string sorting problems
+ */
+const strs = ['a', 'c', 'b']
+// console.log(strs.sort((a, b) => 1))
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * Min stack
+ * 
+ * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+push(x) -- Push element x onto stack.
+pop() -- Removes the element on top of the stack.
+top() -- Get the top element.
+getMin() -- Retrieve the minimum element in the stack.
+
+
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ * 
+ * 
+ * example:
+ * MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin();   --> Returns -3.
+minStack.pop();
+minStack.top();      --> Returns 0.
+minStack.getMin();   --> Returns -2.
+ */
+
+
+class MinStack {
+    constructor(stack) {
+        this.stack = []
+    }
+
+    push(x) {
+        this.stack.unshift(x)
+    }
+
+    pop() {
+        this.stack.shift()
+    }
+
+    top() {
+        return this.stack[0]
+    }
+
+    getMin() {
+        return Math.min(...this.stack)
+    }
+}
+
+// const obj = new MinStack()
+
+
+// obj.push(2)
+// obj.push(1)
+// obj.push(3)
+// console.log(obj)
+// // obj.pop()
+// // let top = obj.top()
+// // console.log(top)
+
+// let getMin = obj.getMin()
+// console.log(getMin)
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * Max stack
+ * 
+ * 
+ * Design a max stack that supports push, pop, top, peekMax and popMax.
+
+push(x) -- Push element x onto stack.
+pop() -- Remove the element on top of the stack and return it.
+top() -- Get the element on the top.
+peekMax() -- Retrieve the maximum element in the stack.
+popMax() -- Retrieve the maximum element in the stack, and remove it. If you find more than one maximum elements, only remove the top-most one.
+
+ * Your MaxStack object will be instantiated and called as such:
+ * var obj = new MaxStack()
+ * obj.push(x)
+ * var param_2 = obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.peekMax()
+ * var param_5 = obj.popMax()
+
+examples: 
+MaxStack stack = new MaxStack();
+stack.push(5); 
+stack.push(1);
+stack.push(5);
+stack.top(); -> 5
+stack.popMax(); -> 5
+stack.top(); -> 1
+stack.peekMax(); -> 5
+stack.pop(); -> 1
+stack.top(); -> 5
+ */
+
+
+class MaxStack {
+    constructor() {
+        this.stack = []
+    }
+
+    push(x) {
+        this.stack.unshift(x)
+    }
+
+    pop() {
+        this.stack.shift()
+    }
+
+    top() {
+        return this.stack[0]
+    }
+
+    peekMax() {
+        return Math.max(...this.stack)
+    }
+
+    popMax() {
+        let max = Math.max(...this.stack)
+        return this.stack.splice(this.stack.lastIndexOf(max), 1)
+    }
+}
+
+const obj = new MaxStack()
+
+obj.push(5)
+obj.push(1)
+obj.push(5)
+
+
+let top = obj.top()
+console.log(top)
+
+// let peekMax = obj.peekMax()
+// console.log(peekMax)
+
+let popMax = obj.popMax()
+
+
+let top1 = obj.top()
+console.log(top1)
+
+const peekMax = obj.peekMax()
+console.log(peekMax)
+

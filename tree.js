@@ -948,26 +948,48 @@ t5 = {
     }
 }
 
-// recursive solution
-var isMirror = (t1, t2) => {
-    // it can be both null
-    if( t1 === null && t2 === null ) {
-        return true
+t6 = {
+    val: 1,
+    left: {
+        val: 2,
+        left: {
+            val: 3,
+            left: null,
+            right: null
+        },
+        right: null
+    },
+    right: {
+        val: 2,
+        left: {
+            val: 3,
+            left: null,
+            right: null
+        },
+        right: null
     }
-
-    // if only one is null the other one is not, false
-    if( t1 === null || t2 === null ) {
-        return false
-    }
-
-    // when two trees are mirrored, two roots has same val
-    if(t1.val !== t2.val) {
-        return false
-    }
-
-    // left child is missor to the other tree's right child, 
-    return isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
 }
+
+// recursive solution
+// var isMirror = (t1, t2) => {
+//     // it can be both null
+//     if( t1 === null && t2 === null ) {
+//         return true
+//     }
+
+//     // if only one is null the other one is not, false
+//     if( t1 === null || t2 === null ) {
+//         return false
+//     }
+
+//     // when two trees are mirrored, two roots has same val
+//     if(t1.val !== t2.val) {
+//         return false
+//     }
+
+//     // left child is missor to the other tree's right child, 
+//     return isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
+// }
 
 var isSymmetric = function(root) {
     // if root is null, it is symmetric
@@ -978,5 +1000,44 @@ var isSymmetric = function(root) {
     // check if left child is mirror of right child
     return isMirror(root.left, root.right)
 }
-console.log(isSymmetric(t5)) // true
-// console.log(isSymmetric([1,2,2,null,3,null,3])) // false
+// console.log(isSymmetric(t5)) // true
+// console.log(isSymmetric(t6)) // false
+
+
+
+
+
+
+// iterarive solution for the mirror function 
+// BFS
+
+var isMirror = function(p, q) {
+    var s1 = [p], s2 = [q]
+
+    // create two queues and keep pushing the children in for execution
+    while(s1.length > 0 || s2.length > 0 ) {
+        var n1 = s1.pop(), n2 = s2.pop()
+
+        if( !n1 && !n2 ) {
+            return true
+        }
+
+        if( !n1 || !n2 ) {
+            return false
+        }
+
+        if( n1.val !== n2.val) {
+            return false
+        }
+
+        s1.push(n1.left)
+        s1.push(n1.right)
+        s2.push(n2.right)
+        s2.push(n2.left)
+    }
+    return true
+} 
+// console.log(isSymmetric(t5)) // true
+// console.log(isSymmetric(t6)) // false
+
+
