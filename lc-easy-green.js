@@ -1102,7 +1102,7 @@ var isNum = (char) => {
      let digArr = []
      let letArr = []
      for(log of logs) {
-        newlog = removeId(log)
+        const newlog = removeId(log)
         if(isNum(newlog[0])) {
             digArr.push(log)
         } else {
@@ -1111,11 +1111,12 @@ var isNum = (char) => {
      }
 
      console.log(letArr)
-     
      // comparing function for 2 strings,
      function compare(a, b) {
         console.log({a, b})
-        let res = removeId(a).localeCompare(removeId(b))
+
+        // localeCompare does the comparison 
+        const res = removeId(a).localeCompare(removeId(b))
         console.log({res})
 
         // if they're equal then compares identifiers
@@ -1124,16 +1125,15 @@ var isNum = (char) => {
         }
         return res
      }
-
      console.log("before sorting", letArr)
 
      letArr.sort(compare)
-
      return [...letArr, ...digArr]
-     
-    
 }
 // console.log(reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"])) //["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"]
+
+
+
 
 
 
@@ -1144,10 +1144,46 @@ var isNum = (char) => {
 /**
  * string sorting problems
  */
-const strs = ['a', 'c', 'b']
-// console.log(strs.sort((a, b) => 1))
+const strs = ['c', 'bd', 'd', 'a']
+
+// const nums = [ 24, 3, 1 ]
+
+// strs.sort()
+
+strs.sort((a,b) => {
+    if( a > b ) {
+        return 1
+    } 
+    
+    if ( a < b) {
+        return -1
+    } 
+    
+    if ( a === b ) {
+        return 0
+    }
+})
+
+// nums.sort()
+
+// nums.sort((a,b) => {
+//     if( a > b ) {
+//         return 1
+//     } 
+    
+//     if ( a < b) {
+//         return -1
+//     } 
+    
+//     if ( a === b ) {
+//         return 0
+//     }
+// })
 
 
+
+// console.log(nums)
+// console.log(strs)
 
 
 
@@ -1303,18 +1339,164 @@ obj.push(1)
 obj.push(5)
 
 
-let top = obj.top()
-console.log(top)
+// let top = obj.top()
+// console.log(top)
 
-// let peekMax = obj.peekMax()
+// // let peekMax = obj.peekMax()
+// // console.log(peekMax)
+
+// let popMax = obj.popMax()
+
+
+// let top1 = obj.top()
+// console.log(top1)
+
+// const peekMax = obj.peekMax()
 // console.log(peekMax)
 
-let popMax = obj.popMax()
 
 
-let top1 = obj.top()
-console.log(top1)
 
-const peekMax = obj.peekMax()
-console.log(peekMax)
+
+
+
+
+
+
+
+
+
+
+/**
+ * Design a HashMap without using any built-in hash table libraries.
+
+To be specific, your design should include these functions:
+
+put(key, value) : Insert a (key, value) pair into the HashMap. If the value already exists in the HashMap, update the value.
+get(key): Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.
+remove(key) : Remove the mapping for the value key if this map contains the mapping for the key.
+
+
+ * Your MyHashMap object will be instantiated and called as such:
+ * var obj = new MyHashMap()
+ * obj.put(key,value)
+ * var param_2 = obj.get(key)
+ * obj.remove(key)
+ 
+
+
+MyHashMap hashMap = new MyHashMap();
+hashMap.put(1, 1);          
+hashMap.put(2, 2);         
+hashMap.get(1);            // returns 1
+hashMap.get(3);            // returns -1 (not found)
+hashMap.put(2, 1);          // update the existing value
+hashMap.get(2);            // returns 1 
+hashMap.remove(2);          // remove the mapping for 2
+hashMap.get(2);            // returns -1 (not found) 
+ */
+
+
+class MyHashMap {
+    constructor() {
+        this.map = {}
+
+    }
+
+    put(key, value) {
+        // if(!this.map[key]) {
+        //     this.map[key] = value
+        // } else {
+            this.map[key] = value
+        // }
+    }
+
+    get(key) {
+        if(this.map[key] === undefined) {
+            return -1
+        }
+        return this.map[key]
+    }
+
+    remove(key) {
+        if(this.map.hasOwnProperty(key)) {
+            delete(this.map[key])
+        }
+    }
+    
+}
+
+// const hashMap = new MyHashMap()
+// hashMap.put(1, 2)
+// hashMap.put(1, 1)
+// hashMap.put(2, 2)
+// console.log(hashMap)
+
+// const get = hashMap.get(3)
+// hashMap.put(2, 1)
+// console.log(get)
+
+// hashMap.remove(1)
+// console.log(hashMap)
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * merger sorted array (two pointers)
+ * 
+ * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+The number of elements initialized in nums1 and nums2 are m and n respectively.
+You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2.
+ */
+
+var merge = function(nums1, m, nums2, n) {
+    let insert = m + n - 1
+    var endNums1 = m-1 
+    var endNums2 = n-1
+
+
+    while(endNums1 >= 0 && endNums2 >= 0) {
+        console.log('here')
+        if(nums1[endNums1] < nums2[endNums2]) {
+            nums1[insert] = nums2[endNums2]
+            insert--
+            endNums2--
+        } 
+
+        // these two can be merged to save run time
+        else if (nums1[endNums1] > nums2[endNums2]) {
+            nums1[insert] = nums1[endNums1]
+            insert--
+            endNums1--
+        } else if (nums1[endNums1] = nums2[endNums2]) {
+            nums1[insert] = nums1[endNums1]
+            insert--
+            endNums1--
+        } 
+    }
+
+    // if not all nums2 element are merged into nums1
+    while (endNums2 >= 0) {
+        nums1[insert] = nums2[endNums2]
+        insert--
+        endNums2--
+    }
+
+
+    console.log(nums1)
+    
+}
+// console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)) // [1,2,2,3,5,6]
+// console.log(merge([0], 0, [1], 1)) // [1]
+console.log(merge([2,0], 1, [1], 1)) // [1, 2]
+
 
