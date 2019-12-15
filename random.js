@@ -31,6 +31,9 @@ for( element of numArr) {
 
 
 
+
+
+
 // Create  fcunction that takes 2 arrays as arguments and returns true if they contain one or more common items
 
 const arr1 = ['x', 'a', 'c', 'y']
@@ -59,36 +62,6 @@ function isCommonItem(arr1, arr2) {
 
     
     
-    
-// reverseWordOrder v2
-
-// Without using .split(), .reverse(), or .join(), write a function reverseWordOrder that accepts a single argument, a string. The function should return a string with the order of the words reversed. Don't worry about punctuation.
-
-function reverse(str) {
-
-    let currentWord = ""
-    let reversedStr = ""
-
-    for(let i=0; i<str.length + 1; i++) {
-        if(str[i] === " " || i === str.length) {
-            reversedStr = currentWord + ' ' + reversedStr
-            currentWord = ""
-        } 
-        
-        else {
-            currentWord = currentWord + str[i]
-        }
-        
-        // console.log({currentWord})
-        // console.log({reversedStr})
-    }
-}
-    
-// console.log(reverse("I am Jane"))
-
-
-
-
 
 
 
@@ -233,50 +206,6 @@ var deduped = sandwiches.filter(function (sandwich, index) {
 
 
 
-// given a string a digits, return the largest 3-digit number that can be found as a substring of the given string
-
-// '12345" => 345
-// "98734" => 987
-// "4359768" => 976
-// "43578" => 976
-// "43587" => 976
-
-// find the largest num, 
-// if largest num is the last or second last, find the second largest number
-// if the scond largest is the last or second last, find the third lagest
-
-
-function findLargest(str) {
-    // console.log(sortedArr = str.split('').map(char=>parseInt(char)).sort())
-
-    const length = str.length // 5
-
-    const largestNum = sortedArr[length - 1] 
-    const secondLarge = sortedArr[length - 2]
-    const thirdLarge = sortedArr[length - 3]
-    
-    const largestIndex = str.indexOf(largestNum) // 
-    const secondIndex = str.indexOf(secondLarge) // 
-    const thirdIndex = str.indexOf(thirdLarge) // 
-
-    if (largestIndex < str.length - 2) {
-        return str.substring(largestIndex, largestIndex + 3)
-    }
-        
-    if (secondIndex < str.length - 2) {
-        return str.substring(secondIndex, secondIndex + 3)
-    }
-
-    return str.substring(thirdIndex, thirdIndex + 3)
-
-}
-
-// console.log(findLargest("00809040021389"))
-
-
-
-
-
 
 
 
@@ -298,57 +227,6 @@ function fibonacciSequence() {
 
 // console.log(fibonacciSequence())
 
-
-
-
-
-// string parsing
-
-// Write a function insertDash that accepts a number as a parameter and returns a string with a dash inserted between any consecutive odd numbers.
-
-function inserDash(num) {
-    str = num.toString()
-    newStr = ""
-    for( let i=0; i<str.length; i++) {
-        if(str[i] % 2 === 1 && str[i-1] %2 === 1) {
-            // console.log(str[i])
-            // str[i-1] = "-" + str[i]
-            newStr = newStr + "-" + str[i]
-        }
-
-        else {newStr = newStr + str[i]}
-    }
-    return newStr
-}
-
-// console.log(inserDash(4335767999))
-
-
-
-
-
-
-
-
-
-
-
-// Additional spaces have been added to a sentence. Return the correct sentence by removing them. All words should be separated by one space, and there should be no spaces at the beginning or end of the sentence
-
-// correctSpacing("The film   starts       at      midnight. ")
-// ➞ "The film starts at midnight."
-
-// correctSpacing("The     waves were crashing  on the     shore.   ")
-// ➞ "The waves were crashing on the shore."
-
-// correctSpacing(" Always look on    the bright   side of  life.")
-// ➞ "Always look on the bright side of life."
-
-function removeSpace(sentence) {
-    return sentence = sentence.replace(/\s+/g, " ").trim()
-}
-// console.log(removeSpace("The film   starts       at      midnight. "))
-// console.log(removeSpace(" Always look on    the bright   side of  life."))
 
 
 
@@ -547,6 +425,7 @@ function hourglass2(twoDArray) {
 
 
 
+
 // james
 function hourglass (arr) {
     let value = 0;
@@ -569,60 +448,6 @@ function hourglass (arr) {
     // return value
 }
 // hourglass(sample)
-
-
-
-
-
-
-/*
-You just bought a delicious, yet odorless, cheese for your pet mice. Unfortunately some of them are blind, so they start walking away from this otherwise-irresistible treat!  Write a function blindMice() that will find out how many of your mice are blind. This function should accept a single argument, a string representing the mice and the cheese, and returns the number of mice that are blind. We can assume that all mice walking away from the cheese are blind, while those walking towards it are not.   Cheese: 'C'  Mice walking right: '~M'  Mice walking left: 'M~'  (The '~' is the tail)  Example inputs and correct return values:  "M~~M ~MM~C~MM~M~" à return the number 3 "~M~M~MC M~~M" à return the number 1 "~M CM~~M~M" à return the number 2
-
-**/
-
-
-// Parsing string into tokens
-// State machine
-function countBlindMice(strM) {
-    let hasSeenC = false
-    let blind = 0
-    for(let i=0; i<strM.length; i++) {
-        const char = strM[i]
-        switch(char) {
-            case "M":
-                if(strM[i+1] === "~") {
-                    if(hasSeenC === false) {
-                        blind = blind+1
-                    }
-                    
-                    i = i+1
-                }
-                else {
-                    throw new Error('invalid input')
-                }
-            break;
-            case "~":
-                if(strM[i+1] === "M") {
-                    if(hasSeenC) {
-                        blind = blind+1
-                    }
-                    i = i+1
-                }
-                else {
-                    throw new Error('invalid input')
-                }
-            break;
-            case "C":
-                hasSeenC = true
-        }
-    }
-    return blind
-}
-
-// console.log("blind:", countBlindMice("M~~M ~MM~C~MM~M~")) //3
-// console.log(countBlindMice("~M~M~MC M~~M")) //1
-// console.log(countBlindMice("~M CM~~M~M")) //2
-
 
 
 
@@ -894,6 +719,8 @@ function countSquareInteger(a, b) {
 
 
 
+
+
 /**
  * Find the number of ways that a given integer, , can be expressed as the sum of the  powers of unique, natural numbers.
 For example, if  and , we have to find all combinations of unique squares adding up to . The only solution is  .
@@ -1070,33 +897,6 @@ and className he gave me classNames to name them and asked me follow it carefull
 
 
 
-   /**
-    * 
-    * u are given a string containing characters  and  only. Your task is to change it into a string such that there are no matching adjacent characters. To do this, you are allowed to delete zero or more characters in the string.
-Your task is to find the minimum number of required deletions.
-For example, given the string , remove an  at positions and  to make  in  deletions.
-    */
-
-   function minimalDeletion (str) {
-    let count = 0
-    for(let i=0; i<str.length; i++) {
-        if(str[i] === str[i+1]) {
-            count++
-        }
-    }
-    return count
-   }
-
-
-
-//    console.log(minimalDeletion('AAAA'))
-//    console.log(minimalDeletion('BBBBB'))
-//    console.log(minimalDeletion('ABABABAB'))
-//    console.log(minimalDeletion('BABABABA'))
-//    console.log(minimalDeletion('AAABBB'))
-
-
-
 
 
 
@@ -1122,81 +922,6 @@ Given an array  of  integers and a number, , perform  left rotations on the arra
 
 //    console.log(leftRotation([1, 2, 3, 4, 5, 6], 3))
 
-
-
-
-
-
-
-
-   /**
-    * Function Description
-Complete the repeatedString function in the editor below. It should return an integer representing the number of occurrences of a in the prefix of length  in the infinitely repeating string.
-repeatedString has the following parameter(s):
-s: a string to repeat
-n: the number of characters to consider
-Input Format
-The first line contains a single string, . 
-The second line contains an integer, .
-
-Sample Input 0
-aba
-10
-Sample Output 0
-7
-Explanation 0 
-The first  letters of the infinite string are abaabaabaa. Because there are  a's, we print  on a new line.
-Sample Input 1
-a
-1000000000000
-Sample Output 1
-1000000000000
-Explanation 1 
-Because all of the first  letters of the infinite string are a, we print  on a new line.
-    */
-
-
-
-    function countA(str, n) {
-        let count = 0
-
-        if(n <= str.length) {
-            for(let i=0; i<n; i++) {
-                if(str[i] === "a") {
-                    count ++
-                }
-            }
-            return count
-
-        } else {
-            let numInOneBlock = 0 
-            for(let i=0; i<str.length; i++) {
-                if(str[i] === "a") {
-                    numInOneBlock ++
-                }
-            }
-
-            const numOfBlocks = Math.floor(n/str.length)
-
-            const remainder = n % str.length
-
-            let count = 0 
-
-            for(let i=0; i<remainder; i++) {
-                if(str[i] === "a") {
-                    count ++
-                }
-            }
-
-            let result
-            result = numOfBlocks * numInOneBlock + count
-
-            return result
-
-        }
-    }
-
-    // console.log(countA('abcdfaaf', 3))
 
 
 
@@ -1263,87 +988,6 @@ function recursiveSum(num) {
 
 // console.log(recursiveSum(5))
 
-
-
-
-
-
-
-
-
-/**
- * Sherlock considers a string to be valid if all characters of the string appear the same number of times. It is also valid if he can remove just  character at  index in the string, and the remaining characters will occur the same number of times. Given a string , determine if it is valid. If so, return YES, otherwise return NO.
-
-Function Description
-Complete the isValid function in the editor below. It should return either the string YES or the string NO.
-isValid has the following parameter(s):
-s: a string
-
-
-Sample Input 0
-aabbcd
-Sample Output 0
-NO
-
-
-
-Sample Input 1
-aabbccddeefghi
-Sample Output 1
-NO
-
-
-Sample Input 2
-abcdefghhgfedecba
-Sample Output 2
-YES
-
- */
-
-
-
- function SherlockValidString(s) {
-     const Yes='YES'
-     const No='NO'
-    const charHash = {}
-    for(char of s) {
-        if(!charHash.hasOwnProperty(char)){
-            charHash[char] = 1
-        } else{
-            charHash[char] ++
-        }
-    }
-
-    const values = Object.values(charHash)
-    
-    values.sort((a, b)=>a-b)
-    
-    if(values[values.length-1] - values[0]>1) {
-        return No
-    }
-
-    const newValues = values.map(value=>value-values[0])
-
-    let count1 = 0
-    newValues.map((value)=>{
-        if(value>0) {
-            count1++
-        }
-    })
-
-    if(count1 > 1) {
-        return No
-    }
-
-    return Yes 
-    
-
- }
-
-//  console.log(SherlockValidString('aabbcd'))
-//  console.log(SherlockValidString('aaabbcd'))
-//  console.log(SherlockValidString('abcdefghhgfedecba'))
-//  console.log(SherlockValidString('aabbccddeefghi'))
 
 
 
@@ -1422,39 +1066,6 @@ function calculateMaxProfit(arr) {
 
 
 
- /**
-  * write a function that takes a string and an array, return true if the string can be built with elements from the array, otherwise return false
-  * 
-  * what about when str=''
-  */
-
-function canBuild(str, arr) {
-    let subStr = ''
-    for(let i=0; i<str.length; i++) {
-        subStr=subStr+str[i]
-        // console.log({subStr})
-        if(arr.includes(subStr)){
-            subStr=''
-        } 
-    }
-
-    console.log({subStr})
-    if(subStr==='') {
-        return true
-    } else {
-        false
-    }
-    
-}
-
-//   console.assert(canBuild(('abcefg'), ['abc', 'dt', 'efg']) === true)
- 
-
-
-
-
-
-
 
 
 /**
@@ -1513,76 +1124,6 @@ var generate = function(numRows) {
 
 
 
-/**
- * reverse words in a string
- */
-
- function reverseWords(s) {
-    let temp = ""
-    let reversed = ""
-    for(let i=0; i<s.length; i++) {
-        if(s[i]===" ") {
-            reversed = reversed + temp + " "
-            temp = ""
-        } 
-
-        else if(i===s.length-1) {
-            temp = s[i] + temp
-            reversed = reversed + temp
-        } 
-        else {
-            temp = s[i] + temp
-        }
-    }
-    return reversed
- }
-
-
-//  console.log(reverseWords(["h","e","l","l","o"]))
-//  console.log(reverseWords("Let's take LeetCode contest")) // "s'teL ekat edoCteeL tsetnoc"
- 
- 
-
-
-
-
-
-//  function reverseWords2(s) {
-//     let reversed
-//     reversed = s.trim().replace( /\s\s+/g, ' ' ).split(' ').reverse().join(' ')
-//     return reversed
-//  }
- 
- 
-function reverseWords2(s) {
-    let trimed = s.trim().replace(/\s\s+/g, ' ')
-    let temp = ""
-    let reversed = ""
-
-    for(let i=0; i<trimed.length; i++) {
-
-        if(trimed[i] === " ") {
-            reversed = " " + temp + reversed
-            temp = ""
-        } else if(i===trimed.length-1) {
-            temp = temp + trimed[i]
-            reversed = temp + reversed
-        } else {
-            temp = temp + trimed[i]
-        }
-    }
-
-    // console.log({reversed})
-}
-
-
-//   console.log(reverseWords2("the sky is blue"))
-//   console.log(reverseWords2("  hello world!  ")) //"world! hello"
-//   console.log(reverseWords2("a good   example")) // "example good a"
-
-
-
-  
 
 
 
@@ -1593,65 +1134,6 @@ function reverseWords2(s) {
 
 
 
-
-
-/**
- * longest palindrome
- */
-
-function longestPalindrome(s) {
-    let map = {}
-    let pairs = 0
-
-    for(char of s) {
-        if(!map.hasOwnProperty(char)) {
-            map[char] = 1
-        } else {
-            delete map[char]
-            pairs++
-        }
-    }
-    let single = Object.keys(map).length >= 1 ? 1 : 0
-    const answer = pairs * 2 + single
-    return answer
-}
-// console.log(longestPalindrome("abccccdd"))
-
-
-
-
-
-
-
-
-
-
-
-/**
- * longest word in dictionary
- */
- function longestWord(words) {
-    words.sort()
-    let set = new Set()
-    let ans = ""
-
-    for(word of words) {
-        if (word.length === 1 || set.has(word.slice(0, -1))) {
-            set.add(word);
-            if (word.length > ans.length) {
-              ans = word;
-            }
-        // console.log(ans)
-        }
-    }
-    return ans
- }
-
-
-
-//  console.log(longestWord(["w","wo","wor","worl", "world"])) // world
-//  console.log(longestWord(["a", "banana", "app", "appl", "ap", "apply", "apple"])) // apple
-//  console.log(longestWord(["b","br","bre","brea","break","breakf","breakfa","breakfas","breakfast","l","lu","lun","lunc","lunch","d","di","din","dinn","dinne","dinner"])) // apple
 
 
 
