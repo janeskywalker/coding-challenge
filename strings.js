@@ -1308,8 +1308,7 @@ var lengthOfLongestSubstring = function(s) {
 
 
 
-// sliding window solution (two pointers)
-
+// sliding window solution (two pointers and map)
 /** 
  * https://www.youtube.com/watch?v=dH5t6rWmob0
 
@@ -1317,8 +1316,6 @@ https://leetcode.com/problems/minimum-window-substring/discuss/26808/here-is-a-1
 */
 
 
-
-// work in progress
 var lengthOfLongestSubstring2 = function(s) {
     if(s === null || s.length === 0) {
         return 0
@@ -1331,15 +1328,12 @@ var lengthOfLongestSubstring2 = function(s) {
     let map = {}
 
     while( end < s.length ) {
-        console.log(s[end])
-        console.log(map)
+ 
         // scan and record in hashmap
         if(!map.hasOwnProperty(s[end])) {
-            console.log("dont have it, add it")
             map[s[end]] = 1
             end++
         } else if(map.hasOwnProperty(s[end])){
-            console.log("have it")
             map[s[end]]++
             repeat++
             end++
@@ -1349,24 +1343,54 @@ var lengthOfLongestSubstring2 = function(s) {
 
         // slide window to remove deplicate, keeeping the window only contain unique char
         while(repeat > 0 ) {
-            console.log('killing repeat')
-            console.log('begin char:', s[begin])
             if(map[s[begin]] > 1) {
-                console.log('killing this:', s[begin])
                 map[s[begin]]--
                 repeat--
+                begin++
+            } else {
+                delete map[s[begin]]
+                begin++
             }
-
-            begin++
-            
-            console.log({begin, repeat})
         }
         res = Math.max(res, end-begin)
-        console.log({res})
     }
     return res 
 }
 
+
+
+
+
+// liding window solution: two pointers and set 
+var lengthOfLongestSubstring3 = function(str) {
+    let low = 0;
+    let high = 0;
+    const charSet = new Set();
+    let longest = 0;
+
+    while (high < str.length) {
+        const char = str[high];
+        
+        // keep moving low to the right till the dupicate is deleted in the set
+        while (charSet.has(char)) {
+            charSet.delete(str[low]);
+            low += 1;
+        }
+        
+        charSet.add(char);
+        longest = Math.max(longest, charSet.size)
+        
+        high += 1;
+    }
+    return longest;
+}
+
+
+
 // console.log(lengthOfLongestSubstring2("pwwke")) //3
 // console.log(lengthOfLongestSubstring2("abcabcbb")) //3
-// console.log(lengthOfLongestSubstring2("tmmzuxt")) //5
+console.log(lengthOfLongestSubstring3("tmmzuxt")) //5
+
+
+
+
