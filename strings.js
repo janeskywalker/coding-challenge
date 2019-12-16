@@ -1304,11 +1304,69 @@ var lengthOfLongestSubstring = function(s) {
     return longestLen
 }
 
-console.log(lengthOfLongestSubstring("pwwkew")) //3
+// console.log(lengthOfLongestSubstring("pwwkew")) //3
 
 
 
 // sliding window solution (two pointers)
 
+/** 
+ * https://www.youtube.com/watch?v=dH5t6rWmob0
 
-// console.log(lengthOfLongestSubstring2("pwawkew")) //3
+https://leetcode.com/problems/minimum-window-substring/discuss/26808/here-is-a-10-line-template-that-can-solve-most-substring-problems
+*/
+
+
+
+// work in progress
+var lengthOfLongestSubstring2 = function(s) {
+    if(s === null || s.length === 0) {
+        return 0
+    }
+
+    let begin = 0
+    let end = 0
+    let repeat = 0
+    let res = 0
+    let map = {}
+
+    while( end < s.length ) {
+        console.log(s[end])
+        console.log(map)
+        // scan and record in hashmap
+        if(!map.hasOwnProperty(s[end])) {
+            console.log("dont have it, add it")
+            map[s[end]] = 1
+            end++
+        } else if(map.hasOwnProperty(s[end])){
+            console.log("have it")
+            map[s[end]]++
+            repeat++
+            end++
+        }
+    
+        console.log({map, repeat, begin, end})
+
+        // slide window to remove deplicate, keeeping the window only contain unique char
+        while(repeat > 0 ) {
+            console.log('killing repeat')
+            console.log('begin char:', s[begin])
+            if(map[s[begin]] > 1) {
+                console.log('killing this:', s[begin])
+                map[s[begin]]--
+                repeat--
+            }
+
+            begin++
+            
+            console.log({begin, repeat})
+        }
+        res = Math.max(res, end-begin)
+        console.log({res})
+    }
+    return res 
+}
+
+// console.log(lengthOfLongestSubstring2("pwwke")) //3
+// console.log(lengthOfLongestSubstring2("abcabcbb")) //3
+// console.log(lengthOfLongestSubstring2("tmmzuxt")) //5
