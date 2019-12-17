@@ -1,3 +1,33 @@
+/**
+ * Given a 32-bit signed integer, reverse digits of an integer.
+ */
+
+var reverse = function(x) {
+
+    const max = Math.pow(2, 31)
+    let str = x.toString()
+    // alternative: let str = x.toString().split("").reverse().join("")
+
+    let reversed = ''
+    for(let char of str) {
+        reversed = char+reversed
+    }
+
+    if(reversed[reversed.length -1] === '-' ) {
+        reversed = "-" + reversed.substring(0, reversed.length - 1)
+    }
+
+    const result = Number(reversed)
+    return result < -max || result > max ? 0 : result
+}
+// console.log(reverse(123)) //321
+// console.log(reverse(-123)) //-321
+// console.log(reverse(1200)) //21
+// console.log(reverse(1534236469)) //21
+
+
+
+
 
 
 
@@ -773,7 +803,14 @@ var isPalindrome = function(s) {
 
 
 
-// Valid Palidrome II
+
+
+
+/**
+ * Valid Palidrome II
+ * 
+ * Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+ *  */
 
 var isPalindrom = function(s) {
     let reversed = ""
@@ -1387,7 +1424,126 @@ var lengthOfLongestSubstring3 = function(str) {
 
 // console.log(lengthOfLongestSubstring2("pwwke")) //3
 // console.log(lengthOfLongestSubstring2("abcabcbb")) //3
-console.log(lengthOfLongestSubstring3("tmmzuxt")) //5
+// console.log(lengthOfLongestSubstring3("tmmzuxt")) //5
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Longest Palindromic Substring
+ * 
+ * Given a string s, find the longest palindromic substring in s. 
+ */
+
+ // brute force - TLE 0(N^3)
+var isPalindromeHelper = function(s) {
+    let reversed = ''
+    for(char of s) {
+        reversed = char + reversed
+    }
+    return reversed === s
+} 
+
+var longestPalindrome = function(s) {
+    if(s.length <= 1) {
+        return s
+    }
+
+    let startingIndex = 0
+    let longgestSub = ""
+
+    function runLoop(s) {
+        let substring = ''
+        for(let i = startingIndex; i<s.length; i++) {
+            substring = substring + s[i]
+            if(isPalindromeHelper(substring)) {
+                if(substring.length > longgestSub.length) {
+                    longgestSub = substring
+                }
+            }
+        }
+
+        while(startingIndex < s.length) {
+            startingIndex++
+            runLoop(s)
+        }
+       
+    }
+
+    runLoop(s)
+    return longgestSub
+
+}
+
+// console.log(longestPalindrome("babad")) //"bab"
+// console.log(longestPalindrome("cbbd")) //"bb"
+
+
+
+
+
+
+
+
+// DP matrix solution
+// 2D DP
+var longestPalindrome2 = function(s) {
+    
+	if(s.length <= 1) return s;
+	
+	// construct a 2D array, default to false 
+    const dp = [...new Array(s.length + 1)].map(_ => new Array(s.length + 1).fill(false));
+    
+    let lps = '';
+    
+	// base case for one character
+    for(let i = 0; i < s.length; i++) {
+        dp[i][i] = true;
+        lps = s[i];
+    }
+    
+	// base case for two characters
+    for(let i = 0; i < s.length; i++) {
+        if(s[i] === s[i + 1]) {
+            dp[i][i+1] = true;
+        }
+        if(dp[i][i+1]) {
+            // substring second argument exclusive 
+            lps = s.substring(i, i + 2);
+        }
+    }
+
+    // expand to three or more characters
+    // decrement i, increment j. because need to check if lower left is T or F.
+    for(let i = s.length - 1; i >= 0; i--) {
+        for(let j = i + 2; j < s.length; j++) {
+            // this is a palidrome if i === j and everything inside (lower left) is a palindrome
+            dp[i][j] = dp[i+1][j-1] && s[i] === s[j];
+            if(dp[i][j]) {
+                // +1 because we are dealing with indices 
+                lps = lps.length < (j - i + 1) ? s.substring(i, j + 1) : lps;
+            }
+        }
+    }
+    
+    return lps;
+}
+
+
+// console.log(longestPalindrome2("cbbd")) //"bb"
+// console.log(longestPalindrome2("babad")) //"bab"
+
+
+
+
 
 
 
