@@ -1339,8 +1339,6 @@ var lengthOfLongestSubstring2 = function(s) {
             end++
         }
     
-        console.log({map, repeat, begin, end})
-
         // slide window to remove deplicate, keeeping the window only contain unique char
         while(repeat > 0 ) {
             if(map[s[begin]] > 1) {

@@ -1,4 +1,3 @@
-
 // matching parentheses
 function isParenthesesMatch(str) {
     const arr = []
@@ -394,14 +393,11 @@ function autoComplete(str) {
 
 
 /**
-
 create function calculate
 This challenge is a variation of matching parenthese
-
 calculate("(3 + 4) * 5") returns 35
 calculate("(2 * 3) + (5 - 2)") returns 9
 calculate("((3 + 4) * 3) + 70") returns 91
-
  */
  
 function isNumeric(char) {
@@ -506,10 +502,6 @@ function calculate(str) {
 // console.log('two: ', calculate("(3 + 5) + 8"));
 // console.log('three: ', calculate("(2 * 3) + (5 - 2)"))
 // console.log('four: ', calculate("((3 + 4) * 3) + 70"))
-
-
-
-
 
 
 
