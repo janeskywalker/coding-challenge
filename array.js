@@ -145,6 +145,8 @@ function isCommonItem(arr1, arr2) {
 
 /*
 
+2D array, matrix
+
 largest hourglass sum 
 
 Given a  2D Array, :
@@ -397,7 +399,7 @@ var generate = function(numRows) {
 
  */
 
-// nested for loop, O of n square
+// nested for loop, O(N^2)
 // var twoSum = function(nums, target) {
 //     let ans = []
 //     for(let i = 0; i<nums.length; i++) {
@@ -410,8 +412,11 @@ var generate = function(numRows) {
 //     return ans
 // };
 
-// one pass, o(n)
+
+
+// one pass, O(N)
 var twoSum = function(nums, target) {
+    // needs to save indices too, so choose map over set
     let map = new Map 
     for(let i = 0; i < nums.length; i++) {
         let complement = target - nums[i]
@@ -430,7 +435,15 @@ var twoSum = function(nums, target) {
 
 
 
+
+
+
+
+
+
 /**
+ * 
+ * Difference of this problem comparing to the last one is this one is a sorted array
  * 
  * Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
 
@@ -463,6 +476,7 @@ const twoSum2 = (numbers, target) => {
 }
 // console.log(twoSum2([1, 2, 7, 11, 15], 26))
 // console.log(twoSum2([2, 7, 11, 15], 9))
+
 
 
 
@@ -689,7 +703,7 @@ var findShortestSubArray = function(nums) {
 // console.log(findShortestSubArray([1, 2, 2, 3, 1])) //2
 
 
-// leetcode solution:
+// lc solution:
 // var findShortestSubArray = function(nums) {
 //     var firstIndex = Object.create(null);
 //     var lastIndex = Object.create(null);
@@ -736,7 +750,7 @@ var findShortestSubArray = function(nums) {
   * subarray sum equals k
   */
 
-  // brute force solution, for loop inside of a  while loop (leetcode not accepted)
+  // brute force solution, for loop inside of a  while loop (TLE)
 
 // const sum = (arr) => {
 //     const sum = arr.reduce((cur, acc)=> cur + acc)
@@ -760,7 +774,7 @@ var findShortestSubArray = function(nums) {
 // }
 
 
-// refactor brute force solution (leetcode accepted)
+// refactor brute force solution (AC)
 function subarraySum(nums, k) {
     let startingIndice = 0 
     let countEqualsK = 0
@@ -812,6 +826,12 @@ function subarraySum(nums, k) {
 //     console.log(map)
 //     return count
 // }
+
+
+
+
+
+
 
 // successful hashmap solution
 // function subarraySum(nums, k){
@@ -951,4 +971,135 @@ var intersection = function(nums1, nums2) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+/**
+ * merger sorted array (two pointers)
+ * 
+ * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+The number of elements initialized in nums1 and nums2 are m and n respectively.
+You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2.
+ */
+
+var merge = function(nums1, m, nums2, n) {
+    let insert = m + n - 1
+    var endNums1 = m-1 
+    var endNums2 = n-1
+
+
+    while(endNums1 >= 0 && endNums2 >= 0) {
+        console.log('here')
+        if(nums1[endNums1] < nums2[endNums2]) {
+            nums1[insert] = nums2[endNums2]
+            insert--
+            endNums2--
+        } 
+
+        // these two can be merged to save run time
+        else if (nums1[endNums1] > nums2[endNums2]) {
+            nums1[insert] = nums1[endNums1]
+            insert--
+            endNums1--
+        } else if (nums1[endNums1] = nums2[endNums2]) {
+            nums1[insert] = nums1[endNums1]
+            insert--
+            endNums1--
+        } 
+    }
+
+    // if not all nums2 element are merged into nums1
+    while (endNums2 >= 0) {
+        nums1[insert] = nums2[endNums2]
+        insert--
+        endNums2--
+    }
+    console.log(nums1)
+}
+// console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)) // [1,2,2,3,5,6]
+// console.log(merge([0], 0, [1], 1)) // [1]
+console.log(merge([2,0], 1, [1], 1)) // [1, 2]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+ * 
+ * The solution set must not contain duplicate triplets.
+ */
+
+
+var threeSum = function(nums) {
+    const result = []
+    if(nums === null || nums.length < 3) {
+        return result
+    }
+
+    nums.sort((a, b) => a - b)
+
+    // no need to include last two, the last sum should be the last third element
+    for(let i = 0; i < nums.length - 2 ; i++) {
+        if( i > 0 && nums[i] === nums[i - 1]) {
+            // keep iterating, jump to the next element, dont do anything with this element
+            // skip numbers we've already seen
+            continue
+        }
+
+        const target = -nums[i]
+        let left = i + 1
+        let right = nums.length - 1 
+        twoSumHelper(nums, result, target, left, right) 
+    }
+
+    function twoSumHelper(nums, result, target, left, right) {
+        while(left < right) {
+            if(nums[left] + nums[right] === target) {
+                result.push([nums[left], nums[right], -target])
+                left++
+                right--
+
+                // no duplicate triplets, so if element the same the previous ones, keep moving 
+                while(left < right && nums[left] === nums[left - 1]) {
+                    left++
+                }
+
+                while(left < right && nums[right] === nums[right + 1]) {
+                    right--
+                }
+
+            } else if(nums[left] + nums[right] < target) {
+                left++
+            } else if(nums[left] + nums[right] > target) {
+                right--
+            } 
+        }
+    }
+    return result
+}
+
+
+
+
+console.log(threeSum([-1, 0, 1, 2, -1, -4])) // [[-1, 0, 1],[-1, -1, 2]]
 

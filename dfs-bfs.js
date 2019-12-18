@@ -117,4 +117,104 @@ At the end, return the modified image.
     // return image here
     return image
 }
-console.log(floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)) // [[2,2,2],[2,2,0],[2,0,1]]
+// console.log(floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)) // [[2,2,2],[2,2,0],[2,0,1]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /**
+  * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+  */
+
+ var letterCombinations = function(digits) {
+
+    if (digits.length === 0) return [];
+    
+    const map = {
+        2: 'abc',
+        3: 'def',
+        4: 'ghi',
+        5: 'jkl',
+        6: 'mno',
+        7: 'pqrs',
+        8: 'tuv',
+        9: 'wxyz'
+    }
+
+    let res = []
+
+    function letterComboHelper(i, str) {
+
+        console.log({i, str})  
+
+        // all digits are filled 
+        if (i === digits.length) {
+        // if (map[digits[i]] === undefined) {
+            res.push(str)
+            return
+        }
+  
+        for (let char of map[digits[i]]) {
+            console.log({char})
+            letterComboHelper(i + 1, str + char)
+        }
+    }
+  
+    letterComboHelper(0, '')
+
+    return res
+    
+}
+
+
+
+// var letterCombinations = function(digits) {
+//     if(digits.length === 0) return []
+//     let hash = {
+//         "2": "abc",
+//         "3": "def",
+//         "4": "ghi",
+//         "5": "jkl",
+//         "6": "mno",
+//         "7": "pqrs",
+//         "8": "tuv",
+//         "9": "wxyz"
+//     }
+//     let result = []
+//     letterComboHelper(result, digits, hash, 0, "")
+//     return result
+    
+// };
+
+// function letterComboHelper(result,digits,hash, idx, combo){
+//     if(combo.length === digits.length){
+//         result.push(combo)
+//         return
+//     }
+//     let letters = hash[digits[idx]]
+//     for(let i = 0; i < letters.length; i++){
+//         let currentLetter = letters[i]
+//         letterComboHelper(result,digits,hash, idx + 1, combo + currentLetter )
+//     }
+// }
+
+console.log(letterCombinations('23')) // ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"] 
+
+
